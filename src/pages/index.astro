@@ -1,17 +1,18 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
 // Текущая версия приложения и ссылки на файлы
-// Вы сможете легко менять их здесь при выходе новых версий
 const currentVersion = "1.0.0";
 const releaseDate = "Ноябрь 2026";
 
-// Здесь позже укажете ссылки на ваши файлы (например, с GitHub Releases или с вашего сервера)
+// Ссылки на релизы в вашем репозитории программы DevNotPay/FWT-Dev
 const downloadLinks = {
-  windows: "https://github.com/your-username/fwt/releases/latest/download/FWT-Setup.exe",
-  windowsPortable: "https://github.com/your-username/fwt/releases/latest/download/FWT-Portable.zip",
-  macos: "https://github.com/your-username/fwt/releases/latest/download/FWT.dmg",
-  linux: "https://github.com/your-username/fwt/releases/latest/download/FWT.AppImage",
+  windows: "https://github.com/DevNotPay/FWT-Dev/releases/latest/download/FWT-Setup.exe",
+  windowsPortable: "https://github.com/DevNotPay/FWT-Dev/releases/latest/download/FWT-Portable.zip",
+  macos: "https://github.com/DevNotPay/FWT-Dev/releases/latest/download/FWT.dmg",
+  linux: "https://github.com/DevNotPay/FWT-Dev/releases/latest/download/FWT.AppImage",
 };
 ---
 
@@ -44,7 +45,7 @@ const downloadLinks = {
         Скачать для Windows
       </a>
       <a
-        href="/changelog"
+        href={`${base}/changelog`}
         class="px-6 py-3.5 text-base font-semibold rounded-xl bg-slate-900 hover:bg-slate-850 text-slate-300 hover:text-white border border-slate-800 transition"
       >
         Что нового в v{currentVersion}
@@ -178,7 +179,7 @@ const downloadLinks = {
       </p>
     </div>
     <a
-      href="/donate"
+      href={`${base}/donate`}
       class="whitespace-nowrap px-6 py-3 rounded-xl bg-white hover:bg-slate-200 text-slate-950 font-semibold text-sm transition shadow-lg shadow-white/10"
     >
       Поддержать проект ☕
