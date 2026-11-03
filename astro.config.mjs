@@ -5,7 +5,7 @@ import tailwindcss from '@tailwindcss/vite';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://devnotpay.github.io',
-  base: '/FreeWorkTracker',
+  base: '/FWT-Site',
   vite: {
     plugins: [tailwindcss()]
   }
