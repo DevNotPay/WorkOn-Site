@@ -1,0 +1,158 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// Настройки ссылок и кошельков для донатов
+// Замените на ваши реальные ссылки/номера
+const donationLinks = {
+  cloudtips: "https://pay.cloudtips.ru/p/your-id", // Ссылка на CloudTips / СБП
+  boosty: "https://boosty.to/your-username",      // Ссылка на Boosty
+  kofi: "https://ko-fi.com/your-username",         // Ссылка на Ko-fi
+  crypto: {
+    usdtTrc20: "TXxx...ваша_строка_кошелька...xxx",
+    ton: "EQxx...ваш_TON_кошелек...xxx",
+  }
+};
+---
+
+<Layout title="Поддержать проект — FWT" description="Поддержите разработку бесплатного трекера рабочего времени FWT.">
+  <div class="max-w-3xl mx-auto py-6 sm:py-10">
+    <!-- Заголовок -->
+    <div class="text-center mb-10">
+      <div class="w-14 h-14 mx-auto rounded-2xl bg-amber-500/10 text-amber-400 border border-amber-500/20 flex items-center justify-center text-3xl mb-4 shadow-lg shadow-amber-500/10">
+        ☕
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-white">Поддержать разработку FWT</h1>
+      <p class="mt-3 text-slate-400 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
+        FWT — это проект с открытой душой, который создаётся в свободное время. 
+        У приложения нет инвесторов, платных подписок и рекламы.
+      </p>
+    </div>
+
+    <!-- На что идут средства -->
+    <div class="p-6 rounded-2xl bg-slate-900/60 border border-slate-800 mb-10">
+      <h2 class="text-base font-bold text-white mb-3">На что идут донаты?</h2>
+      <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm text-slate-300">
+        <li class="flex items-center gap-2">
+          <span class="text-emerald-400">✓</span> Оплата VDS-сервера и доменного имени
+        </li>
+        <li class="flex items-center gap-2">
+          <span class="text-emerald-400">✓</span> Покупка сертификатов для сборки (.exe / .dmg)
+        </li>
+        <li class="flex items-center gap-2">
+          <span class="text-emerald-400">✓</span> Кофе, превращающийся в новые фичи и код
+        </li>
+        <li class="flex items-center gap-2">
+          <span class="text-emerald-400">✓</span> Мотивация делать продукт лучше с каждым днём
+        </li>
+      </ul>
+    </div>
+
+    <!-- Секция способов оплаты -->
+    <div class="space-y-6">
+      <!-- 1. Для РФ и СНГ -->
+      <div>
+        <h3 class="text-xs uppercase tracking-wider text-slate-500 font-semibold mb-3">
+          Карты банков РФ, СБП и СНГ
+        </h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <!-- CloudTips / СБП -->
+          <a
+            href={donationLinks.cloudtips}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="p-5 rounded-2xl bg-slate-900 hover:bg-slate-850 border border-slate-800 hover:border-slate-700 transition flex items-center justify-between group"
+          >
+            <div>
+              <div class="font-bold text-white group-hover:text-indigo-400 transition">CloudTips (СБП / Карты)</div>
+              <div class="text-xs text-slate-400 mt-1">Разовый донат в один клик без регистрации</div>
+            </div>
+            <span class="text-slate-500 group-hover:text-white transition">→</span>
+          </a>
+
+          <!-- Boosty -->
+          <a
+            href={donationLinks.boosty}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="p-5 rounded-2xl bg-slate-900 hover:bg-slate-850 border border-slate-800 hover:border-slate-700 transition flex items-center justify-between group"
+          >
+            <div>
+              <div class="font-bold text-white group-hover:text-amber-400 transition">Boosty</div>
+              <div class="text-xs text-slate-400 mt-1">Ежемесячная подписка или разовый донат</div>
+            </div>
+            <span class="text-slate-500 group-hover:text-white transition">→</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- 2. Международные карты -->
+      <div>
+        <h3 class="text-xs uppercase tracking-wider text-slate-500 font-semibold mb-3">
+          Зарубежные карты (International)
+        </h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <!-- Ko-fi -->
+          <a
+            href={donationLinks.kofi}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="p-5 rounded-2xl bg-slate-900 hover:bg-slate-850 border border-slate-800 hover:border-slate-700 transition flex items-center justify-between group"
+          >
+            <div>
+              <div class="font-bold text-white group-hover:text-sky-400 transition">Ko-fi</div>
+              <div class="text-xs text-slate-400 mt-1">Оплата картой Visa / Mastercard / PayPal</div>
+            </div>
+            <span class="text-slate-500 group-hover:text-white transition">→</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- 3. Криптовалюта -->
+      <div>
+        <h3 class="text-xs uppercase tracking-wider text-slate-500 font-semibold mb-3">
+          Криптовалюта (Crypto)
+        </h3>
+        <div class="space-y-3">
+          <!-- USDT TRC20 -->
+          <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div>
+              <span class="text-xs font-semibold text-emerald-400 uppercase tracking-wide">USDT (TRC-20)</span>
+              <div class="text-xs font-mono text-slate-300 mt-0.5 break-all select-all">
+                {donationLinks.crypto.usdtTrc20}
+              </div>
+            </div>
+            <button
+              type="button"
+              onclick={`navigator.clipboard.writeText('${donationLinks.crypto.usdtTrc20}'); this.innerText = 'Скопировано!'; setTimeout(() => this.innerText = 'Копировать', 2000);`}
+              class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-medium text-slate-300 hover:text-white transition self-start sm:self-center shrink-0"
+            >
+              Копировать
+            </button>
+          </div>
+
+          <!-- TON -->
+          <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div>
+              <span class="text-xs font-semibold text-sky-400 uppercase tracking-wide">TON</span>
+              <div class="text-xs font-mono text-slate-300 mt-0.5 break-all select-all">
+                {donationLinks.crypto.ton}
+              </div>
+            </div>
+            <button
+              type="button"
+              onclick={`navigator.clipboard.writeText('${donationLinks.crypto.ton}'); this.innerText = 'Скопировано!'; setTimeout(() => this.innerText = 'Копировать', 2000);`}
+              class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-medium text-slate-300 hover:text-white transition self-start sm:self-center shrink-0"
+            >
+              Копировать
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Спасибо -->
+    <div class="text-center mt-12 text-xs text-slate-500">
+      Спасибо каждому, кто поддерживает проект! Ваша поддержка помогает FWT оставаться бесплатным для всех. ❤️
+    </div>
+  </div>
+</Layout>

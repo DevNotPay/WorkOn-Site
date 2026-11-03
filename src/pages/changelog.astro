@@ -1,0 +1,120 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// Список релизов приложения
+// Чтобы добавить новую версию, просто добавьте объект в начало этого массива!
+const releases = [
+  {
+    version: "1.0.0",
+    date: "3 ноября 2026",
+    isLatest: true,
+    description: "Первый стабильный публичный релиз трекера рабочего времени FWT.",
+    changes: [
+      { type: "new", text: "Базовый таймер с быстрым запуском и остановкой по одной клавише" },
+      { type: "new", text: "Группировка задач по проектам и клиентам" },
+      { type: "new", text: "Локальная база данных (SQLite) — все данные остаются на устройстве" },
+      { type: "new", text: "Сворачивание в системный трей (Windows, macOS, Linux)" },
+      { type: "improve", text: "Оптимизация потребления оперативной памяти (< 40 МБ в фоне)" },
+    ],
+    downloads: {
+      windows: "#",
+      macos: "#",
+      linux: "#"
+    }
+  },
+  {
+    version: "0.9.0-beta",
+    date: "15 октября 2026",
+    isLatest: false,
+    description: "Бета-версия для закрытого тестирования основных сценариев.",
+    changes: [
+      { type: "new", text: "Начальный интерфейс и структура проектов" },
+      { type: "fix", text: "Исправлена ошибка с засыпанием таймера при блокировке экрана" },
+      { type: "fix", text: "Корректный подсчет времени при смене часового пояса" },
+    ],
+    downloads: null
+  }
+];
+
+const badgeStyles: Record<string, { label: string; class: string }> = {
+  new: { label: "Новое", class: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20" },
+  fix: { label: "Исправлено", class: "bg-amber-500/10 text-amber-400 border-amber-500/20" },
+  improve: { label: "Улучшено", class: "bg-sky-500/10 text-sky-400 border-sky-500/20" },
+};
+---
+
+<Layout title="Чейнджлог — FWT" description="История версий и список изменений трекера рабочего времени FWT.">
+  <div class="max-w-3xl mx-auto">
+    <!-- Заголовок страницы -->
+    <div class="text-center py-6 sm:py-10">
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-white">История изменений</h1>
+      <p class="mt-3 text-slate-400 text-sm sm:text-base">
+        Хронология обновлений, новых функций и исправлений в приложении FWT.
+      </p>
+    </div>
+
+    <!-- Таймлайн релизов -->
+    <div class="space-y-10 relative before:absolute before:inset-0 before:left-4 sm:before:left-6 before:w-0.5 before:bg-slate-800">
+      {releases.map((release) => (
+        <article class="relative pl-10 sm:pl-14">
+          <!-- Точка на таймлайне -->
+          <span class={`absolute left-2.5 sm:left-4.5 top-1.5 -translate-x-1/2 w-4 h-4 rounded-full border-2 ${
+            release.isLatest 
+              ? "bg-indigo-500 border-slate-950 ring-4 ring-indigo-500/20" 
+              : "bg-slate-800 border-slate-950"
+          }`}></span>
+
+          <!-- Карточка релиза -->
+          <div class="p-6 rounded-2xl bg-slate-900/60 border border-slate-800">
+            <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
+              <div class="flex items-center gap-3">
+                <h2 class="text-xl font-bold text-white">v{release.version}</h2>
+                {release.isLatest && (
+                  <span class="text-xs px-2.5 py-0.5 rounded-full bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 font-medium">
+                    Текущая версия
+                  </span>
+                )}
+              </div>
+              <time class="text-xs text-slate-500 font-mono">{release.date}</time>
+            </div>
+
+            <p class="text-sm text-slate-300 mb-5">
+              {release.description}
+            </p>
+
+            <!-- Список изменений -->
+            <ul class="space-y-2.5 text-sm">
+              {release.changes.map((item) => {
+                const badge = badgeStyles[item.type] || badgeStyles.new;
+                return (
+                  <li class="flex items-start gap-3 text-slate-300">
+                    <span class={`text-[11px] font-medium px-2 py-0.5 rounded-md border shrink-0 mt-0.5 ${badge.class}`}>
+                      {badge.label}
+                    </span>
+                    <span>{item.text}</span>
+                  </li>
+                );
+              })}
+            </ul>
+
+            <!-- Ссылки на скачивание этого конкретного релиза (если есть) -->
+            {release.downloads && (
+              <div class="mt-6 pt-4 border-t border-slate-800/80 flex flex-wrap items-center gap-2">
+                <span class="text-xs text-slate-400 mr-2">Файлы релиза:</span>
+                <a href={release.downloads.windows} class="text-xs px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition">
+                  Windows (.exe)
+                </a>
+                <a href={release.downloads.macos} class="text-xs px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition">
+                  macOS (.dmg)
+                </a>
+                <a href={release.downloads.linux} class="text-xs px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition">
+                  Linux (.AppImage)
+                </a>
+              </div>
+            )}
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</Layout>

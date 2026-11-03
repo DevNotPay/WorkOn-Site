@@ -1,0 +1,97 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "FWT — Бесплатный трекер рабочего времени",
+  description = "Простой, легкий и полностью бесплатный тайм-трекер для Windows, macOS и Linux. Без подписок, рекламы и слежки."
+} = Astro.props;
+
+const navItems = [
+  { href: "/", label: "Главная" },
+  { href: "/changelog", label: "Чейнджлог" },
+  { href: "/donate", label: "Поддержать проект" },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang="ru" class="h-full bg-slate-950 text-slate-100 antialiased selection:bg-indigo-500 selection:text-white">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+  </head>
+  <body class="min-h-full flex flex-col font-sans bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.15),rgba(255,255,255,0))]">
+    <!-- Шапка (Header) -->
+    <header class="sticky top-0 z-50 backdrop-blur-md bg-slate-950/80 border-b border-slate-800/80">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+        <!-- Логотип -->
+        <a href="/" class="flex items-center gap-2.5 font-bold text-lg text-white hover:opacity-90 transition">
+          <span class="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center text-white shadow-lg shadow-indigo-500/25">
+            ⏱
+          </span>
+          <span>FWT <span class="text-xs px-2 py-0.5 ml-1 rounded-full bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 font-medium">Free</span></span>
+        </a>
+
+        <!-- Навигация -->
+        <nav class="flex items-center gap-1 sm:gap-2 text-sm font-medium">
+          {navItems.map((item) => {
+            const isActive = currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href));
+            return (
+              <a
+                href={item.href}
+                class={`px-3 py-1.5 rounded-lg transition-colors ${
+                  isActive
+                    ? "bg-slate-800 text-white"
+                    : "text-slate-400 hover:text-white hover:bg-slate-900"
+                }`}
+              >
+                {item.label}
+              </a>
+            );
+          })}
+        </nav>
+
+        <!-- Кнопка Скачать в шапке -->
+        <div class="hidden sm:block">
+          <a
+            href="/#download"
+            class="px-4 py-2 text-sm font-semibold rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white transition shadow-sm hover:shadow-indigo-500/20"
+          >
+            Скачать
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Основной контент -->
+    <main class="flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 py-10">
+      <slot />
+    </main>
+
+    <!-- Подвал (Footer) -->
+    <footer class="border-t border-slate-900 bg-slate-950/50 py-8 text-center text-xs text-slate-500">
+      <div class="max-w-5xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div>
+          © {new Date().getFullYear()} FWT (Free Work Tracker). Бесплатный проект с открытой душой.
+        </div>
+        <div class="flex items-center gap-6">
+          <a href="/changelog" class="hover:text-slate-300 transition">История версий</a>
+          <a href="/donate" class="hover:text-slate-300 transition">Поддержать</a>
+          <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="hover:text-slate-300 transition">GitHub</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
