@@ -7,21 +7,21 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const currentVersion = "1.0.0";
 const releaseDate = "Ноябрь 2026";
 
-// Ссылки на релизы в вашем репозитории программы DevNotPay/FreeWorkTracker
+// Ссылки на релизы в вашем репозитории программы DevNotPay
 const downloadLinks = {
-  windows: "https://github.com/DevNotPay/FreeWorkTracker/releases/latest/download/FWT-Setup.exe",
-  windowsPortable: "https://github.com/DevNotPay/FreeWorkTracker/releases/latest/download/FWT-Portable.zip",
-  macos: "https://github.com/DevNotPay/FreeWorkTracker/releases/latest/download/FWT.dmg",
-  linux: "https://github.com/DevNotPay/FreeWorkTracker/releases/latest/download/FWT.AppImage",
+  windows: "https://github.com/DevNotPay/FreeWorkTracker/releases/latest/download/WorkOn-Setup.exe",
+  windowsPortable: "https://github.com/DevNotPay/FreeWorkTracker/releases/latest/download/WorkOn-Portable.zip",
+  macos: "https://github.com/DevNotPay/FreeWorkTracker/releases/latest/download/WorkOn.dmg",
+  linux: "https://github.com/DevNotPay/FreeWorkTracker/releases/latest/download/WorkOn.AppImage",
 };
 ---
 
-<Layout title="FWT — Бесплатный трекер рабочего времени">
+<Layout title="WorkOn — Бесплатный трекер рабочего времени">
   <!-- Hero Секция -->
   <section class="text-center pt-8 pb-16 sm:pt-16 sm:pb-24">
     <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs sm:text-sm font-medium mb-6">
       <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-      Свежий релиз v{currentVersion} доступен для загрузки
+      Свежий релиз WorkOn v{currentVersion} доступен для загрузки
     </div>
 
     <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-white max-w-3xl mx-auto leading-tight sm:leading-none">
@@ -33,7 +33,7 @@ const downloadLinks = {
 
     <p class="mt-6 text-lg sm:text-xl text-slate-400 max-w-2xl mx-auto">
       Легкий и удобный десктопный тайм-трекер для фрилансеров и разработчиков. 
-      Все данные хранятся строго на вашем компьютере.
+      Один клик — и работа началась. Все данные хранятся строго на вашем компьютере.
     </p>
 
     <!-- Кнопки действий -->
@@ -42,7 +42,7 @@ const downloadLinks = {
         href="#download"
         class="px-8 py-3.5 text-base font-semibold rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white transition shadow-lg shadow-indigo-600/30 hover:scale-[1.02] active:scale-[0.98]"
       >
-        Скачать для Windows
+        Скачать WorkOn бесплатно
       </a>
       <a
         href={`${base}/changelog`}
@@ -95,9 +95,9 @@ const downloadLinks = {
   <!-- Блок скачивания (Download) -->
   <section id="download" class="py-16 border-t border-slate-900 scroll-mt-20">
     <div class="text-center max-w-xl mx-auto mb-10">
-      <h2 class="text-3xl font-extrabold text-white">Выберите вашу систему</h2>
+      <h2 class="text-3xl font-extrabold text-white">Скачать WorkOn</h2>
       <p class="mt-3 text-slate-400 text-sm">
-        Установите FWT на свой рабочий компьютер и начните отслеживать задачи в один клик.
+        Установите WorkOn на свой рабочий компьютер и начните отслеживать задачи в один клик.
       </p>
     </div>
 
@@ -173,9 +173,9 @@ const downloadLinks = {
   <!-- Призыв поддержать проект (Donate CTA) -->
   <section class="my-12 p-8 rounded-3xl bg-gradient-to-r from-indigo-950/40 via-purple-950/20 to-slate-900 border border-indigo-900/40 flex flex-col sm:flex-row items-center justify-between gap-6">
     <div>
-      <h3 class="text-xl font-bold text-white">Нравится приложение?</h3>
+      <h3 class="text-xl font-bold text-white">Нравится WorkOn?</h3>
       <p class="text-sm text-slate-400 mt-1 max-w-lg">
-        FWT развивается на чистом энтузиазме. Если тайм-трекер помогает вам в работе, вы можете поддержать автора чашкой кофе.
+        WorkOn развивается на чистом энтузиазме. Если тайм-трекер помогает вам в работе, вы можете поддержать автора чашкой кофе.
       </p>
     </div>
     <a

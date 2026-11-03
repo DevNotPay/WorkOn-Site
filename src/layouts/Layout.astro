@@ -7,7 +7,7 @@ interface Props {
 }
 
 const {
-  title = "FWT — Бесплатный трекер рабочего времени",
+  title = "WorkOn — Бесплатный трекер рабочего времени",
   description = "Простой, легкий и полностью бесплатный тайм-трекер для Windows, macOS и Linux. Без подписок, рекламы и слежки."
 } = Astro.props;
 
@@ -43,7 +43,7 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
           <span class="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center text-white shadow-lg shadow-indigo-500/25">
             ⏱
           </span>
-          <span>FWT <span class="text-xs px-2 py-0.5 ml-1 rounded-full bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 font-medium">Free</span></span>
+          <span>Work<span class="text-indigo-400">On</span> <span class="text-xs px-2 py-0.5 ml-1 rounded-full bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 font-medium">Free</span></span>
         </a>
 
         <!-- Навигация -->
@@ -87,7 +87,7 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
     <footer class="border-t border-slate-900 bg-slate-950/50 py-8 text-center text-xs text-slate-500">
       <div class="max-w-5xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
         <div>
-          © {new Date().getFullYear()} FWT (Free Work Tracker). Бесплатный проект с открытой душой.
+          © {new Date().getFullYear()} WorkOn. Бесплатный инструмент с открытой душой.
         </div>
         <div class="flex items-center gap-6">
           <a href={`${base}/changelog`} class="hover:text-slate-300 transition">История версий</a>
