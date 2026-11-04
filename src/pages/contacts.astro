@@ -1,0 +1,109 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<Layout title="Обратная связь — WorkOn" description="Свяжитесь с автором WorkOn: форма обратной связи, GitHub и Discord.">
+  <div class="max-w-3xl mx-auto py-6 sm:py-10">
+    <div class="text-center mb-12">
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-white mb-4">Обратная связь</h1>
+      <p class="text-slate-400 text-sm sm:text-base max-w-xl mx-auto">
+        Нашли баг, есть идея или хотите обсудить корпоративную версию? Напишите нам любым удобным способом.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <!-- Форма обратной связи -->
+      <div>
+        <h2 class="text-lg font-bold text-white mb-6">Написать нам</h2>
+        <form
+          action="https://formspree.io/f/ВАШ_FORM_ID"
+          method="POST"
+          class="space-y-4"
+        >
+          <div>
+            <label class="block text-xs font-medium text-slate-400 mb-1">Ваше имя</label>
+            <input
+              type="text"
+              name="name"
+              placeholder="Иван"
+              class="w-full px-3 py-2 rounded-lg bg-slate-900 border border-slate-700 text-slate-200 focus:border-indigo-500 focus:outline-none transition"
+              required
+            />
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-slate-400 mb-1">Email</label>
+            <input
+              type="email"
+              name="email"
+              placeholder="ivan@example.com"
+              class="w-full px-3 py-2 rounded-lg bg-slate-900 border border-slate-700 text-slate-200 focus:border-indigo-500 focus:outline-none transition"
+              required
+            />
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-slate-400 mb-1">Сообщение</label>
+            <textarea
+              name="message"
+              rows="5"
+              placeholder="Что-то не работает или есть предложение..."
+              class="w-full px-3 py-2 rounded-lg bg-slate-900 border border-slate-700 text-slate-200 focus:border-indigo-500 focus:outline-none transition"
+              required
+            ></textarea>
+          </div>
+          <button
+            type="submit"
+            class="w-full px-4 py-2.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-semibold transition shadow-lg shadow-indigo-600/30"
+          >
+            Отправить
+          </button>
+          <p class="text-[11px] text-slate-500 text-center mt-2">
+            Чтобы форма заработала, замените action на ваш endpoint (Formspree, Getform и т.д.)
+          </p>
+        </form>
+      </div>
+
+      <!-- Ссылки -->
+      <div class="space-y-4">
+        <div class="p-6 rounded-2xl bg-slate-900/60 border border-slate-800">
+          <h3 class="text-base font-bold text-white mb-4">GitHub</h3>
+          <a
+            href="https://github.com/DevNotPay/FreeWorkTracker"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="block w-full px-4 py-3 rounded-xl bg-slate-800 hover:bg-slate-750 border border-slate-700 text-slate-200 hover:text-white transition text-left"
+          >
+            <span class="font-mono text-sm">github.com/DevNotPay/FreeWorkTracker</span>
+            <span class="ml-2 text-[10px] px-2 py-0.5 rounded bg-slate-700 text-slate-400">Открытый исходный код</span>
+          </a>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-slate-900/60 border border-slate-800">
+          <h3 class="text-base font-bold text-white mb-4">Discord</h3>
+          <a
+            href="https://discord.gg/ВАШ_ИНВАЙТ"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="block w-full px-4 py-3 rounded-xl bg-slate-800 hover:bg-slate-750 border border-slate-700 text-slate-200 hover:text-white transition text-left"
+          >
+            <span class="font-mono text-sm">discord.gg/ВАШ_ИНВАЙТ</span>
+            <span class="ml-2 text-[10px] px-2 py-0.5 rounded bg-slate-700 text-slate-400">Сервер поддержки</span>
+          </a>
+          <p class="text-[11px] text-slate-500 mt-2">Замените ссылку на реальный инвайт Discord.</p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-slate-900/60 border border-slate-800">
+          <h3 class="text-base font-bold text-white mb-4">Другой контакт</h3>
+          <p class="text-sm text-slate-300 mb-4">Если не получается отправить форму, пишите напрямую:</p>
+          <ul class="space-y-2 text-sm text-slate-400">
+            <li class="flex items-center gap-2">
+              <span class="text-indigo-400">📧</span>
+              <a href="mailto:hello@workon-app.pages.dev" class="hover:text-white transition">hello@workon-app.pages.dev</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>

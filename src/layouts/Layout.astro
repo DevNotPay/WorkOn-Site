@@ -15,8 +15,11 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 const navItems = [
   { href: `${base}/`, label: "Главная" },
-  { href: `${base}/changelog`, label: "Чейнджлог" },
+  { href: `${base}/changelog`, label: "Блог / Чейнджлог" },
+  { href: `${base}/roadmap`, label: "Дорожная карта" },
   { href: `${base}/donate`, label: "Поддержать проект" },
+  { href: `${base}/contacts`, label: "Контакты" },
+  { href: "https://github.com/DevNotPay/FreeWorkTracker", label: "GitHub", external: true },
 ];
 
 const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
@@ -33,6 +36,9 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
+    <meta property="og:image" content={`${base}/og-image.jpg`} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={`${base}/og-image.jpg`} />
   </head>
   <body class="min-h-full flex flex-col font-sans bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.15),rgba(255,255,255,0))]">
     <!-- Шапка (Header) -->
@@ -54,6 +60,8 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
             return (
               <a
                 href={item.href}
+                target={item.external ? '_blank' : undefined}
+                rel={item.external ? 'noopener noreferrer' : undefined}
                 class={`px-3 py-1.5 rounded-lg transition-colors ${
                   isActive
                     ? "bg-slate-800 text-white"
@@ -94,6 +102,7 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
           <a href={`${base}/donate`} class="hover:text-slate-300 transition">Поддержать</a>
           <a href="https://github.com/DevNotPay/FreeWorkTracker" target="_blank" rel="noopener noreferrer" class="hover:text-slate-300 transition">GitHub</a>
         </div>
+        <div class="mt-4 sm:mt-0 text-[10px] text-slate-500">Лицензия: AGPLv3 • Открытый исходный код</div>
       </div>
     </footer>
   </body>

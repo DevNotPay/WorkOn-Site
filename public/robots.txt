@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://workon-app.pages.dev/sitemap.xml

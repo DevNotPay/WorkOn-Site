@@ -1,0 +1,81 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const roadmap = [
+  {
+    quarter: 'Q4 2026',
+    status: 'Вышло',
+    items: [
+      'Базовый таймер с быстрым запуском и остановкой',
+      'Группировка задач по проектам и клиентам',
+      'Локальная база данных SQLite — все данные на устройстве',
+      'Сворачивание в системный трей (Windows, macOS, Linux)',
+      'Бесплатное распространение без пейволов и подписок',
+    ],
+  },
+  {
+    quarter: 'Q1 2027',
+    status: 'В разработке',
+    items: [
+      'Экспорт отчётов в CSV / PDF',
+      'Настройка уведомлений и напоминаний',
+      'Тёмная и светлая темы оформления',
+      'Поддержка нескольких языков интерфейса',
+    ],
+  },
+  {
+    quarter: 'Q2 2027',
+    status: 'Планируется',
+    items: [
+      'Корпоративная версия: централизованное управление, ролевой доступ, селфхост для команд до 200 человек',
+      'Синхронизация между устройствами через собственное серверное приложение',
+      'API для интеграции с внешними системами',
+    ],
+  },
+];
+---
+
+<Layout title="Дорожная карта — WorkOn" description="Планы развития бесплатного трекера рабочего времени WorkOn и сроки выхода корпоративной версии.">
+  <div class="max-w-4xl mx-auto py-6 sm:py-10">
+    <div class="text-center mb-12">
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-white mb-4">Дорожная карта WorkOn</h1>
+      <p class="text-slate-400 text-sm sm:text-base max-w-2xl mx-auto">
+        Все функции ниже бесплатны и останутся таковыми. Корпоративная версия для команд — в плане, сроки указаны ниже.
+      </p>
+    </div>
+
+    <div class="space-y-10">
+      {roadmap.map((phase) => (
+        <article class="p-6 rounded-2xl bg-slate-900/60 border border-slate-800">
+          <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+            <h2 class="text-xl font-bold text-white">
+              {phase.quarter} <span class="text-xs px-2 py-0.5 rounded-full border shrink-0 {phase.status === 'Вышло' ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' : phase.status === 'В разработке' ? 'bg-indigo-500/10 text-indigo-400 border-indigo-500/20' : 'bg-slate-700 text-slate-400 border-slate-700'}">
+                {phase.status}
+              </span>
+            </h2>
+          </div>
+          <ul class="space-y-3 text-sm text-slate-300">
+            {phase.items.map((item) => (
+              <li class="flex items-start gap-3">
+                <span class="text-indigo-400 shrink-0">➤</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </article>
+      ))}
+    </div>
+
+    <div class="mt-12 p-8 rounded-3xl bg-indigo-950/20 border border-indigo-900/40 text-center">
+      <h3 class="text-xl font-bold text-white mb-3">Хотите корпоративную версию раньше?</h3>
+      <p class="text-sm text-slate-400 mb-6 max-w-lg mx-auto">
+        Корпоративная версия для команд до 200 человек с селфхостом и централизованным управлением запланирована на Q2 2027.
+      </p>
+      <a href={`${base}/contacts`} class="px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold transition">
+        Написать нам
+      </a>
+    </div>
+  </div>
+</Layout>
