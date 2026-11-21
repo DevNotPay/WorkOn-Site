@@ -1,0 +1,569 @@
+---
+import { TRANSLATIONS, type Lang } from '../i18n/translations';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const d = TRANSLATIONS[lang].demo;
+
+const projectDots = ['#F59E0B', '#38BDF8', '#34D399', '#A78BFA'];
+
+const demoConfig = {
+  statusIdle: d.statusIdle,
+  statusRunning: d.statusRunning,
+  statusPaused: d.statusPaused,
+  startLabel: d.start,
+  pauseLabel: d.pause,
+  resumeLabel: d.resume,
+  copyReportLabel: d.copyReport,
+  copiedReportLabel: d.copiedReport,
+  emptySessions: d.emptySessions,
+  defaultTask: d.defaultTask,
+  projects: d.projects,
+  sampleSessions: d.sampleSessions,
+  reportHeader: lang === 'ru' ? 'WorkOn — Отчёт за сегодня' : 'WorkOn — Today Summary',
+  totalLabel: d.todayTotalLabel,
+  removeAria: lang === 'ru' ? 'Удалить запись' : 'Remove session',
+};
+---
+
+<div
+  id="workon-demo-root"
+  data-config={JSON.stringify(demoConfig)}
+  class="w-full rounded-xl border border-line bg-surface shadow-[0_24px_60px_-24px_rgba(0,0,0,0.85)] overflow-hidden"
+>
+  <!-- Desktop Window Title Bar -->
+  <div class="flex items-center justify-between gap-4 border-b border-line bg-surface-elevated px-4 py-3">
+    <div class="flex items-center gap-2">
+      <span class="h-2.5 w-2.5 rounded-full bg-line-strong" aria-hidden="true"></span>
+      <span class="h-2.5 w-2.5 rounded-full bg-line-strong" aria-hidden="true"></span>
+      <span class="h-2.5 w-2.5 rounded-full bg-line-strong" aria-hidden="true"></span>
+      <span class="ml-2 font-mono text-xs text-ink-muted whitespace-nowrap">
+        {d.windowTitle}
+      </span>
+    </div>
+
+    <div class="flex items-center gap-2 font-mono text-xs text-ink-secondary whitespace-nowrap">
+      <span
+        id="demo-live-indicator"
+        class="hidden h-2 w-2 rounded-full bg-accent"
+        aria-hidden="true"
+      ></span>
+      <span id="demo-status-text">{d.statusIdle}</span>
+    </div>
+  </div>
+
+  <!-- Main Timer Workspace -->
+  <div class="p-5 sm:p-6">
+    <!-- Task Input -->
+    <div>
+      <label
+        for="demo-task-input"
+        class="block text-xs font-medium text-ink-muted mb-1.5"
+      >
+        {d.taskLabel}
+      </label>
+      <input
+        id="demo-task-input"
+        type="text"
+        value={d.defaultTask}
+        placeholder={d.taskPlaceholder}
+        maxlength="80"
+        class="w-full min-h-10 rounded-lg border border-line bg-canvas px-3.5 py-2 text-sm text-ink placeholder:text-ink-muted transition-colors duration-150 focus:border-accent focus:outline-none"
+      />
+    </div>
+
+    <!-- Interactive Project Selector -->
+    <div class="mt-4">
+      <div class="text-xs font-medium text-ink-muted mb-2">{d.projectsLabel}</div>
+      <div
+        id="demo-project-list"
+        class="flex flex-wrap gap-1.5"
+        role="radiogroup"
+        aria-label={d.projectsLabel}
+      >
+        {d.projects.map((project, idx) => (
+          <button
+            type="button"
+            data-project={project}
+            data-color={projectDots[idx % projectDots.length]}
+            aria-pressed={idx === 0 ? 'true' : 'false'}
+            class={`demo-project-btn inline-flex min-h-9 items-center gap-2 rounded-md border px-3 py-1.5 text-xs font-medium transition-colors duration-150 whitespace-nowrap shrink-0 cursor-pointer ${
+              idx === 0
+                ? 'border-line-strong bg-surface-elevated text-ink'
+                : 'border-line bg-canvas text-ink-secondary hover:border-line-strong hover:text-ink'
+            }`}
+          >
+            <span
+              class="h-2 w-2 rounded-full shrink-0"
+              style={`background-color: ${projectDots[idx % projectDots.length]}`}
+              aria-hidden="true"
+            ></span>
+            <span>{project}</span>
+          </button>
+        ))}
+      </div>
+    </div>
+
+    <!-- Chronograph Display & Primary Controls -->
+    <div class="mt-6 flex flex-col gap-5 border-y border-line py-5 sm:flex-row sm:items-center sm:justify-between">
+      <div>
+        <div
+          id="demo-clock"
+          class="font-mono text-4xl font-semibold tracking-tight text-ink tabular-nums sm:text-[2.75rem] leading-none"
+          aria-live="off"
+        >
+          00:00:00
+        </div>
+        <div class="mt-2 text-xs text-ink-muted">
+          {d.shortcutHint}
+        </div>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-2 shrink-0">
+        <button
+          type="button"
+          id="demo-toggle-btn"
+          class="inline-flex min-h-10 items-center justify-center gap-2 rounded-md bg-accent px-4 py-2 text-sm font-semibold text-accent-ink transition-colors duration-150 hover:bg-accent-hover whitespace-nowrap shrink-0 cursor-pointer"
+        >
+          <svg
+            id="demo-play-icon"
+            class="h-4 w-4"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+            <polygon points="6,4 20,12 6,20" />
+          </svg>
+          <svg
+            id="demo-pause-icon"
+            class="hidden h-4 w-4"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+            <rect x="6" y="4" width="4" height="16" rx="1" />
+            <rect x="14" y="4" width="4" height="16" rx="1" />
+          </svg>
+          <span id="demo-toggle-label">{d.start}</span>
+        </button>
+
+        <button
+          type="button"
+          id="demo-finish-btn"
+          disabled
+          class="inline-flex min-h-10 items-center justify-center rounded-md border border-line bg-surface-elevated px-3.5 py-2 text-sm font-medium text-ink transition-colors duration-150 hover:border-line-strong hover:bg-surface-hover disabled:cursor-not-allowed disabled:opacity-40 whitespace-nowrap shrink-0 cursor-pointer"
+        >
+          {d.finish}
+        </button>
+
+        <button
+          type="button"
+          id="demo-reset-btn"
+          disabled
+          aria-label={d.reset}
+          title={d.reset}
+          class="inline-flex h-10 w-10 items-center justify-center rounded-md border border-line bg-canvas text-ink-secondary transition-colors duration-150 hover:border-line-strong hover:text-ink disabled:cursor-not-allowed disabled:opacity-40 shrink-0 cursor-pointer"
+        >
+          <svg
+            class="h-4 w-4"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M3 12a9 9 0 1 0 3-6.7L3 8" />
+            <path d="M3 3v5h5" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Today's Logged Sessions Ledger -->
+    <div class="mt-5">
+      <div class="flex items-center justify-between gap-4 mb-3">
+        <span class="text-xs font-medium text-ink-muted">{d.todayHeading}</span>
+        <div class="flex items-center gap-3 text-xs">
+          <span class="text-ink-muted">{d.todayTotalLabel}:</span>
+          <span
+            id="demo-today-total"
+            class="font-mono font-medium text-ink tabular-nums"
+          >
+            02:07:00
+          </span>
+        </div>
+      </div>
+
+      <ul id="demo-sessions-list" class="divide-y divide-line border-t border-b border-line">
+        <!-- Populated and synchronized by client script -->
+      </ul>
+
+      <div class="mt-3 flex items-center justify-between gap-4">
+        <span class="font-mono text-[11px] text-ink-muted">SQLite · local</span>
+        <button
+          type="button"
+          id="demo-copy-report-btn"
+          class="inline-flex min-h-9 items-center gap-1.5 rounded-md px-2.5 py-1.5 text-xs font-medium text-ink-secondary transition-colors duration-150 hover:bg-surface-elevated hover:text-ink whitespace-nowrap shrink-0 cursor-pointer"
+        >
+          <svg
+            class="h-3.5 w-3.5"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <rect x="9" y="9" width="13" height="13" rx="2" />
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+          </svg>
+          <span id="demo-copy-report-label">{d.copyReport}</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  interface DemoSession {
+    id: string;
+    task: string;
+    project: string;
+    color: string;
+    seconds: number;
+  }
+
+  interface DemoConfig {
+    statusIdle: string;
+    statusRunning: string;
+    statusPaused: string;
+    startLabel: string;
+    pauseLabel: string;
+    resumeLabel: string;
+    copyReportLabel: string;
+    copiedReportLabel: string;
+    emptySessions: string;
+    defaultTask: string;
+    projects: string[];
+    sampleSessions: { task: string; project: string; seconds: number }[];
+    reportHeader: string;
+    totalLabel: string;
+    removeAria: string;
+  }
+
+  const root = document.getElementById('workon-demo-root');
+  if (root) {
+    const raw = root.getAttribute('data-config');
+    const cfg: DemoConfig = raw ? JSON.parse(raw) : null;
+
+    if (cfg) {
+      const projectColors: Record<string, string> = {};
+      const palette = ['#F59E0B', '#38BDF8', '#34D399', '#A78BFA'];
+      cfg.projects.forEach((p, i) => {
+        projectColors[p] = palette[i % palette.length];
+      });
+
+      const taskInput = document.getElementById('demo-task-input') as HTMLInputElement | null;
+      const clockEl = document.getElementById('demo-clock');
+      const statusEl = document.getElementById('demo-status-text');
+      const liveDot = document.getElementById('demo-live-indicator');
+      const toggleBtn = document.getElementById('demo-toggle-btn') as HTMLButtonElement | null;
+      const toggleLabel = document.getElementById('demo-toggle-label');
+      const playIcon = document.getElementById('demo-play-icon');
+      const pauseIcon = document.getElementById('demo-pause-icon');
+      const finishBtn = document.getElementById('demo-finish-btn') as HTMLButtonElement | null;
+      const resetBtn = document.getElementById('demo-reset-btn') as HTMLButtonElement | null;
+      const sessionsList = document.getElementById('demo-sessions-list');
+      const todayTotalEl = document.getElementById('demo-today-total');
+      const copyBtn = document.getElementById('demo-copy-report-btn');
+      const copyLabel = document.getElementById('demo-copy-report-label');
+      const projectButtons = Array.from(
+        root.querySelectorAll<HTMLButtonElement>('.demo-project-btn')
+      );
+
+      let selectedProject = cfg.projects[0] || 'General';
+      let isRunning = false;
+      let accumulatedMs = 0;
+      let startedAtMs: number | null = null;
+      let tickInterval: number | null = null;
+
+      let sessions: DemoSession[] = cfg.sampleSessions.map((item, idx) => ({
+        id: `sample-${idx}`,
+        task: item.task,
+        project: item.project,
+        color: projectColors[item.project] || '#F59E0B',
+        seconds: item.seconds,
+      }));
+
+      function formatDuration(totalSeconds: number): string {
+        const safe = Math.max(0, Math.floor(totalSeconds));
+        const hrs = Math.floor(safe / 3600);
+        const mins = Math.floor((safe % 3600) / 60);
+        const secs = safe % 60;
+        return [hrs, mins, secs].map((n) => String(n).padStart(2, '0')).join(':');
+      }
+
+      function getCurrentElapsedMs(): number {
+        if (isRunning && startedAtMs !== null) {
+          return accumulatedMs + (Date.now() - startedAtMs);
+        }
+        return accumulatedMs;
+      }
+
+      function updateClockAndControls() {
+        const elapsedSec = Math.floor(getCurrentElapsedMs() / 1000);
+        if (clockEl) {
+          clockEl.textContent = formatDuration(elapsedSec);
+        }
+
+        const hasTime = getCurrentElapsedMs() >= 1000 || isRunning;
+        if (finishBtn) finishBtn.disabled = !hasTime;
+        if (resetBtn) resetBtn.disabled = !hasTime;
+
+        if (statusEl && liveDot && toggleLabel && playIcon && pauseIcon) {
+          if (isRunning) {
+            statusEl.textContent = cfg.statusRunning;
+            liveDot.classList.remove('hidden');
+            toggleLabel.textContent = cfg.pauseLabel;
+            playIcon.classList.add('hidden');
+            pauseIcon.classList.remove('hidden');
+          } else if (accumulatedMs > 0) {
+            statusEl.textContent = cfg.statusPaused;
+            liveDot.classList.add('hidden');
+            toggleLabel.textContent = cfg.resumeLabel;
+            playIcon.classList.remove('hidden');
+            pauseIcon.classList.add('hidden');
+          } else {
+            statusEl.textContent = cfg.statusIdle;
+            liveDot.classList.add('hidden');
+            toggleLabel.textContent = cfg.startLabel;
+            playIcon.classList.remove('hidden');
+            pauseIcon.classList.add('hidden');
+          }
+        }
+
+        updateTodayTotal();
+      }
+
+      function updateTodayTotal() {
+        if (!todayTotalEl) return;
+        const loggedSeconds = sessions.reduce((acc, s) => acc + s.seconds, 0);
+        const liveSeconds = Math.floor(getCurrentElapsedMs() / 1000);
+        todayTotalEl.textContent = formatDuration(loggedSeconds + liveSeconds);
+      }
+
+      function renderSessions() {
+        if (!sessionsList) return;
+        sessionsList.innerHTML = '';
+
+        if (sessions.length === 0) {
+          const emptyLi = document.createElement('li');
+          emptyLi.className = 'py-4 text-center text-xs text-ink-muted';
+          emptyLi.textContent = cfg.emptySessions;
+          sessionsList.appendChild(emptyLi);
+          updateTodayTotal();
+          return;
+        }
+
+        sessions.slice(0, 4).forEach((session) => {
+          const li = document.createElement('li');
+          li.className = 'flex items-center justify-between gap-3 py-2.5 text-xs';
+
+          const left = document.createElement('div');
+          left.className = 'min-w-0 flex-1';
+
+          const titleRow = document.createElement('div');
+          titleRow.className = 'truncate font-medium text-ink';
+          titleRow.textContent = session.task;
+
+          const metaRow = document.createElement('div');
+          metaRow.className = 'mt-0.5 flex items-center gap-1.5 text-[11px] text-ink-muted';
+
+          const dot = document.createElement('span');
+          dot.className = 'h-1.5 w-1.5 rounded-full shrink-0';
+          dot.style.backgroundColor = session.color;
+
+          const proj = document.createElement('span');
+          proj.className = 'truncate';
+          proj.textContent = session.project;
+
+          metaRow.appendChild(dot);
+          metaRow.appendChild(proj);
+          left.appendChild(titleRow);
+          left.appendChild(metaRow);
+
+          const right = document.createElement('div');
+          right.className = 'flex items-center gap-2 shrink-0';
+
+          const dur = document.createElement('span');
+          dur.className = 'font-mono text-xs text-ink-secondary tabular-nums';
+          dur.textContent = formatDuration(session.seconds);
+
+          const removeBtn = document.createElement('button');
+          removeBtn.type = 'button';
+          removeBtn.setAttribute('aria-label', cfg.removeAria);
+          removeBtn.className =
+            'inline-flex h-6 w-6 items-center justify-center rounded text-ink-muted transition-colors duration-150 hover:bg-surface-elevated hover:text-ink cursor-pointer';
+          removeBtn.innerHTML =
+            '<svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
+          removeBtn.addEventListener('click', () => {
+            sessions = sessions.filter((item) => item.id !== session.id);
+            renderSessions();
+          });
+
+          right.appendChild(dur);
+          right.appendChild(removeBtn);
+
+          li.appendChild(left);
+          li.appendChild(right);
+          sessionsList.appendChild(li);
+        });
+
+        updateTodayTotal();
+      }
+
+      function startTimer() {
+        if (isRunning) return;
+        isRunning = true;
+        startedAtMs = Date.now();
+        tickInterval = window.setInterval(updateClockAndControls, 250);
+        updateClockAndControls();
+      }
+
+      function pauseTimer() {
+        if (!isRunning) return;
+        if (startedAtMs !== null) {
+          accumulatedMs += Date.now() - startedAtMs;
+        }
+        isRunning = false;
+        startedAtMs = null;
+        if (tickInterval !== null) {
+          clearInterval(tickInterval);
+          tickInterval = null;
+        }
+        updateClockAndControls();
+      }
+
+      function toggleTimer() {
+        if (isRunning) {
+          pauseTimer();
+        } else {
+          startTimer();
+        }
+      }
+
+      function finishSession() {
+        const totalSec = Math.max(1, Math.floor(getCurrentElapsedMs() / 1000));
+        pauseTimer();
+        const title = (taskInput?.value || '').trim() || cfg.defaultTask;
+        sessions.unshift({
+          id: `session-${Date.now()}`,
+          task: title,
+          project: selectedProject,
+          color: projectColors[selectedProject] || '#F59E0B',
+          seconds: totalSec,
+        });
+        accumulatedMs = 0;
+        renderSessions();
+        updateClockAndControls();
+      }
+
+      function resetTimer() {
+        pauseTimer();
+        accumulatedMs = 0;
+        updateClockAndControls();
+      }
+
+      projectButtons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          selectedProject = btn.getAttribute('data-project') || selectedProject;
+          projectButtons.forEach((item) => {
+            const active = item === btn;
+            item.setAttribute('aria-pressed', String(active));
+            item.classList.toggle('border-line-strong', active);
+            item.classList.toggle('bg-surface-elevated', active);
+            item.classList.toggle('text-ink', active);
+            item.classList.toggle('border-line', !active);
+            item.classList.toggle('bg-canvas', !active);
+            item.classList.toggle('text-ink-secondary', !active);
+          });
+        });
+      });
+
+      toggleBtn?.addEventListener('click', toggleTimer);
+      finishBtn?.addEventListener('click', finishSession);
+      resetBtn?.addEventListener('click', resetTimer);
+
+      document.addEventListener('keydown', (event) => {
+        if (event.code !== 'Space') return;
+        const target = event.target as HTMLElement | null;
+        const tag = target?.tagName;
+        if (
+          tag === 'INPUT' ||
+          tag === 'TEXTAREA' ||
+          tag === 'BUTTON' ||
+          tag === 'A' ||
+          tag === 'SUMMARY' ||
+          target?.isContentEditable
+        ) {
+          return;
+        }
+        event.preventDefault();
+        toggleTimer();
+      });
+
+      copyBtn?.addEventListener('click', async () => {
+        const lines = [cfg.reportHeader, ''];
+        sessions.forEach((s) => {
+          lines.push(`- [${s.project}] ${s.task} — ${formatDuration(s.seconds)}`);
+        });
+        const totalSeconds =
+          sessions.reduce((acc, s) => acc + s.seconds, 0) +
+          Math.floor(getCurrentElapsedMs() / 1000);
+        lines.push('', `${cfg.totalLabel}: ${formatDuration(totalSeconds)}`);
+        const text = lines.join('\n');
+
+        let copied = false;
+        try {
+          if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(text);
+            copied = true;
+          }
+        } catch {
+          copied = false;
+        }
+
+        if (!copied) {
+          const area = document.createElement('textarea');
+          area.value = text;
+          area.style.position = 'fixed';
+          area.style.opacity = '0';
+          document.body.appendChild(area);
+          area.select();
+          try {
+            copied = document.execCommand('copy');
+          } catch {
+            copied = false;
+          }
+          document.body.removeChild(area);
+        }
+
+        if (copied && copyLabel) {
+          copyLabel.textContent = cfg.copiedReportLabel;
+          window.setTimeout(() => {
+            if (copyLabel) copyLabel.textContent = cfg.copyReportLabel;
+          }, 2000);
+        }
+      });
+
+      renderSessions();
+      updateClockAndControls();
+    }
+  }
+</script>

@@ -1,0 +1,199 @@
+---
+import { RELEASES, SITE_CONFIG, type ChangeType } from '../data/siteConfig';
+import { TRANSLATIONS, type Lang } from '../i18n/translations';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = TRANSLATIONS[lang].changelog;
+
+const typeTone: Record<ChangeType, string> = {
+  new: 'text-emerald-400',
+  improve: 'text-sky-400',
+  fix: 'text-amber-400',
+};
+---
+
+<section class="py-12 sm:py-16">
+  <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+    <!-- Page Header -->
+    <div class="flex flex-col justify-between gap-6 border-b border-line pb-8 sm:flex-row sm:items-end">
+      <div>
+        <h1 class="font-display text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
+          {t.heading}
+        </h1>
+        <p class="mt-2.5 max-w-xl text-sm leading-relaxed text-ink-secondary sm:text-base">
+          {t.subheading}
+        </p>
+      </div>
+
+      <!-- Interactive Category Filter Tabs -->
+      <div
+        id="changelog-filter-bar"
+        role="tablist"
+        aria-label={t.heading}
+        class="inline-flex items-center gap-1 self-start rounded-lg border border-line bg-surface p-1 sm:self-auto"
+      >
+        {(['all', 'new', 'improve', 'fix'] as const).map((filterKey, idx) => (
+          <button
+            type="button"
+            role="tab"
+            data-filter={filterKey}
+            aria-selected={idx === 0 ? 'true' : 'false'}
+            class={`changelog-filter-btn min-h-8 rounded-md px-3 py-1 text-xs font-medium transition-colors duration-150 whitespace-nowrap shrink-0 cursor-pointer ${
+              idx === 0
+                ? 'bg-surface-elevated text-ink'
+                : 'text-ink-muted hover:text-ink'
+            }`}
+          >
+            {t.filters[filterKey]}
+          </button>
+        ))}
+      </div>
+    </div>
+
+    <!-- Release Timeline -->
+    <div class="mt-10 space-y-8">
+      {RELEASES.map((release) => (
+        <article
+          data-release-card
+          class="rounded-xl border border-line bg-surface p-6 sm:p-7"
+        >
+          <div class="flex flex-wrap items-baseline justify-between gap-3 border-b border-line pb-4">
+            <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+              <h2 class="font-mono text-xl font-semibold text-ink tabular-nums">
+                v{release.version}
+              </h2>
+              {release.isLatest && (
+                <span class="font-mono text-xs text-accent">
+                  {t.latestLabel}
+                </span>
+              )}
+            </div>
+            <time
+              datetime={release.isoDate}
+              class="font-mono text-xs text-ink-muted tabular-nums"
+            >
+              {release.date[lang]}
+            </time>
+          </div>
+
+          <p class="mt-4 text-sm leading-relaxed text-ink-secondary">
+            {release.description[lang]}
+          </p>
+
+          <ul class="mt-5 space-y-3" data-change-list>
+            {release.changes.map((item) => (
+              <li
+                data-change-type={item.type}
+                class="flex flex-col gap-1 text-sm sm:flex-row sm:items-baseline sm:gap-4"
+              >
+                <span
+                  class={`w-24 shrink-0 font-mono text-xs font-medium ${typeTone[item.type]}`}
+                >
+                  {t.filters[item.type]}
+                </span>
+                <span class="text-ink leading-relaxed">{item.text[lang]}</span>
+              </li>
+            ))}
+          </ul>
+
+          <p
+            data-empty-msg
+            class="hidden mt-5 text-xs text-ink-muted"
+          >
+            {t.emptyFilter}
+          </p>
+
+          {release.downloads && (
+            <div class="mt-6 flex flex-wrap items-center gap-2 border-t border-line pt-4">
+              <span class="mr-2 text-xs text-ink-muted">{t.filesLabel}:</span>
+              <a
+                href={release.downloads.windows}
+                class="inline-flex min-h-9 items-center rounded-md border border-line bg-canvas px-3 py-1.5 text-xs font-medium text-ink-secondary transition-colors duration-150 hover:border-line-strong hover:text-ink whitespace-nowrap"
+              >
+                Windows (.exe)
+              </a>
+              {release.downloads.windowsPortable && (
+                <a
+                  href={release.downloads.windowsPortable}
+                  class="inline-flex min-h-9 items-center rounded-md border border-line bg-canvas px-3 py-1.5 text-xs font-medium text-ink-secondary transition-colors duration-150 hover:border-line-strong hover:text-ink whitespace-nowrap"
+                >
+                  Portable (.zip)
+                </a>
+              )}
+              <a
+                href={release.downloads.macos}
+                class="inline-flex min-h-9 items-center rounded-md border border-line bg-canvas px-3 py-1.5 text-xs font-medium text-ink-secondary transition-colors duration-150 hover:border-line-strong hover:text-ink whitespace-nowrap"
+              >
+                macOS (.dmg)
+              </a>
+              <a
+                href={release.downloads.linux}
+                class="inline-flex min-h-9 items-center rounded-md border border-line bg-canvas px-3 py-1.5 text-xs font-medium text-ink-secondary transition-colors duration-150 hover:border-line-strong hover:text-ink whitespace-nowrap"
+              >
+                Linux (.AppImage)
+              </a>
+            </div>
+          )}
+        </article>
+      ))}
+    </div>
+
+    <div class="mt-8 text-xs text-ink-muted">
+      <a
+        href={SITE_CONFIG.githubReleasesUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-1.5 transition-colors duration-150 hover:text-ink"
+      >
+        <span>{t.viewOnGithub}</span>
+        <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  const filterBtns = Array.from(
+    document.querySelectorAll<HTMLButtonElement>('.changelog-filter-btn')
+  );
+  const releaseCards = Array.from(
+    document.querySelectorAll<HTMLElement>('[data-release-card]')
+  );
+
+  function applyFilter(selected: string) {
+    filterBtns.forEach((btn) => {
+      const isActive = btn.getAttribute('data-filter') === selected;
+      btn.setAttribute('aria-selected', String(isActive));
+      btn.classList.toggle('bg-surface-elevated', isActive);
+      btn.classList.toggle('text-ink', isActive);
+      btn.classList.toggle('text-ink-muted', !isActive);
+    });
+
+    releaseCards.forEach((card) => {
+      const items = Array.from(card.querySelectorAll<HTMLElement>('[data-change-type]'));
+      const emptyMsg = card.querySelector<HTMLElement>('[data-empty-msg]');
+      let visibleCount = 0;
+
+      items.forEach((item) => {
+        const match = selected === 'all' || item.getAttribute('data-change-type') === selected;
+        item.classList.toggle('hidden', !match);
+        if (match) visibleCount++;
+      });
+
+      if (emptyMsg) {
+        emptyMsg.classList.toggle('hidden', visibleCount > 0);
+      }
+    });
+  }
+
+  filterBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const key = btn.getAttribute('data-filter') || 'all';
+      applyFilter(key);
+    });
+  });
+</script>

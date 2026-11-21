@@ -1,43 +1,20 @@
-# Astro Starter Kit: Minimal
+# WorkOn — Официальный сайт
 
-```sh
-npm create astro@latest -- --template minimal
-```
+Статический сайт бесплатного десктопного тайм-трекера **WorkOn** (Astro + Tailwind CSS v4), разворачиваемый автоматически на Cloudflare.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Быстрое обновление версий и донатов
 
-## 🚀 Project Structure
+Все данные проекта, релизы, ссылки на скачивание и реквизиты донатов находятся в одном файле:
 
-Inside of your Astro project, you'll see the following folders and files:
+- `src/data/siteConfig.ts`
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+Достаточно добавить новый релиз в начало массива `RELEASES` (с `isLatest: true`) или заменить адреса в `DONATION_PLATFORMS` и `CRYPTO_WALLETS` — изменения автоматически применятся на главной странице, в чейнджлоге (RU / EN), в SEO-разметке и на странице донатов.
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Команды
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+| Команда | Назначение |
+| :--- | :--- |
+| `npm install` | Установка зависимостей |
+| `npm run dev` | Локальный сервер разработки (`http://localhost:3000`) |
+| `npm run build` | Сборка статического сайта в `./dist` |
+| `npm run preview` | Предпросмотр собранной версии |

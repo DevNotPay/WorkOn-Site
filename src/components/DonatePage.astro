@@ -1,0 +1,213 @@
+---
+import {
+  CRYPTO_WALLETS,
+  DONATION_PLATFORMS,
+  SITE_CONFIG,
+} from '../data/siteConfig';
+import { TRANSLATIONS, type Lang } from '../i18n/translations';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = TRANSLATIONS[lang].donate;
+
+const cisPlatforms = DONATION_PLATFORMS.filter((p) => p.region === 'cis');
+const intlPlatforms = DONATION_PLATFORMS.filter((p) => p.region === 'international');
+---
+
+<section class="py-12 sm:py-16">
+  <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+    <!-- Header -->
+    <div class="border-b border-line pb-8">
+      <h1 class="font-display text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
+        {t.heading}
+      </h1>
+      <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink-secondary sm:text-base">
+        {t.subheading}
+      </p>
+    </div>
+
+    <!-- Honest Cost Transparency -->
+    <div class="mt-8 rounded-xl border border-line bg-surface p-6 sm:p-7">
+      <h2 class="font-display text-base font-semibold text-ink">
+        {t.transparencyTitle}
+      </h2>
+      <ul class="mt-4 grid grid-cols-1 gap-3.5 sm:grid-cols-2">
+        {t.transparencyItems.map((item, idx) => (
+          <li class="flex items-start gap-3 text-sm leading-relaxed text-ink-secondary">
+            <span class="mt-0.5 font-mono text-xs text-accent tabular-nums shrink-0">
+              0{idx + 1}.
+            </span>
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <!-- Donation Methods -->
+    <div class="mt-10 space-y-10">
+      <!-- CIS / Russia -->
+      <div>
+        <h2 class="text-sm font-semibold text-ink-secondary mb-4">
+          {t.cisHeading}
+        </h2>
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          {cisPlatforms.map((platform) => (
+            <a
+              href={platform.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group flex items-center justify-between gap-4 rounded-xl border border-line bg-surface p-5 transition-colors duration-150 hover:border-line-strong hover:bg-surface-elevated"
+            >
+              <div>
+                <div class="font-display text-base font-semibold text-ink transition-colors duration-150 group-hover:text-accent">
+                  {platform.name}
+                </div>
+                <div class="mt-1 text-xs leading-relaxed text-ink-muted">
+                  {platform.description[lang]}
+                </div>
+              </div>
+              <span
+                class="text-sm text-ink-muted transition-transform duration-150 group-hover:translate-x-0.5 group-hover:text-ink shrink-0"
+                aria-hidden="true"
+              >
+                →
+              </span>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <!-- International -->
+      <div>
+        <h2 class="text-sm font-semibold text-ink-secondary mb-4">
+          {t.intlHeading}
+        </h2>
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          {intlPlatforms.map((platform) => (
+            <a
+              href={platform.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group flex items-center justify-between gap-4 rounded-xl border border-line bg-surface p-5 transition-colors duration-150 hover:border-line-strong hover:bg-surface-elevated"
+            >
+              <div>
+                <div class="font-display text-base font-semibold text-ink transition-colors duration-150 group-hover:text-accent">
+                  {platform.name}
+                </div>
+                <div class="mt-1 text-xs leading-relaxed text-ink-muted">
+                  {platform.description[lang]}
+                </div>
+              </div>
+              <span
+                class="text-sm text-ink-muted transition-transform duration-150 group-hover:translate-x-0.5 group-hover:text-ink shrink-0"
+                aria-hidden="true"
+              >
+                →
+              </span>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <!-- Cryptocurrency -->
+      <div>
+        <h2 class="text-sm font-semibold text-ink-secondary mb-4">
+          {t.cryptoHeading}
+        </h2>
+        <div class="space-y-3">
+          {CRYPTO_WALLETS.map((wallet) => (
+            <div class="flex flex-col justify-between gap-3 rounded-xl border border-line bg-surface p-4 sm:flex-row sm:items-center sm:px-5">
+              <div class="min-w-0">
+                <div class="font-mono text-xs font-medium text-accent">
+                  {wallet.network}
+                </div>
+                <div class="mt-1 break-all select-all font-mono text-xs text-ink-secondary">
+                  {wallet.address}
+                </div>
+              </div>
+
+              <button
+                type="button"
+                data-copy-address={wallet.address}
+                data-label-default={t.copyBtn}
+                data-label-copied={t.copiedBtn}
+                data-label-failed={t.copyFailedBtn}
+                class="crypto-copy-btn inline-flex min-h-9 items-center justify-center rounded-md border border-line-strong bg-surface-elevated px-3.5 py-1.5 text-xs font-medium text-ink transition-colors duration-150 hover:bg-surface-hover self-start sm:self-center whitespace-nowrap shrink-0 cursor-pointer"
+              >
+                {t.copyBtn}
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- Closing Note -->
+    <div class="mt-12 flex flex-col items-start justify-between gap-4 border-t border-line pt-8 text-xs text-ink-muted sm:flex-row sm:items-center">
+      <p>{t.thankYou}</p>
+      <a
+        href={SITE_CONFIG.githubRepo}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-1.5 font-medium text-ink-secondary transition-colors duration-150 hover:text-ink whitespace-nowrap shrink-0"
+      >
+        <span>{t.starGithub}</span>
+        <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  async function copyTextSafe(text: string): Promise<boolean> {
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return true;
+      }
+    } catch {
+      // Fallback below
+    }
+
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.setAttribute('readonly', '');
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    document.body.appendChild(textarea);
+    textarea.select();
+    let ok = false;
+    try {
+      ok = document.execCommand('copy');
+    } catch {
+      ok = false;
+    }
+    document.body.removeChild(textarea);
+    return ok;
+  }
+
+  document.querySelectorAll<HTMLButtonElement>('.crypto-copy-btn').forEach((btn) => {
+    let resetTimer: number | null = null;
+    btn.addEventListener('click', async () => {
+      const address = btn.getAttribute('data-copy-address') || '';
+      const defaultText = btn.getAttribute('data-label-default') || 'Copy';
+      const copiedText = btn.getAttribute('data-label-copied') || 'Copied';
+      const failedText = btn.getAttribute('data-label-failed') || 'Failed';
+
+      const ok = await copyTextSafe(address);
+      btn.textContent = ok ? copiedText : failedText;
+      if (ok) {
+        btn.classList.add('border-accent', 'text-accent');
+      }
+
+      if (resetTimer !== null) window.clearTimeout(resetTimer);
+      resetTimer = window.setTimeout(() => {
+        btn.textContent = defaultText;
+        btn.classList.remove('border-accent', 'text-accent');
+      }, 2000);
+    });
+  });
+</script>

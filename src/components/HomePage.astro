@@ -1,0 +1,506 @@
+---
+import TimerDemo from './TimerDemo.astro';
+import { LATEST_RELEASE, SITE_CONFIG } from '../data/siteConfig';
+import { TRANSLATIONS, getLocalePath, type Lang } from '../i18n/translations';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = TRANSLATIONS[lang];
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const withBase = (p: string) => `${base}${p}`;
+
+const changelogHref = withBase(getLocalePath(lang, '/changelog'));
+const donateHref = withBase(getLocalePath(lang, '/donate'));
+
+const downloads = LATEST_RELEASE.downloads ?? {
+  windows: SITE_CONFIG.githubReleasesUrl,
+  windowsPortable: SITE_CONFIG.githubReleasesUrl,
+  macos: SITE_CONFIG.githubReleasesUrl,
+  linux: SITE_CONFIG.githubReleasesUrl,
+};
+---
+
+<!-- Hero Section: Value Proposition + Live Interactive WorkOn Demo -->
+<section class="relative border-b border-line bg-utility-grid">
+  <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
+    <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-10">
+      <!-- Left Column: Copy & Primary Action -->
+      <div class="lg:col-span-6">
+        <div class="flex flex-wrap items-center gap-x-2.5 gap-y-1 font-mono text-xs text-ink-muted">
+          <span class="text-accent tabular-nums">v{LATEST_RELEASE.version}</span>
+          <span aria-hidden="true">·</span>
+          <span>{LATEST_RELEASE.date[lang]}</span>
+          <span aria-hidden="true">·</span>
+          <span>{t.hero.metaFree}</span>
+          <span aria-hidden="true">·</span>
+          <span>{t.hero.metaLocal}</span>
+        </div>
+
+        <h1 class="mt-5 font-display text-[clamp(2.25rem,4.2vw,3.5rem)] font-extrabold tracking-tight text-ink leading-[1.08]">
+          {t.hero.headlineStart}
+          <span class="block mt-1 text-ink-secondary font-bold">
+            {t.hero.headlineAccent}
+          </span>
+        </h1>
+
+        <p class="mt-6 max-w-xl text-base leading-relaxed text-ink-secondary sm:text-lg">
+          {t.hero.subtitle}
+        </p>
+
+        <div class="mt-8 flex flex-wrap items-center gap-3">
+          <a
+            id="hero-download-cta"
+            href="#download"
+            data-label-default={t.hero.primaryCtaDefault}
+            data-label-windows={t.hero.primaryCtaWindows}
+            data-label-macos={t.hero.primaryCtaMac}
+            data-label-linux={t.hero.primaryCtaLinux}
+            class="inline-flex min-h-11 items-center justify-center gap-2 rounded-md bg-accent px-6 py-3 text-sm font-semibold text-accent-ink transition-colors duration-150 hover:bg-accent-hover whitespace-nowrap shrink-0"
+          >
+            <svg
+              class="h-4 w-4 shrink-0"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+            <span id="hero-download-cta-label">{t.hero.primaryCtaDefault}</span>
+          </a>
+
+          <a
+            href={changelogHref}
+            class="inline-flex min-h-11 items-center justify-center rounded-md border border-line bg-surface px-5 py-3 text-sm font-medium text-ink-secondary transition-colors duration-150 hover:border-line-strong hover:bg-surface-elevated hover:text-ink whitespace-nowrap shrink-0"
+          >
+            {t.hero.secondaryCta}
+          </a>
+        </div>
+
+        <p class="mt-5 text-xs text-ink-muted">
+          {t.hero.trustNote}
+        </p>
+      </div>
+
+      <!-- Right Column: Interactive Desktop Utility Demo -->
+      <div class="lg:col-span-6">
+        <TimerDemo lang={lang} />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Capabilities: Asymmetric Bento Grid -->
+<section class="border-b border-line py-16 sm:py-24">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <div class="max-w-2xl">
+      <h2 class="font-display text-2xl font-bold tracking-tight text-ink sm:text-3xl">
+        {t.features.heading}
+      </h2>
+      <p class="mt-3 text-sm leading-relaxed text-ink-secondary sm:text-base">
+        {t.features.subheading}
+      </p>
+    </div>
+
+    <div class="mt-10 grid grid-cols-1 gap-5 md:grid-cols-3">
+      <!-- 01: Wide Local SQLite Card -->
+      <div class="flex flex-col justify-between rounded-xl border border-line bg-surface p-6 sm:p-7 md:col-span-2">
+        <div>
+          <span class="font-mono text-xs text-ink-muted tabular-nums">
+            {t.features.items[0].index}.
+          </span>
+          <h3 class="mt-2 font-display text-lg font-semibold text-ink sm:text-xl">
+            {t.features.items[0].title}
+          </h3>
+          <p class="mt-2.5 max-w-xl text-sm leading-relaxed text-ink-secondary">
+            {t.features.items[0].description}
+          </p>
+        </div>
+
+        <div class="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-line pt-4 font-mono text-xs">
+          <span class="text-ink-muted">{t.features.items[0].detailLabel}</span>
+          <code class="text-ink">{t.features.items[0].detailValue}</code>
+        </div>
+      </div>
+
+      <!-- 02: Compact Footprint Metric Card -->
+      <div class="flex flex-col justify-between rounded-xl border border-line bg-surface p-6 sm:p-7">
+        <div>
+          <span class="font-mono text-xs text-ink-muted tabular-nums">
+            {t.features.items[1].index}.
+          </span>
+          <h3 class="mt-2 font-display text-lg font-semibold text-ink sm:text-xl">
+            {t.features.items[1].title}
+          </h3>
+          <p class="mt-2.5 text-sm leading-relaxed text-ink-secondary">
+            {t.features.items[1].description}
+          </p>
+        </div>
+
+        <div class="mt-6 border-t border-line pt-4">
+          <div class="font-mono text-3xl font-semibold tracking-tight text-accent tabular-nums">
+            {t.features.items[1].metric}
+          </div>
+          <div class="mt-1 text-xs text-ink-muted">
+            {t.features.items[1].metricCaption}
+          </div>
+        </div>
+      </div>
+
+      <!-- 03: Compact Keyboard Shortcuts Card -->
+      <div class="flex flex-col justify-between rounded-xl border border-line bg-surface p-6 sm:p-7">
+        <div>
+          <span class="font-mono text-xs text-ink-muted tabular-nums">
+            {t.features.items[2].index}.
+          </span>
+          <h3 class="mt-2 font-display text-lg font-semibold text-ink sm:text-xl">
+            {t.features.items[2].title}
+          </h3>
+          <p class="mt-2.5 text-sm leading-relaxed text-ink-secondary">
+            {t.features.items[2].description}
+          </p>
+        </div>
+
+        <div class="mt-6 space-y-2.5 border-t border-line pt-4">
+          {t.features.items[2].shortcuts?.map((sc) => (
+            <div class="flex items-center justify-between gap-2 text-xs">
+              <span class="text-ink-muted">{sc.label}</span>
+              <kbd class="rounded border border-line-strong bg-canvas px-2 py-0.5 font-mono text-[11px] text-ink whitespace-nowrap">
+                {sc.keys}
+              </kbd>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- 04: Wide Donation-Funded Free Forever Card -->
+      <div class="flex flex-col justify-between rounded-xl border border-line bg-surface p-6 sm:p-7 md:col-span-2">
+        <div>
+          <span class="font-mono text-xs text-ink-muted tabular-nums">
+            {t.features.items[3].index}.
+          </span>
+          <h3 class="mt-2 font-display text-lg font-semibold text-ink sm:text-xl">
+            {t.features.items[3].title}
+          </h3>
+          <p class="mt-2.5 max-w-xl text-sm leading-relaxed text-ink-secondary">
+            {t.features.items[3].description}
+          </p>
+        </div>
+
+        <div class="mt-6 flex flex-wrap items-center gap-6 border-t border-line pt-4 text-xs">
+          <a
+            href={donateHref}
+            class="inline-flex items-center gap-1.5 font-medium text-accent transition-colors duration-150 hover:text-accent-hover whitespace-nowrap"
+          >
+            <span>{t.features.items[3].ctaLabel}</span>
+            <span aria-hidden="true">→</span>
+          </a>
+          <a
+            href={SITE_CONFIG.githubRepo}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1.5 font-medium text-ink-secondary transition-colors duration-150 hover:text-ink whitespace-nowrap"
+          >
+            <span>GitHub</span>
+            <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Download Section -->
+<section id="download" class="border-b border-line py-16 sm:py-24 scroll-mt-16">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+      <div class="max-w-xl">
+        <h2 class="font-display text-2xl font-bold tracking-tight text-ink sm:text-3xl">
+          {t.download.heading}
+        </h2>
+        <p class="mt-2.5 text-sm leading-relaxed text-ink-secondary sm:text-base">
+          {t.download.subheading}
+        </p>
+      </div>
+
+      <div class="font-mono text-xs text-ink-muted tabular-nums">
+        v{LATEST_RELEASE.version} · {LATEST_RELEASE.date[lang]}
+      </div>
+    </div>
+
+    <div class="mt-10 grid grid-cols-1 gap-5 md:grid-cols-3">
+      <!-- Windows -->
+      <div
+        data-os-card="windows"
+        class="flex flex-col justify-between rounded-xl border border-line bg-surface p-6 transition-colors duration-150 hover:border-line-strong"
+      >
+        <div>
+          <div class="flex items-center justify-between gap-3">
+            <svg
+              class="h-6 w-6 text-ink"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path d="M3 5.5L10.5 4.4V11.5H3V5.5ZM11.5 4.25L21 3V11.5H11.5V4.25ZM3 12.5H10.5V19.6L3 18.5V12.5ZM11.5 12.5H21V21L11.5 19.75V12.5Z" />
+            </svg>
+            <span
+              data-os-badge="windows"
+              class="hidden font-mono text-xs font-medium text-accent"
+            >
+              {t.download.recommendedTag}
+            </span>
+          </div>
+
+          <h3 class="mt-5 font-display text-xl font-bold text-ink">
+            {t.download.windows.name}
+          </h3>
+          <p class="mt-1 text-xs text-ink-muted">
+            {t.download.windows.meta}
+          </p>
+        </div>
+
+        <div class="mt-7 space-y-2">
+          <a
+            href={downloads.windows}
+            data-os-primary="windows"
+            class="flex min-h-10 w-full items-center justify-center rounded-md border border-line-strong bg-surface-elevated px-4 py-2.5 text-sm font-semibold text-ink transition-colors duration-150 hover:bg-surface-hover whitespace-nowrap"
+          >
+            {t.download.windows.primaryBtn}
+          </a>
+          {downloads.windowsPortable && (
+            <a
+              href={downloads.windowsPortable}
+              class="flex min-h-9 w-full items-center justify-center rounded-md px-4 py-2 text-xs font-medium text-ink-secondary transition-colors duration-150 hover:bg-surface-elevated hover:text-ink whitespace-nowrap"
+            >
+              {t.download.windows.secondaryBtn}
+            </a>
+          )}
+        </div>
+      </div>
+
+      <!-- macOS -->
+      <div
+        data-os-card="macos"
+        class="flex flex-col justify-between rounded-xl border border-line bg-surface p-6 transition-colors duration-150 hover:border-line-strong"
+      >
+        <div>
+          <div class="flex items-center justify-between gap-3">
+            <svg
+              class="h-6 w-6 text-ink"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path d="M16.365 1.43c0 1.14-.493 2.27-1.177 3.08-.744.9-1.99 1.57-2.987 1.57-.12 0-.23-.02-.3-.03-.01-.06-.04-.22-.04-.39 0-1.15.572-2.27 1.206-2.98.804-.94 2.142-1.64 3.248-1.68.03.13.05.28.05.43zm4.565 15.71c-.03.07-.463 1.58-1.518 3.12-.945 1.34-1.94 2.71-3.43 2.71-1.517 0-1.9-.88-3.63-.88-1.698 0-2.302.91-3.67.91-1.377 0-2.332-1.26-3.428-2.8-1.287-1.82-2.323-4.63-2.323-7.28 0-4.28 2.797-6.55 5.552-6.55 1.448 0 2.675.95 3.6.95.865 0 2.222-1.01 3.902-1.01.613 0 2.886.06 4.374 2.19-.13.09-2.383 1.37-2.383 4.19 0 3.26 2.854 4.42 2.955 4.45z" />
+            </svg>
+            <span
+              data-os-badge="macos"
+              class="hidden font-mono text-xs font-medium text-accent"
+            >
+              {t.download.recommendedTag}
+            </span>
+          </div>
+
+          <h3 class="mt-5 font-display text-xl font-bold text-ink">
+            {t.download.macos.name}
+          </h3>
+          <p class="mt-1 text-xs text-ink-muted">
+            {t.download.macos.meta}
+          </p>
+        </div>
+
+        <div class="mt-7">
+          <a
+            href={downloads.macos}
+            data-os-primary="macos"
+            class="flex min-h-10 w-full items-center justify-center rounded-md border border-line-strong bg-surface-elevated px-4 py-2.5 text-sm font-semibold text-ink transition-colors duration-150 hover:bg-surface-hover whitespace-nowrap"
+          >
+            {t.download.macos.primaryBtn}
+          </a>
+        </div>
+      </div>
+
+      <!-- Linux -->
+      <div
+        data-os-card="linux"
+        class="flex flex-col justify-between rounded-xl border border-line bg-surface p-6 transition-colors duration-150 hover:border-line-strong"
+      >
+        <div>
+          <div class="flex items-center justify-between gap-3">
+            <svg
+              class="h-6 w-6 text-ink"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <polyline points="4 17 10 11 4 5" />
+              <line x1="12" y1="19" x2="20" y2="19" />
+            </svg>
+            <span
+              data-os-badge="linux"
+              class="hidden font-mono text-xs font-medium text-accent"
+            >
+              {t.download.recommendedTag}
+            </span>
+          </div>
+
+          <h3 class="mt-5 font-display text-xl font-bold text-ink">
+            {t.download.linux.name}
+          </h3>
+          <p class="mt-1 text-xs text-ink-muted">
+            {t.download.linux.meta}
+          </p>
+        </div>
+
+        <div class="mt-7">
+          <a
+            href={downloads.linux}
+            data-os-primary="linux"
+            class="flex min-h-10 w-full items-center justify-center rounded-md border border-line-strong bg-surface-elevated px-4 py-2.5 text-sm font-semibold text-ink transition-colors duration-150 hover:bg-surface-hover whitespace-nowrap"
+          >
+            {t.download.linux.primaryBtn}
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-6 flex items-center justify-between text-xs text-ink-muted">
+      <a
+        href={SITE_CONFIG.githubReleasesUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-1.5 transition-colors duration-150 hover:text-ink"
+      >
+        <span>{t.download.allReleasesLink}</span>
+        <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ & Unsigned Build Installation Notes -->
+<section id="faq" class="border-b border-line py-16 sm:py-24 scroll-mt-16">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 gap-10 lg:grid-cols-12">
+      <div class="lg:col-span-4">
+        <h2 class="font-display text-2xl font-bold tracking-tight text-ink sm:text-3xl">
+          {t.faq.heading}
+        </h2>
+        <p class="mt-3 text-sm leading-relaxed text-ink-secondary">
+          {t.faq.subheading}
+        </p>
+      </div>
+
+      <div class="lg:col-span-8">
+        <div class="divide-y divide-line border-y border-line">
+          {t.faq.items.map((item, idx) => (
+            <details class="group py-4" open={idx === 0}>
+              <summary class="flex min-h-10 cursor-pointer list-none items-center justify-between gap-4 text-left text-sm font-semibold text-ink transition-colors duration-150 hover:text-accent sm:text-base">
+                <span>{item.q}</span>
+                <svg
+                  class="h-4 w-4 shrink-0 text-ink-muted transition-transform duration-150 group-open:rotate-180"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </summary>
+              <p class="mt-3 pr-8 text-sm leading-relaxed text-ink-secondary">
+                {item.a}
+              </p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Quiet Donation CTA -->
+<section class="py-16 sm:py-20">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col items-start justify-between gap-6 rounded-xl border border-line bg-surface p-7 sm:flex-row sm:items-center sm:p-9">
+      <div class="max-w-xl">
+        <h2 class="font-display text-xl font-bold tracking-tight text-ink sm:text-2xl">
+          {t.donateCta.heading}
+        </h2>
+        <p class="mt-2 text-sm leading-relaxed text-ink-secondary">
+          {t.donateCta.description}
+        </p>
+      </div>
+
+      <a
+        href={donateHref}
+        class="inline-flex min-h-11 items-center justify-center gap-2 rounded-md border border-line-strong bg-surface-elevated px-5 py-3 text-sm font-semibold text-ink transition-colors duration-150 hover:border-accent hover:text-accent whitespace-nowrap shrink-0"
+      >
+        <span>{t.donateCta.button}</span>
+        <span aria-hidden="true">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  function detectOS(): 'windows' | 'macos' | 'linux' | null {
+    const ua = navigator.userAgent.toLowerCase();
+    const platform = (navigator.platform || '').toLowerCase();
+    if (ua.includes('win') || platform.includes('win')) return 'windows';
+    if (ua.includes('mac') || platform.includes('mac')) return 'macos';
+    if (ua.includes('linux') || platform.includes('linux')) return 'linux';
+    return null;
+  }
+
+  const detected = detectOS();
+  if (detected) {
+    const heroCta = document.getElementById('hero-download-cta');
+    const heroCtaLabel = document.getElementById('hero-download-cta-label');
+    if (heroCta && heroCtaLabel) {
+      const label = heroCta.getAttribute(`data-label-${detected}`);
+      if (label) heroCtaLabel.textContent = label;
+    }
+
+    const card = document.querySelector(`[data-os-card="${detected}"]`);
+    const badge = document.querySelector(`[data-os-badge="${detected}"]`);
+    const primaryBtn = document.querySelector(`[data-os-primary="${detected}"]`);
+
+    if (card) {
+      card.classList.remove('border-line');
+      card.classList.add('border-accent/60');
+    }
+    if (badge) {
+      badge.classList.remove('hidden');
+    }
+    if (primaryBtn) {
+      primaryBtn.classList.remove(
+        'border',
+        'border-line-strong',
+        'bg-surface-elevated',
+        'text-ink',
+        'hover:bg-surface-hover'
+      );
+      primaryBtn.classList.add(
+        'bg-accent',
+        'text-accent-ink',
+        'hover:bg-accent-hover'
+      );
+    }
+  }
+</script>
