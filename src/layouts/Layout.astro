@@ -71,7 +71,7 @@ const softwareSchema = {
   '@context': 'https://schema.org',
   '@type': 'SoftwareApplication',
   name: SITE_CONFIG.name,
-  applicationCategory: 'ProductivityApplication',
+  applicationCategory: 'BusinessApplication',
   operatingSystem: 'Windows 10, Windows 11, macOS 12+, Linux',
   softwareVersion: LATEST_RELEASE.version,
   datePublished: LATEST_RELEASE.isoDate,
@@ -80,6 +80,8 @@ const softwareSchema = {
   downloadUrl: LATEST_RELEASE.downloads?.windows ?? SITE_CONFIG.githubReleasesUrl,
   inLanguage: lang,
   isAccessibleForFree: true,
+  featureList:
+    'Time Tracking, Focus Clock, Timeline, Kanban Board, List View, Gantt Chart, Scrum Sprints, Markdown Wiki, Excel Reports, Multi-currency Invoicing, CRM',
   offers: {
     '@type': 'Offer',
     price: '0',
@@ -93,7 +95,7 @@ const softwareSchema = {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#0A0B0D" />
+    <meta name="theme-color" content="#181818" />
     <link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
     <link rel="icon" href={withBase('/favicon.ico')} sizes="any" />
 
@@ -134,13 +136,13 @@ const softwareSchema = {
     )}
   </head>
 
-  <body class="min-h-full flex flex-col bg-canvas text-ink selection:bg-accent selection:text-accent-ink">
-    <header class="sticky top-0 z-50 border-b border-line bg-canvas/90 backdrop-blur-md">
+  <body class="min-h-full flex flex-col bg-canvas text-ink selection:bg-accent selection:text-white">
+    <header class="sticky top-0 z-50 border-b border-line bg-canvas/95 backdrop-blur-md">
       <div class="mx-auto flex h-14 max-w-6xl items-center justify-between gap-8 px-4 sm:px-6 lg:px-8">
         <!-- Zone 1: Brand Wordmark -->
         <a
           href={homeHref}
-          class="inline-flex items-center gap-2.5 font-display text-base font-bold tracking-tight text-ink transition-opacity duration-150 hover:opacity-85 whitespace-nowrap shrink-0"
+          class="inline-flex items-center gap-2.5 font-display text-base font-bold tracking-tight text-ink-strong transition-opacity duration-150 hover:opacity-85 whitespace-nowrap shrink-0"
         >
           <svg
             class="h-5 w-5 shrink-0"
@@ -148,12 +150,12 @@ const softwareSchema = {
             fill="none"
             aria-hidden="true"
           >
-            <rect width="64" height="64" rx="14" fill="#171A20" />
-            <rect x="2" y="2" width="60" height="60" rx="12" stroke="#323746" stroke-width="4" />
-            <circle cx="32" cy="34" r="17" stroke="#525866" stroke-width="4" />
-            <path d="M32 17A17 17 0 0 1 48 28.2" stroke="#F59E0B" stroke-width="4" stroke-linecap="round" />
-            <line x1="32" y1="34" x2="41" y2="27" stroke="#F4F4F5" stroke-width="4" stroke-linecap="round" />
-            <circle cx="32" cy="34" r="3" fill="#F59E0B" />
+            <rect width="64" height="64" rx="14" fill="#202020" />
+            <rect x="2" y="2" width="60" height="60" rx="12" stroke="#383838" stroke-width="4" />
+            <circle cx="32" cy="34" r="17" stroke="#52525B" stroke-width="4" />
+            <path d="M32 17A17 17 0 0 1 48 28.2" stroke="#7C3AED" stroke-width="4.5" stroke-linecap="round" />
+            <line x1="32" y1="34" x2="41" y2="27" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" />
+            <circle cx="32" cy="34" r="3.2" fill="#A78BFA" />
           </svg>
           <span>WorkOn</span>
         </a>
@@ -168,8 +170,8 @@ const softwareSchema = {
             aria-current={isRouteActive(homeHref) ? 'page' : undefined}
             class={`py-1 transition-colors duration-150 whitespace-nowrap shrink-0 border-b ${
               isRouteActive(homeHref)
-                ? 'border-accent text-ink'
-                : 'border-transparent text-ink-secondary hover:text-ink hover:border-line-strong'
+                ? 'border-accent text-ink-strong'
+                : 'border-transparent text-ink-secondary hover:text-ink-strong hover:border-line-strong'
             }`}
           >
             {t.nav.home}
@@ -179,8 +181,8 @@ const softwareSchema = {
             aria-current={isRouteActive(changelogHref) ? 'page' : undefined}
             class={`py-1 transition-colors duration-150 whitespace-nowrap shrink-0 border-b ${
               isRouteActive(changelogHref)
-                ? 'border-accent text-ink'
-                : 'border-transparent text-ink-secondary hover:text-ink hover:border-line-strong'
+                ? 'border-accent text-ink-strong'
+                : 'border-transparent text-ink-secondary hover:text-ink-strong hover:border-line-strong'
             }`}
           >
             {t.nav.changelog}
@@ -190,8 +192,8 @@ const softwareSchema = {
             aria-current={isRouteActive(donateHref) ? 'page' : undefined}
             class={`py-1 transition-colors duration-150 whitespace-nowrap shrink-0 border-b ${
               isRouteActive(donateHref)
-                ? 'border-accent text-ink'
-                : 'border-transparent text-ink-secondary hover:text-ink hover:border-line-strong'
+                ? 'border-accent text-ink-strong'
+                : 'border-transparent text-ink-secondary hover:text-ink-strong hover:border-line-strong'
             }`}
           >
             {t.nav.donate}
@@ -199,7 +201,7 @@ const softwareSchema = {
           <a
             href={switchHref}
             aria-label={t.switchLangAria}
-            class="py-1 font-mono text-xs text-ink-muted transition-colors duration-150 hover:text-ink whitespace-nowrap shrink-0 border-b border-transparent hover:border-line-strong"
+            class="py-1 font-mono text-xs text-ink-muted transition-colors duration-150 hover:text-ink-strong whitespace-nowrap shrink-0 border-b border-transparent hover:border-line-strong"
           >
             {t.switchLangLabel}
           </a>
@@ -209,7 +211,7 @@ const softwareSchema = {
         <div class="flex items-center shrink-0">
           <a
             href={downloadAnchorHref}
-            class="hidden md:inline-flex min-h-9 items-center justify-center rounded-md bg-accent px-4 py-2 text-xs font-semibold text-accent-ink transition-colors duration-150 hover:bg-accent-hover whitespace-nowrap shrink-0"
+            class="hidden md:inline-flex min-h-9 items-center justify-center rounded-lg bg-accent px-4 py-2 text-xs font-semibold text-accent-ink transition-colors duration-150 hover:bg-accent-hover whitespace-nowrap shrink-0"
           >
             {t.nav.downloadCta}
           </a>
@@ -222,7 +224,7 @@ const softwareSchema = {
             aria-label={t.nav.openMenu}
             data-label-open={t.nav.openMenu}
             data-label-close={t.nav.closeMenu}
-            class="inline-flex md:hidden h-10 w-10 items-center justify-center rounded-md border border-line bg-surface text-ink-secondary transition-colors duration-150 hover:text-ink hover:border-line-strong"
+            class="inline-flex md:hidden h-10 w-10 items-center justify-center rounded-lg border border-line bg-surface text-ink-secondary transition-colors duration-150 hover:text-ink-strong hover:border-line-strong"
           >
             <svg
               id="icon-menu-open"
@@ -264,37 +266,37 @@ const softwareSchema = {
         <div class="flex flex-col gap-1">
           <a
             href={homeHref}
-            class={`flex min-h-11 items-center rounded-md px-3 text-sm font-medium transition-colors duration-150 ${
+            class={`flex min-h-11 items-center rounded-lg px-3 text-sm font-medium transition-colors duration-150 ${
               isRouteActive(homeHref)
-                ? 'bg-surface-elevated text-ink'
-                : 'text-ink-secondary hover:bg-surface-elevated hover:text-ink'
+                ? 'bg-surface-elevated text-ink-strong'
+                : 'text-ink-secondary hover:bg-surface-elevated hover:text-ink-strong'
             }`}
           >
             {t.nav.home}
           </a>
           <a
             href={changelogHref}
-            class={`flex min-h-11 items-center rounded-md px-3 text-sm font-medium transition-colors duration-150 ${
+            class={`flex min-h-11 items-center rounded-lg px-3 text-sm font-medium transition-colors duration-150 ${
               isRouteActive(changelogHref)
-                ? 'bg-surface-elevated text-ink'
-                : 'text-ink-secondary hover:bg-surface-elevated hover:text-ink'
+                ? 'bg-surface-elevated text-ink-strong'
+                : 'text-ink-secondary hover:bg-surface-elevated hover:text-ink-strong'
             }`}
           >
             {t.nav.changelog}
           </a>
           <a
             href={donateHref}
-            class={`flex min-h-11 items-center rounded-md px-3 text-sm font-medium transition-colors duration-150 ${
+            class={`flex min-h-11 items-center rounded-lg px-3 text-sm font-medium transition-colors duration-150 ${
               isRouteActive(donateHref)
-                ? 'bg-surface-elevated text-ink'
-                : 'text-ink-secondary hover:bg-surface-elevated hover:text-ink'
+                ? 'bg-surface-elevated text-ink-strong'
+                : 'text-ink-secondary hover:bg-surface-elevated hover:text-ink-strong'
             }`}
           >
             {t.nav.donate}
           </a>
           <a
             href={switchHref}
-            class="flex min-h-11 items-center justify-between rounded-md px-3 text-sm font-medium text-ink-secondary transition-colors duration-150 hover:bg-surface-elevated hover:text-ink"
+            class="flex min-h-11 items-center justify-between rounded-lg px-3 text-sm font-medium text-ink-secondary transition-colors duration-150 hover:bg-surface-elevated hover:text-ink-strong"
           >
             <span>{t.switchLangAria}</span>
             <span class="font-mono text-xs text-ink-muted">{t.switchLangLabel}</span>
@@ -302,7 +304,7 @@ const softwareSchema = {
           <div class="mt-3 pt-3 border-t border-line">
             <a
               href={downloadAnchorHref}
-              class="flex min-h-11 w-full items-center justify-center rounded-md bg-accent px-4 py-2.5 text-sm font-semibold text-accent-ink transition-colors duration-150 hover:bg-accent-hover"
+              class="flex min-h-11 w-full items-center justify-center rounded-lg bg-accent px-4 py-2.5 text-sm font-semibold text-accent-ink transition-colors duration-150 hover:bg-accent-hover"
             >
               {t.nav.downloadCta}
             </a>
@@ -324,24 +326,24 @@ const softwareSchema = {
         </div>
 
         <div class="flex flex-wrap items-center gap-6">
-          <a href={changelogHref} class="transition-colors duration-150 hover:text-ink whitespace-nowrap">
+          <a href={changelogHref} class="transition-colors duration-150 hover:text-ink-strong whitespace-nowrap">
             {t.footer.changelog}
           </a>
-          <a href={donateHref} class="transition-colors duration-150 hover:text-ink whitespace-nowrap">
+          <a href={donateHref} class="transition-colors duration-150 hover:text-ink-strong whitespace-nowrap">
             {t.footer.donate}
           </a>
           <a
             href={SITE_CONFIG.githubRepo}
             target="_blank"
             rel="noopener noreferrer"
-            class="transition-colors duration-150 hover:text-ink whitespace-nowrap"
+            class="transition-colors duration-150 hover:text-ink-strong whitespace-nowrap"
           >
             {t.footer.github}
           </a>
           <a
             href={switchHref}
             aria-label={t.switchLangAria}
-            class="font-mono transition-colors duration-150 hover:text-ink whitespace-nowrap"
+            class="font-mono transition-colors duration-150 hover:text-ink-strong whitespace-nowrap"
           >
             {t.switchLangLabel}
           </a>

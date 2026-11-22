@@ -53,7 +53,7 @@ export const SITE_CONFIG = {
   githubRepo: 'https://github.com/DevNotPay/FreeWorkTracker',
   githubReleasesUrl: 'https://github.com/DevNotPay/FreeWorkTracker/releases',
   githubIssuesUrl: 'https://github.com/DevNotPay/FreeWorkTracker/issues',
-  license: 'Freeware / Open Source',
+  license: 'Freeware · Offline-First',
 } as const;
 
 const LATEST_DOWNLOAD_BASE =
@@ -73,43 +73,43 @@ export const RELEASES: ReleaseItem[] = [
     },
     isLatest: true,
     description: {
-      ru: 'Первый стабильный публичный релиз локального трекера рабочего времени WorkOn.',
-      en: 'First stable public release of the local desktop time tracker WorkOn.',
+      ru: 'Первый стабильный публичный релиз локальной платформы WorkOn на движке Tauri со всеми 10 рабочими модулями.',
+      en: 'First stable public release of the offline-first Tauri desktop workspace WorkOn with all 10 configurable modules.',
     },
     changes: [
       {
         type: 'new',
         text: {
-          ru: 'Базовый хронометр с быстрым запуском и паузой по глобальному сочетанию клавиш',
-          en: 'Core timer with instant start and pause via global keyboard shortcut',
+          ru: '10 модулей в одном окне: Время и Фокус-часы, Таймлайн, Канбан с WIP-лимитами, Таблица задач с Bulk Actions, Гант с SVG-зависимостями, Scrum-спринты с Burndown, Wiki/Docs, Отчёты, Финансы/Счета и CRM',
+          en: '10 modules in one window: Time & Focus Clock, Timeline, Kanban with WIP limits, List View with Bulk Actions, Gantt with SVG dependencies, Scrum Sprints & Burndown, Markdown Docs, Reports, Finance/Invoicing, and CRM',
         },
       },
       {
         type: 'new',
         text: {
-          ru: 'Группировка задач по проектам и клиентам с итоговыми сводками за день',
-          en: 'Task grouping by projects and clients with daily time summaries',
+          ru: 'Мультивалютный биллинг (RUB, USD, EUR, KZT, GBP, BYN, USDT), защита от двойного выставления часов, «Бумажный вид» счёта, печать A4/PDF и экспорт в Excel (.xlsx)',
+          en: 'Multi-currency billing (RUB, USD, EUR, KZT, GBP, BYN, USDT), unbilled hours protection, Paper View invoice preview, A4/PDF print, and native Excel (.xlsx) export',
         },
       },
       {
         type: 'new',
         text: {
-          ru: 'Локальная база данных SQLite — все записи хранятся строго на вашем устройстве',
-          en: 'Local SQLite database — all records remain strictly on your machine',
+          ru: 'Умная детекция простоя (Idle Detection), Фокус-часы (Pomodoro / TrackTime / FlowTime) с отдельным учётом перерывов и ручной ввод времени без лимитов',
+          en: 'Smart Idle Detection, Focus Clock (Pomodoro / TrackTime / FlowTime) separating breaks from billable hours, and unlimited manual time logging',
         },
       },
       {
         type: 'new',
         text: {
-          ru: 'Сворачивание в системный трей на Windows, macOS и Linux',
-          en: 'System tray integration on Windows, macOS, and Linux',
+          ru: 'Полностью локальное хранение без аккаунтов и телеметрии, изолированные воркспейсы и полный экспорт/импорт резервной копии базы в JSON',
+          en: '100% local offline-first storage with zero accounts or telemetry, isolated workspaces, and full JSON backup export/import',
         },
       },
       {
         type: 'improve',
         text: {
-          ru: 'Оптимизация потребления оперативной памяти (< 40 МБ в фоновом режиме)',
-          en: 'Optimized memory footprint (< 40 MB RAM in background mode)',
+          ru: 'Нативное безрамочное окно на Tauri, темы Obsidian Dark и Light, масштабирование интерфейса от 70% до 150%',
+          en: 'Native frameless Tauri desktop shell, Obsidian Dark & Light themes, and interface scaling from 70% to 150%',
         },
       },
     ],
@@ -129,29 +129,29 @@ export const RELEASES: ReleaseItem[] = [
     },
     isLatest: false,
     description: {
-      ru: 'Бета-версия для закрытого тестирования основных сценариев учёта времени.',
-      en: 'Closed beta release for testing core time-tracking workflows.',
+      ru: 'Бета-версия для тестирования ядра задач, таймлайна, Ганта и генерации счетов.',
+      en: 'Closed beta release for testing the task engine, timeline, Gantt dependencies, and invoice builder.',
     },
     changes: [
       {
         type: 'new',
         text: {
-          ru: 'Начальный интерфейс рабочего окна и структура проектов',
-          en: 'Initial desktop window interface and project structure',
+          ru: 'Модульный сайдбар с отключением ненужных разделов и перестановкой вкладок',
+          en: 'Modular sidebar with toggles to hide unused sections and reorder tabs',
         },
       },
       {
         type: 'fix',
         text: {
-          ru: 'Исправлена ошибка с засыпанием таймера при блокировке экрана',
-          en: 'Fixed timer pausing drift when the system screen locks',
+          ru: 'Корректная работа Idle Detection после выхода системы из сна и блокировки экрана',
+          en: 'Reliable Idle Detection behavior after system sleep and screen lock',
         },
       },
       {
         type: 'fix',
         text: {
-          ru: 'Корректный подсчёт длительности сессии при смене часового пояса',
-          en: 'Accurate session duration calculation across timezone changes',
+          ru: 'Точный расчёт пересекающихся слотов на почасовом таймлайне при смене часового пояса',
+          en: 'Accurate overlapping block layout on the hourly timeline across timezone switches',
         },
       },
     ],

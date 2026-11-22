@@ -21,7 +21,7 @@ const intlPlatforms = DONATION_PLATFORMS.filter((p) => p.region === 'internation
   <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
     <!-- Header -->
     <div class="border-b border-line pb-8">
-      <h1 class="font-display text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
+      <h1 class="font-display text-3xl font-extrabold tracking-tight text-ink-strong sm:text-4xl">
         {t.heading}
       </h1>
       <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink-secondary sm:text-base">
@@ -30,14 +30,14 @@ const intlPlatforms = DONATION_PLATFORMS.filter((p) => p.region === 'internation
     </div>
 
     <!-- Honest Cost Transparency -->
-    <div class="mt-8 rounded-xl border border-line bg-surface p-6 sm:p-7">
-      <h2 class="font-display text-base font-semibold text-ink">
+    <div class="mt-8 rounded-2xl border border-line bg-surface p-6 sm:p-7">
+      <h2 class="font-display text-base font-semibold text-ink-strong">
         {t.transparencyTitle}
       </h2>
       <ul class="mt-4 grid grid-cols-1 gap-3.5 sm:grid-cols-2">
         {t.transparencyItems.map((item, idx) => (
           <li class="flex items-start gap-3 text-sm leading-relaxed text-ink-secondary">
-            <span class="mt-0.5 font-mono text-xs text-accent tabular-nums shrink-0">
+            <span class="mt-0.5 font-mono text-xs text-accent-soft tabular-nums shrink-0">
               0{idx + 1}.
             </span>
             <span>{item}</span>
@@ -59,10 +59,10 @@ const intlPlatforms = DONATION_PLATFORMS.filter((p) => p.region === 'internation
               href={platform.url}
               target="_blank"
               rel="noopener noreferrer"
-              class="group flex items-center justify-between gap-4 rounded-xl border border-line bg-surface p-5 transition-colors duration-150 hover:border-line-strong hover:bg-surface-elevated"
+              class="group flex items-center justify-between gap-4 rounded-2xl border border-line bg-surface p-5 transition-colors duration-150 hover:border-line-strong hover:bg-surface-elevated"
             >
               <div>
-                <div class="font-display text-base font-semibold text-ink transition-colors duration-150 group-hover:text-accent">
+                <div class="font-display text-base font-semibold text-ink-strong transition-colors duration-150 group-hover:text-accent-soft">
                   {platform.name}
                 </div>
                 <div class="mt-1 text-xs leading-relaxed text-ink-muted">
@@ -70,7 +70,7 @@ const intlPlatforms = DONATION_PLATFORMS.filter((p) => p.region === 'internation
                 </div>
               </div>
               <span
-                class="text-sm text-ink-muted transition-transform duration-150 group-hover:translate-x-0.5 group-hover:text-ink shrink-0"
+                class="text-sm text-ink-muted transition-transform duration-150 group-hover:translate-x-0.5 group-hover:text-ink-strong shrink-0"
                 aria-hidden="true"
               >
                 →
@@ -91,10 +91,10 @@ const intlPlatforms = DONATION_PLATFORMS.filter((p) => p.region === 'internation
               href={platform.url}
               target="_blank"
               rel="noopener noreferrer"
-              class="group flex items-center justify-between gap-4 rounded-xl border border-line bg-surface p-5 transition-colors duration-150 hover:border-line-strong hover:bg-surface-elevated"
+              class="group flex items-center justify-between gap-4 rounded-2xl border border-line bg-surface p-5 transition-colors duration-150 hover:border-line-strong hover:bg-surface-elevated"
             >
               <div>
-                <div class="font-display text-base font-semibold text-ink transition-colors duration-150 group-hover:text-accent">
+                <div class="font-display text-base font-semibold text-ink-strong transition-colors duration-150 group-hover:text-accent-soft">
                   {platform.name}
                 </div>
                 <div class="mt-1 text-xs leading-relaxed text-ink-muted">
@@ -102,7 +102,7 @@ const intlPlatforms = DONATION_PLATFORMS.filter((p) => p.region === 'internation
                 </div>
               </div>
               <span
-                class="text-sm text-ink-muted transition-transform duration-150 group-hover:translate-x-0.5 group-hover:text-ink shrink-0"
+                class="text-sm text-ink-muted transition-transform duration-150 group-hover:translate-x-0.5 group-hover:text-ink-strong shrink-0"
                 aria-hidden="true"
               >
                 →
@@ -119,9 +119,9 @@ const intlPlatforms = DONATION_PLATFORMS.filter((p) => p.region === 'internation
         </h2>
         <div class="space-y-3">
           {CRYPTO_WALLETS.map((wallet) => (
-            <div class="flex flex-col justify-between gap-3 rounded-xl border border-line bg-surface p-4 sm:flex-row sm:items-center sm:px-5">
+            <div class="flex flex-col justify-between gap-3 rounded-2xl border border-line bg-surface p-4 sm:flex-row sm:items-center sm:px-5">
               <div class="min-w-0">
-                <div class="font-mono text-xs font-medium text-accent">
+                <div class="font-mono text-xs font-medium text-accent-soft">
                   {wallet.network}
                 </div>
                 <div class="mt-1 break-all select-all font-mono text-xs text-ink-secondary">
@@ -135,7 +135,7 @@ const intlPlatforms = DONATION_PLATFORMS.filter((p) => p.region === 'internation
                 data-label-default={t.copyBtn}
                 data-label-copied={t.copiedBtn}
                 data-label-failed={t.copyFailedBtn}
-                class="crypto-copy-btn inline-flex min-h-9 items-center justify-center rounded-md border border-line-strong bg-surface-elevated px-3.5 py-1.5 text-xs font-medium text-ink transition-colors duration-150 hover:bg-surface-hover self-start sm:self-center whitespace-nowrap shrink-0 cursor-pointer"
+                class="crypto-copy-btn inline-flex min-h-9 items-center justify-center rounded-lg border border-line-strong bg-surface-elevated px-3.5 py-1.5 text-xs font-medium text-ink-strong transition-colors duration-150 hover:bg-surface-hover self-start sm:self-center whitespace-nowrap shrink-0 cursor-pointer"
               >
                 {t.copyBtn}
               </button>
@@ -152,7 +152,7 @@ const intlPlatforms = DONATION_PLATFORMS.filter((p) => p.region === 'internation
         href={SITE_CONFIG.githubRepo}
         target="_blank"
         rel="noopener noreferrer"
-        class="inline-flex items-center gap-1.5 font-medium text-ink-secondary transition-colors duration-150 hover:text-ink whitespace-nowrap shrink-0"
+        class="inline-flex items-center gap-1.5 font-medium text-ink-secondary transition-colors duration-150 hover:text-ink-strong whitespace-nowrap shrink-0"
       >
         <span>{t.starGithub}</span>
         <span aria-hidden="true">↗</span>
@@ -200,13 +200,13 @@ const intlPlatforms = DONATION_PLATFORMS.filter((p) => p.region === 'internation
       const ok = await copyTextSafe(address);
       btn.textContent = ok ? copiedText : failedText;
       if (ok) {
-        btn.classList.add('border-accent', 'text-accent');
+        btn.classList.add('border-emerald-500', 'text-emerald-400');
       }
 
       if (resetTimer !== null) window.clearTimeout(resetTimer);
       resetTimer = window.setTimeout(() => {
         btn.textContent = defaultText;
-        btn.classList.remove('border-accent', 'text-accent');
+        btn.classList.remove('border-emerald-500', 'text-emerald-400');
       }, 2000);
     });
   });

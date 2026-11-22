@@ -11,7 +11,7 @@ const t = TRANSLATIONS[lang].changelog;
 
 const typeTone: Record<ChangeType, string> = {
   new: 'text-emerald-400',
-  improve: 'text-sky-400',
+  improve: 'text-accent-soft',
   fix: 'text-amber-400',
 };
 ---
@@ -21,7 +21,7 @@ const typeTone: Record<ChangeType, string> = {
     <!-- Page Header -->
     <div class="flex flex-col justify-between gap-6 border-b border-line pb-8 sm:flex-row sm:items-end">
       <div>
-        <h1 class="font-display text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
+        <h1 class="font-display text-3xl font-extrabold tracking-tight text-ink-strong sm:text-4xl">
           {t.heading}
         </h1>
         <p class="mt-2.5 max-w-xl text-sm leading-relaxed text-ink-secondary sm:text-base">
@@ -34,7 +34,7 @@ const typeTone: Record<ChangeType, string> = {
         id="changelog-filter-bar"
         role="tablist"
         aria-label={t.heading}
-        class="inline-flex items-center gap-1 self-start rounded-lg border border-line bg-surface p-1 sm:self-auto"
+        class="inline-flex items-center gap-1 self-start rounded-xl border border-line bg-surface p-1 sm:self-auto"
       >
         {(['all', 'new', 'improve', 'fix'] as const).map((filterKey, idx) => (
           <button
@@ -42,10 +42,10 @@ const typeTone: Record<ChangeType, string> = {
             role="tab"
             data-filter={filterKey}
             aria-selected={idx === 0 ? 'true' : 'false'}
-            class={`changelog-filter-btn min-h-8 rounded-md px-3 py-1 text-xs font-medium transition-colors duration-150 whitespace-nowrap shrink-0 cursor-pointer ${
+            class={`changelog-filter-btn min-h-8 rounded-lg px-3 py-1 text-xs font-medium transition-colors duration-150 whitespace-nowrap shrink-0 cursor-pointer ${
               idx === 0
-                ? 'bg-surface-elevated text-ink'
-                : 'text-ink-muted hover:text-ink'
+                ? 'bg-surface-elevated text-ink-strong'
+                : 'text-ink-muted hover:text-ink-strong'
             }`}
           >
             {t.filters[filterKey]}
@@ -59,15 +59,15 @@ const typeTone: Record<ChangeType, string> = {
       {RELEASES.map((release) => (
         <article
           data-release-card
-          class="rounded-xl border border-line bg-surface p-6 sm:p-7"
+          class="rounded-2xl border border-line bg-surface p-6 sm:p-7"
         >
           <div class="flex flex-wrap items-baseline justify-between gap-3 border-b border-line pb-4">
             <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-              <h2 class="font-mono text-xl font-semibold text-ink tabular-nums">
+              <h2 class="font-mono text-xl font-semibold text-ink-strong tabular-nums">
                 v{release.version}
               </h2>
               {release.isLatest && (
-                <span class="font-mono text-xs text-accent">
+                <span class="font-mono text-xs text-accent-soft">
                   {t.latestLabel}
                 </span>
               )}
@@ -100,10 +100,7 @@ const typeTone: Record<ChangeType, string> = {
             ))}
           </ul>
 
-          <p
-            data-empty-msg
-            class="hidden mt-5 text-xs text-ink-muted"
-          >
+          <p data-empty-msg class="hidden mt-5 text-xs text-ink-muted">
             {t.emptyFilter}
           </p>
 
@@ -112,27 +109,27 @@ const typeTone: Record<ChangeType, string> = {
               <span class="mr-2 text-xs text-ink-muted">{t.filesLabel}:</span>
               <a
                 href={release.downloads.windows}
-                class="inline-flex min-h-9 items-center rounded-md border border-line bg-canvas px-3 py-1.5 text-xs font-medium text-ink-secondary transition-colors duration-150 hover:border-line-strong hover:text-ink whitespace-nowrap"
+                class="inline-flex min-h-9 items-center rounded-lg border border-line bg-canvas px-3 py-1.5 text-xs font-medium text-ink-secondary transition-colors duration-150 hover:border-line-strong hover:text-ink-strong whitespace-nowrap"
               >
                 Windows (.exe)
               </a>
               {release.downloads.windowsPortable && (
                 <a
                   href={release.downloads.windowsPortable}
-                  class="inline-flex min-h-9 items-center rounded-md border border-line bg-canvas px-3 py-1.5 text-xs font-medium text-ink-secondary transition-colors duration-150 hover:border-line-strong hover:text-ink whitespace-nowrap"
+                  class="inline-flex min-h-9 items-center rounded-lg border border-line bg-canvas px-3 py-1.5 text-xs font-medium text-ink-secondary transition-colors duration-150 hover:border-line-strong hover:text-ink-strong whitespace-nowrap"
                 >
                   Portable (.zip)
                 </a>
               )}
               <a
                 href={release.downloads.macos}
-                class="inline-flex min-h-9 items-center rounded-md border border-line bg-canvas px-3 py-1.5 text-xs font-medium text-ink-secondary transition-colors duration-150 hover:border-line-strong hover:text-ink whitespace-nowrap"
+                class="inline-flex min-h-9 items-center rounded-lg border border-line bg-canvas px-3 py-1.5 text-xs font-medium text-ink-secondary transition-colors duration-150 hover:border-line-strong hover:text-ink-strong whitespace-nowrap"
               >
                 macOS (.dmg)
               </a>
               <a
                 href={release.downloads.linux}
-                class="inline-flex min-h-9 items-center rounded-md border border-line bg-canvas px-3 py-1.5 text-xs font-medium text-ink-secondary transition-colors duration-150 hover:border-line-strong hover:text-ink whitespace-nowrap"
+                class="inline-flex min-h-9 items-center rounded-lg border border-line bg-canvas px-3 py-1.5 text-xs font-medium text-ink-secondary transition-colors duration-150 hover:border-line-strong hover:text-ink-strong whitespace-nowrap"
               >
                 Linux (.AppImage)
               </a>
@@ -147,7 +144,7 @@ const typeTone: Record<ChangeType, string> = {
         href={SITE_CONFIG.githubReleasesUrl}
         target="_blank"
         rel="noopener noreferrer"
-        class="inline-flex items-center gap-1.5 transition-colors duration-150 hover:text-ink"
+        class="inline-flex items-center gap-1.5 transition-colors duration-150 hover:text-ink-strong"
       >
         <span>{t.viewOnGithub}</span>
         <span aria-hidden="true">↗</span>
@@ -169,7 +166,7 @@ const typeTone: Record<ChangeType, string> = {
       const isActive = btn.getAttribute('data-filter') === selected;
       btn.setAttribute('aria-selected', String(isActive));
       btn.classList.toggle('bg-surface-elevated', isActive);
-      btn.classList.toggle('text-ink', isActive);
+      btn.classList.toggle('text-ink-strong', isActive);
       btn.classList.toggle('text-ink-muted', !isActive);
     });
 

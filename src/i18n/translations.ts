@@ -26,105 +26,264 @@ export const TRANSLATIONS = {
       closeMenu: 'Закрыть меню',
     },
     seo: {
-      homeTitle: 'WorkOn — Бесплатный десктопный трекер рабочего времени',
+      homeTitle: 'WorkOn — Локальная альтернатива Jira, трекер времени, CRM и счета для ПК',
       homeDesc:
-        'Быстрый, локальный и полностью бесплатный тайм-трекер для Windows, macOS и Linux. Хранение в SQLite, без подписок, аккаунтов и рекламы.',
+        'Бесплатная offline-first программа на Tauri для Windows, macOS и Linux: Канбан, Гант, Scrum-спринты, учёт времени, Wiki, CRM и мультивалютные счета с экспортом в Excel.',
       changelogTitle: 'История версий — WorkOn',
       changelogDesc:
-        'Хронология релизов, новых функций и исправлений в бесплатном тайм-трекере WorkOn для Windows, macOS и Linux.',
+        'Хронология релизов, новых модулей и исправлений в локальной десктопной платформе WorkOn для Windows, macOS и Linux.',
       donateTitle: 'Поддержать разработку — WorkOn',
       donateDesc:
-        'WorkOn распространяется бесплатно и развивается на донаты пользователей. Узнайте, как поддержать проект.',
+        'WorkOn распространяется полностью бесплатно без подписок и рекламы. Развитие проекта поддерживается добровольными донатами.',
       notFoundTitle: 'Страница не найдена — WorkOn',
     },
     hero: {
-      metaFree: 'Полностью бесплатно',
-      metaLocal: 'Локальный SQLite',
-      headlineStart: 'Учёт рабочего времени.',
-      headlineAccent: 'Без подписок, облаков и шума.',
+      metaTauri: 'Tauri Desktop',
+      metaOffline: '100% Offline-First',
+      metaFree: 'Бесплатно · Без подписок',
+      headline:
+        'Альтернатива Jira, трекер времени, CRM и счета — в одной локальной программе для ПК',
       subtitle:
-        'Лёгкая десктопная утилита для разработчиков и фрилансеров. Один клик или горячая клавиша — и таймер запущен. Все данные остаются строго на вашем диске.',
-      primaryCtaDefault: 'Скачать WorkOn',
+        '10 настраиваемых модулей в одном быстром окне на Windows, macOS и Linux. Все данные хранятся на вашем диске — без облачных аккаунтов, слежки за экраном, телеметрии и ежемесячных тарифов.',
+      primaryCtaDefault: 'Скачать для Windows',
       primaryCtaWindows: 'Скачать для Windows',
       primaryCtaMac: 'Скачать для macOS',
       primaryCtaLinux: 'Скачать для Linux',
-      secondaryCta: 'История версий',
-      trustNote: 'Windows 10/11 · macOS 12+ · Linux AppImage · Без регистрации',
+      secondaryCta: 'Посмотреть возможности',
+      trustNote: 'Windows 10/11 · macOS 12+ · Linux AppImage · Темы Obsidian Dark и Light · Масштаб 70%–150%',
     },
-    demo: {
-      windowTitle: 'WorkOn — Демо',
-      statusIdle: 'Готов к работе',
-      statusRunning: 'Идёт запись',
-      statusPaused: 'Пауза',
-      taskLabel: 'Текущая задача',
-      taskPlaceholder: 'Над чем вы работаете сейчас?',
-      defaultTask: 'Верстка экрана настроек',
-      projectsLabel: 'Проект',
-      projects: ['Клиентский UI', 'Backend API', 'Ревью кода', 'Личное'],
-      start: 'Старт',
-      pause: 'Пауза',
-      resume: 'Продолжить',
-      finish: 'Записать',
-      reset: 'Сброс',
-      shortcutHint: 'Пробел — старт / пауза (вне поля ввода)',
-      todayHeading: 'Сессии за сегодня',
-      todayTotalLabel: 'Итого сегодня',
-      copyReport: 'Копировать отчёт',
-      copiedReport: 'Отчёт скопирован',
-      emptySessions: 'Пока нет записанных сессий — запустите таймер выше.',
-      sampleSessions: [
-        { task: 'Оптимизация запросов SQLite', project: 'Backend API', seconds: 4920 },
-        { task: 'Проектирование горячих клавиш', project: 'Клиентский UI', seconds: 2700 },
+    replaces: {
+      heading: 'Заменяет 5+ облачных сервисов одним локальным приложением',
+      subheading:
+        'Фрилансерам, ИП и небольшим студиям больше не нужно платить за пять отдельных подписок и склеивать данные вручную.',
+      colService: 'Вместо чего',
+      colInstead: 'Обычно стоит $30–80 / мес',
+      colWorkon: 'Внутри WorkOn — 0 ₽ навсегда',
+      rows: [
+        {
+          category: 'Таск-трекер и планирование',
+          instead: 'Jira / Linear / Trello',
+          workon: 'Ключи PROJ-1, Канбан с WIP-лимитами, таблица с Bulk Actions, Гант с зависимостями, Scrum-спринты и Burndown',
+        },
+        {
+          category: 'Учёт времени и фокус',
+          instead: 'Toggl / Clockify',
+          workon: 'Живой таймер, Фокус-часы (Pomodoro / FlowTime), умный Idle Detection, почасовой таймлайн 00:00–24:00',
+        },
+        {
+          category: 'База знаний проектов',
+          instead: 'Notion / Confluence',
+          workon: 'Встроенный Markdown-редактор с GFM-таблицами, предпросмотром и иерархией папок по проектам',
+        },
+        {
+          category: 'Клиенты и сделки',
+          instead: 'Pipedrive / amoCRM',
+          workon: 'CRM с воронкой лидов, контактами (включая Telegram), балансами и привязкой проектов в изолированных воркспейсах',
+        },
+        {
+          category: 'Табели и выставление счетов',
+          instead: 'Excel + сервисы инвойсов',
+          workon: 'Мультивалютный биллинг (7 валют), защита от двойного счёта, «Бумажный вид» A4/PDF и настоящий экспорт в Excel (.xlsx)',
+        },
       ],
     },
-    features: {
-      heading: 'Сделано как инструмент, а не подписочный сервис',
+    showcase: {
+      heading: 'Все 10 модулей — под реальный рабочий процесс',
       subheading:
-        'Никакой телеметрии, навязанных аккаунтов и искусственных ограничений. Только скорость нативного приложения и полный контроль над данными.',
-      items: [
+        'Переключайте сценарии ниже, чтобы посмотреть, как устроены ключевые разделы программы изнутри.',
+      tabs: [
         {
-          index: '01',
-          title: '100% локальная база SQLite',
-          description:
-            'Все проекты, задачи и отчёты хранятся в одном локальном файле на вашем компьютере. Программа работает полностью офлайн и не отправляет данные на сторонние серверы.',
-          detailLabel: 'Путь хранения',
-          detailValue: '~/WorkOn/tracker.db',
-        },
-        {
-          index: '02',
-          title: 'Минимальная нагрузка',
-          description:
-            'Не съедает батарею и оперативную память — спокойно живёт в системном трее целый рабочий день.',
-          metric: '< 40 МБ',
-          metricCaption: 'ОЗУ в фоновом режиме',
-        },
-        {
-          index: '03',
-          title: 'Управление с клавиатуры',
-          description:
-            'Мгновенный запуск, пауза и переключение задач из системного трея без переключения окон.',
-          shortcuts: [
-            { keys: 'Ctrl + Shift + S', label: 'Старт / Пауза' },
-            { keys: 'Ctrl + Shift + N', label: 'Новая задача' },
+          id: 'tasks',
+          label: 'Канбан, Список и Спринты',
+          modulesCount: 'Модули 03 · 04 · 06',
+          title: 'Управление задачами уровня Jira без тяжеловесности',
+          summary:
+            'Ключи задач (WRK-12), типы (Задача / Баг / Фича / Эпик), Story Points, подзадачи, комментарии, зависимости и быстрый запуск таймера прямо с карточки.',
+          blocks: [
+            {
+              name: 'Канбан-доска',
+              points: [
+                'Перетаскивание карточек (включая захват за заголовок) и настройка своих колонок, цветов и порядка',
+                'WIP-лимиты на колонки и отметка финального статуса «Готово»',
+                'Теги в 1 клик из истории воркспейса, флаг блокировки, дедлайн, фикс-цена или накопленное время',
+              ],
+            },
+            {
+              name: 'Таблица и массовые действия',
+              points: [
+                'Компактная таблица с сортировкой и фильтрами по статусу, типу, приоритету, биллингу, спринту, тегу и просрочке',
+                'Панель Bulk Actions снизу: пакетная смена статуса, приоритета, типа, спринта, тегов или удаление',
+                'Завершение спринта с автопереносом незавершённых задач + архив и Burndown-график',
+              ],
+            },
           ],
         },
         {
-          index: '04',
-          title: 'Честно бесплатно навсегда',
+          id: 'time',
+          label: 'Таймер, Фокус и Таймлайн',
+          modulesCount: 'Модули 01 · 02',
+          title: 'Точный учёт времени без слежки и искусственных лимитов',
+          summary:
+            'Запускайте таймер из шапки или карточки задачи, работайте интервалами в Фокус-часах и проверяйте день на почасовой сетке.',
+          blocks: [
+            {
+              name: 'Учёт времени и Фокус-часы',
+              points: [
+                'Встроенные режимы Pomodoro, TrackTime и FlowTime с визуальным циферблатом — перерывы логируются отдельно и не попадают в оплачиваемые часы',
+                'Умная детекция простоя (Idle Detection): при возвращении к ПК можно оставить время, вычесть или вынести в «Обед / Созвон»',
+                'Ручной ввод без ограничений (хоть 1 ч, хоть 120 ч за несколько недель) с быстрыми пресетами 1ч / 4ч / 8ч / 24ч / 40ч / 80ч',
+              ],
+            },
+            {
+              name: 'Таймлайн 00:00–24:00',
+              points: [
+                'Интерактивная почасовая сетка в режимах «День» и «Неделя» в духе Google Calendar',
+                'Умная раскладка пересекающихся блоков активности и красная линия текущего времени',
+                'Создание и правка записей одним кликом по нужному временному слоту',
+              ],
+            },
+          ],
+        },
+        {
+          id: 'gantt',
+          label: 'Диаграмма Ганта',
+          modulesCount: 'Модуль 05',
+          title: 'Визуальное планирование сроков и зависимостей',
+          summary:
+            'Синхронизированная сетка задач и календарной шкалы позволяет сразу видеть узкие места и двигать сроки мышью.',
+          blocks: [
+            {
+              name: 'Интерактивная шкала сроков',
+              points: [
+                'Три масштаба отображения календаря: «Компактно», «Стандарт» и «Подробно»',
+                'Сдвиг сроков перетаскиванием всей полосы задачи и точная подгонка длительности за левый или правый край',
+              ],
+            },
+            {
+              name: 'Прогресс и связи',
+              points: [
+                'Отображение фактического прогресса выполнения прямо внутри полосы задачи',
+                'Наглядные SVG-стрелки зависимостей между связанными задачами проекта',
+              ],
+            },
+          ],
+        },
+        {
+          id: 'finance',
+          label: 'Финансы, Счета и Excel',
+          modulesCount: 'Модули 08 · 09',
+          title: 'Деньги напрямую привязаны к реальным часам и задачам',
+          summary:
+            'Выставляйте счета из невыставленных часов и фикс-задач в 7 валютах, не рискуя выставить одну работу дважды.',
+          blocks: [
+            {
+              name: 'Мультивалютный биллинг и счета',
+              points: [
+                '7 валют: RUB (₽), USD ($), EUR (€), KZT (₸), GBP (£), BYN (Br), USDT (₮) + почасовые ставки и фикс-цена на задачи',
+                'Учёт выставленных и невыставленных часов, статусы счёта (Черновик → Отправлен → Оплачен / Отменён)',
+                'Пресеты реквизитов (ИП, Самозанятый НПД, ООО/Студия, SWIFT/IBAN) и предпросмотр с переключателем «Бумажный вид» в A4/PDF',
+              ],
+            },
+            {
+              name: 'Отчёты и настоящий Excel (.xlsx)',
+              points: [
+                'Чистые табели за сегодня / 7 дней / 30 дней / всё время — перерывы и простой исключаются автоматически',
+                'Экспорт в .xlsx с двумя оформленными листами («Табель времени» + «Сводка по проектам»), экспорт отдельного счёта или реестра',
+                'Выгрузка в CSV и изолированный режим печати в PDF без лишних элементов интерфейса',
+              ],
+            },
+          ],
+        },
+        {
+          id: 'crm',
+          label: 'CRM, Воркспейсы и Wiki',
+          modulesCount: 'Модули 07 · 10',
+          title: 'Клиенты, сделки и документация проектов рядом с задачами',
+          summary:
+            'Разделяйте личные проекты, фриланс и основную работу по изолированным пространствам и держите ТЗ прямо в программе.',
+          blocks: [
+            {
+              name: 'CRM и рабочие пространства',
+              points: [
+                'База клиентов и воронка лидов, контакты (включая Telegram), заметки, баланс и история расчётов',
+                'Привязка и отвязка новых и существующих проектов к клиентам в пару кликов',
+                'Несколько изолированных воркспейсов («Фриланс», «Основная работа», «Личное») с мгновенным переключением',
+              ],
+            },
+            {
+              name: 'Документы и Вики (Docs)',
+              points: [
+                'Встроенный Markdown-редактор с поддержкой GFM-таблиц, списков и режима предпросмотра',
+                'Иерархия папок по проектам для хранения технических заданий, заметок созвонов и ссылок',
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    modularity: {
+      heading: 'Модульность под ваш рабочий процесс',
+      subheading:
+        'Не нужен Scrum или CRM? Выключите лишние модули тумблером и расставьте вкладки в удобном порядке. Попробуйте настроить панель ниже:',
+      previewLabel: 'Активная панель вкладок в шапке WorkOn',
+      activeCountSuffix: 'из 10 модулей включено',
+      resetBtn: 'Сбросить по умолчанию',
+      minWarning: 'Оставьте включённым хотя бы один модуль',
+      moveUpAria: 'Переместить выше',
+      moveDownAria: 'Переместить ниже',
+      modules: [
+        { id: 'kanban', name: 'Канбан', desc: 'Колонки, WIP-лимиты, карточки' },
+        { id: 'list', name: 'Список', desc: 'Таблица, фильтры, Bulk Actions' },
+        { id: 'timeline', name: 'Таймлайн', desc: 'Почасовая сетка 00:00–24:00' },
+        { id: 'gantt', name: 'Гант', desc: 'Сроки и SVG-зависимости' },
+        { id: 'sprints', name: 'Спринты', desc: 'Бэклог, Scrum и Burndown' },
+        { id: 'time', name: 'Время', desc: 'Фокус-часы и Idle Detection' },
+        { id: 'docs', name: 'Документы', desc: 'Markdown Wiki и GFM-таблицы' },
+        { id: 'reports', name: 'Отчёты', desc: 'Табели, Excel (.xlsx) и CSV' },
+        { id: 'finance', name: 'Финансы', desc: '7 валют, счета A4/PDF' },
+        { id: 'crm', name: 'CRM', desc: 'Клиенты, сделки и балансы' },
+      ],
+    },
+    privacy: {
+      heading: 'Приватность, нативная скорость и задел на будущее',
+      subheading:
+        'WorkOn создаётся для людей, которым нужен полный контроль над инструментами и рабочими данными.',
+      cards: [
+        {
+          index: '01',
+          title: '100% локально и приватно',
           description:
-            'Никаких PRO-тарифов, лимитов на количество проектов, рекламы или водяных знаков. Исходники и релизы открыты на GitHub, а разработка держится исключительно на добровольных донатах.',
-          ctaLabel: 'Как поддержать проект',
+            'Никакой обязательной регистрации, привязки к зарубежным облакам, телеметрии и скрытых скриншотов экрана. Вся база лежит на вашем компьютере и в любой момент выгружается или восстанавливается целиком через JSON-бэкап.',
+          metaLeft: 'Резервное копирование',
+          metaRight: 'Полный экспорт / импорт JSON',
+        },
+        {
+          index: '02',
+          title: 'Нативный движок Tauri',
+          description:
+            'Малый вес дистрибутива, мгновенный запуск без тяжёлого Electron, безрамочное окно, масштабирование интерфейса 70%–150% и две полноценные темы: Obsidian Dark и Light.',
+          metric: '70%–150%',
+          metricCaption: 'Масштаб интерфейса · Tauri',
+        },
+        {
+          index: '03',
+          title: 'Готовность к Self-Hosted версии для команд',
+          description:
+            'Внутренняя архитектура WorkOn уже спроектирована так, чтобы в будущем развернуть собственную self-hosted серверную версию на инфраструктуре компании. Локальная десктопная версия при этом навсегда останется бесплатной.',
+          metaLeft: 'Статус архитектуры',
+          metaRight: 'Local-first сейчас · Self-hosted в планах',
         },
       ],
     },
     download: {
-      heading: 'Скачать WorkOn',
-      subheading: 'Выберите сборку под вашу операционную систему. Установка занимает меньше минуты.',
+      heading: 'Скачать WorkOn бесплатно',
+      subheading:
+        'Установите локальную версию под вашу ОС. Никаких триалов, ограничений по проектам и платных тарифов.',
       recommendedTag: 'Ваша ОС',
       allReleasesLink: 'Все релизы и архивы на GitHub',
       windows: {
         name: 'Windows',
-        meta: 'Windows 10, 11 · 64-bit',
+        meta: 'Windows 10, 11 · 64-bit (Tauri)',
         primaryBtn: 'Установщик (.exe)',
         secondaryBtn: 'Portable-версия (.zip)',
       },
@@ -142,39 +301,39 @@ export const TRANSLATIONS = {
     faq: {
       heading: 'Частые вопросы и установка',
       subheading:
-        'Ответы о приватности, переносе данных и системных предупреждениях при установке бесплатных сборок.',
+        'Коротко и по делу: офлайн-работа, перенос базы, валюты, экспорт и системные предупреждения при установке.',
       items: [
         {
-          q: 'Почему Windows SmartScreen показывает предупреждение при запуске .exe?',
-          a: 'WorkOn — полностью бесплатный независимый проект без коммерческой EV-подписи кода (такой сертификат стоит сотни долларов в год). Поэтому Windows SmartScreen может показать «Система Windows защитила ваш компьютер». Чтобы установить программу, нажмите «Подробнее» → «Выполнить в любом случае». Все официальные сборки публикуются напрямую в GitHub Releases.',
+          q: 'Нужен ли интернет или аккаунт для работы в WorkOn?',
+          a: 'Нет. Программа полностью offline-first и работает локально на вашем компьютере сразу после установки. В WorkOn нет обязательной регистрации, облачной привязки, рекламы, трекеров телеметрии и скрытых скриншотов экрана.',
         },
         {
-          q: 'Как открыть WorkOn на macOS, если Gatekeeper блокирует запуск?',
-          a: 'Так как сборка пока не нотаризована платным аккаунтом Apple Developer, при первом запуске macOS может сообщить о «неизвестном разработчике». Кликните правой кнопкой мыши по иконке WorkOn в папке «Программы» и выберите «Открыть», либо разрешите запуск в «Системные настройки» → «Конфиденциальность и безопасность» → «Всё равно открыть».',
+          q: 'Как сделать резервную копию и перенести базу на другой компьютер?',
+          a: 'В настройках WorkOn встроен полный экспорт и импорт резервной копии базы данных в формате JSON — включая воркспейсы, проекты, задачи, записи времени, документы, клиентов и счета. Достаточно сохранить JSON-файл и импортировать его на новом ПК.',
         },
         {
-          q: 'Где хранятся мои данные и как сделать резервную копию?',
-          a: 'Вся история проектов и сессий сохраняется локально в одном файле базы данных SQLite на вашем диске. Вы можете в любой момент скопировать этот файл для резервной копии или перенести на другой компьютер — синхронизация с облаком не требуется.',
+          q: 'Какие валюты и форматы экспорта поддерживаются?',
+          a: 'В модуле «Финансы» поддерживаются 7 валют: RUB (₽), USD ($), EUR (€), KZT (₸), GBP (£), BYN (Br) и USDT (₮), с почасовыми ставками и задачами с фикс-ценой. Отчёты и счета выгружаются в настоящий Excel (.xlsx — с оформленными листами «Табель времени» и «Сводка по проектам»), CSV и чистый белый A4/PDF через печать.',
         },
         {
-          q: 'Нужен ли интернет или регистрация для работы?',
-          a: 'Нет. WorkOn работает на 100% автономно сразу после установки. В программе нет обязательной регистрации, рекламы, трекеров аналитики и скрытых фоновых запросов.',
+          q: 'Почему Windows SmartScreen или macOS Gatekeeper показывают предупреждение при запуске?',
+          a: 'WorkOn распространяется бесплатно и пока не подписан дорогостоящим коммерческим EV-сертификатом. В Windows нажмите «Подробнее» → «Выполнить в любом случае». На macOS кликните правой кнопкой по WorkOn в папке «Программы» → «Открыть» (или разрешите запуск в «Системные настройки» → «Конфиденциальность и безопасность»). Все официальные сборки публикуются напрямую в GitHub Releases.',
         },
         {
-          q: 'В чём подвох? Почему программа полностью бесплатная?',
-          a: 'Подвоха нет — WorkOn создавался как удобная личная утилита без лишней бюрократии и подписок. Проект распространяется бесплатно и развивается в свободное время благодаря добровольным донатам пользователей.',
+          q: 'Почему программа полностью бесплатная и на чём она зарабатывает?',
+          a: 'В WorkOn нет платных тарифов, урезанных функций и рекламы. Монетизация строится исключительно на добровольных донатах пользователей, которым программа помогает экономить время и деньги каждый день.',
         },
       ],
     },
     donateCta: {
-      heading: 'WorkOn экономит вам время каждый день?',
+      heading: 'WorkOn заменил вам платные сервисы?',
       description:
-        'У проекта нет инвесторов и платных подписок. Добровольные донаты помогают оплачивать домен, сертификаты подписи сборок и уделять больше времени новым функциям.',
+        'У проекта нет инвесторов и подписок. Добровольные донаты помогают оплачивать сертификаты подписи сборок (.exe / .dmg), домен и уделять больше времени развитию новых модулей.',
       button: 'Поддержать проект',
     },
     changelog: {
       heading: 'История изменений',
-      subheading: 'Хронология релизов, новых возможностей и исправлений в WorkOn.',
+      subheading: 'Хронология релизов, новых модулей и исправлений в WorkOn.',
       filters: {
         all: 'Все',
         new: 'Новое',
@@ -189,13 +348,13 @@ export const TRANSLATIONS = {
     donate: {
       heading: 'Поддержать разработку WorkOn',
       subheading:
-        'WorkOn остаётся полностью бесплатным для всех пользователей — без тарифов, ограничений и рекламы. Ваша поддержка напрямую помогает развивать проект.',
+        'WorkOn распространяется полностью бесплатно — без тарифов, ограничений по проектам и рекламы. Единственная монетизация проекта — добровольные донаты.',
       transparencyTitle: 'На что идут пожертвования',
       transparencyItems: [
-        'Покупка сертификатов подписи кода (.exe / .dmg), чтобы убрать предупреждения SmartScreen и Gatekeeper',
-        'Оплата доменного имени и сопутствующих расходов на инфраструктуру релизов',
-        'Время на разработку новых функций, исправление ошибок и поддержку Windows, macOS и Linux',
-        'Гарантия того, что WorkOn навсегда останется бесплатным и без рекламы',
+        'Покупка сертификатов подписи кода (.exe / .dmg), чтобы убрать предупреждения Windows SmartScreen и macOS Gatekeeper',
+        'Оплата доменного имени и сопутствующих расходов на выпуск сборок',
+        'Время на разработку новых функций, тестирование на Windows, macOS и Linux и подготовку self-hosted версии',
+        'Гарантия того, что локальная версия WorkOn навсегда останется бесплатной и без рекламы',
       ],
       cisHeading: 'Банковские карты РФ, СБП и СНГ',
       intlHeading: 'Международные карты и PayPal',
@@ -204,11 +363,11 @@ export const TRANSLATIONS = {
       copiedBtn: 'Скопировано',
       copyFailedBtn: 'Ошибка',
       thankYou:
-        'Спасибо каждому, кто поддерживает WorkOn — донатом, звездой на GitHub или отзывом.',
+        'Спасибо каждому, кто поддерживает WorkOn — донатом, звездой на GitHub или обратной связью.',
       starGithub: 'Или просто поставьте звезду на GitHub',
     },
     footer: {
-      copyright: 'WorkOn. Бесплатный локальный тайм-трекер.',
+      copyright: 'WorkOn. Бесплатный offline-first инструмент для ПК.',
       changelog: 'Чейнджлог',
       donate: 'Поддержать',
       github: 'GitHub',
@@ -234,105 +393,263 @@ export const TRANSLATIONS = {
       closeMenu: 'Close menu',
     },
     seo: {
-      homeTitle: 'WorkOn — Free Local Desktop Time Tracker',
+      homeTitle: 'WorkOn — Local Jira Alternative, Time Tracker, CRM & Invoicing for Desktop',
       homeDesc:
-        'Fast, lightweight, and completely free time tracker for Windows, macOS, and Linux. Stored locally in SQLite — no subscriptions, accounts, or ads.',
+        'Free offline-first Tauri desktop app for Windows, macOS, and Linux: Kanban, Gantt, Scrum sprints, time tracking, Markdown Wiki, CRM, and multi-currency Excel invoicing.',
       changelogTitle: 'Changelog — WorkOn',
       changelogDesc:
-        'Release history, new features, and bug fixes for the free desktop time tracker WorkOn on Windows, macOS, and Linux.',
+        'Release history, new modules, and fixes for the offline-first WorkOn desktop suite on Windows, macOS, and Linux.',
       donateTitle: 'Support Development — WorkOn',
       donateDesc:
-        'WorkOn is 100% free and funded solely by user donations. See how you can support ongoing development.',
+        'WorkOn is 100% free with no subscriptions or ads, sustained purely by voluntary user donations.',
       notFoundTitle: 'Page Not Found — WorkOn',
     },
     hero: {
-      metaFree: 'Completely free',
-      metaLocal: 'Local SQLite',
-      headlineStart: 'Track your work time.',
-      headlineAccent: 'No subscriptions, cloud, or clutter.',
+      metaTauri: 'Tauri Desktop',
+      metaOffline: '100% Offline-First',
+      metaFree: 'Free · No Subscriptions',
+      headline:
+        'Jira-grade tasks, time tracker, CRM, and invoicing — in one local desktop app',
       subtitle:
-        'A lightweight desktop utility built for developers and freelancers. Start timing with one click or a global hotkey. Every record stays strictly on your machine.',
-      primaryCtaDefault: 'Download WorkOn',
+        '10 configurable modules inside one fast native window for Windows, macOS, and Linux. Everything stays on your local disk — no cloud accounts, screen surveillance, telemetry, or monthly fees.',
+      primaryCtaDefault: 'Download for Windows',
       primaryCtaWindows: 'Download for Windows',
       primaryCtaMac: 'Download for macOS',
       primaryCtaLinux: 'Download for Linux',
-      secondaryCta: 'View changelog',
-      trustNote: 'Windows 10/11 · macOS 12+ · Linux AppImage · No sign-up',
+      secondaryCta: 'Explore features',
+      trustNote: 'Windows 10/11 · macOS 12+ · Linux AppImage · Obsidian Dark & Light · 70%–150% UI Scale',
     },
-    demo: {
-      windowTitle: 'WorkOn — Interactive Demo',
-      statusIdle: 'Ready',
-      statusRunning: 'Recording',
-      statusPaused: 'Paused',
-      taskLabel: 'Current task',
-      taskPlaceholder: 'What are you working on?',
-      defaultTask: 'Refine settings window layout',
-      projectsLabel: 'Project',
-      projects: ['Client UI', 'Backend API', 'Code Review', 'Personal'],
-      start: 'Start',
-      pause: 'Pause',
-      resume: 'Resume',
-      finish: 'Log',
-      reset: 'Reset',
-      shortcutHint: 'Press Space to start / pause (outside text input)',
-      todayHeading: "Today's sessions",
-      todayTotalLabel: 'Today total',
-      copyReport: 'Copy report',
-      copiedReport: 'Report copied',
-      emptySessions: 'No logged sessions yet — start the timer above.',
-      sampleSessions: [
-        { task: 'Optimize local SQLite queries', project: 'Backend API', seconds: 4920 },
-        { task: 'Design global hotkey bindings', project: 'Client UI', seconds: 2700 },
+    replaces: {
+      heading: 'Replaces 5+ cloud subscriptions with one local binary',
+      subheading:
+        'Freelancers, solo founders, and small studios no longer need to pay for five separate SaaS tools and stitch data together by hand.',
+      colService: 'Category',
+      colInstead: 'Typically $30–80 / mo',
+      colWorkon: 'Inside WorkOn — $0 forever',
+      rows: [
+        {
+          category: 'Task tracking & planning',
+          instead: 'Jira / Linear / Trello',
+          workon: 'PROJ-1 keys, Kanban with WIP limits, table with Bulk Actions, Gantt with SVG dependencies, Scrum sprints & Burndown',
+        },
+        {
+          category: 'Time tracking & focus',
+          instead: 'Toggl / Clockify',
+          workon: 'Live timer, Focus Clock (Pomodoro / FlowTime), smart Idle Detection, hourly 00:00–24:00 Day/Week timeline',
+        },
+        {
+          category: 'Project documentation',
+          instead: 'Notion / Confluence',
+          workon: 'Built-in Markdown editor with GFM tables, live preview, and project folder hierarchy',
+        },
+        {
+          category: 'Clients & deals',
+          instead: 'Pipedrive / HubSpot',
+          workon: 'CRM pipeline, Telegram & client contacts, balances, project linking across isolated Workspaces',
+        },
+        {
+          category: 'Timesheets & invoicing',
+          instead: 'Excel + invoice tools',
+          workon: '7-currency billing, double-billing guard, Paper View A4/PDF print, and native multi-sheet Excel (.xlsx) export',
+        },
       ],
     },
-    features: {
-      heading: 'Built like a tool, not a subscription trap',
+    showcase: {
+      heading: 'All 10 modules — engineered for real workflows',
       subheading:
-        'Zero telemetry, zero mandatory accounts, and zero artificial paywalls. Just fast native ergonomics and complete ownership of your data.',
-      items: [
+        'Switch between the core scenarios below to inspect what ships inside WorkOn out of the box.',
+      tabs: [
         {
-          index: '01',
-          title: '100% local SQLite storage',
-          description:
-            'All projects, tasks, and logs live in a single local database file on your disk. WorkOn runs completely offline and never phones home.',
-          detailLabel: 'Storage path',
-          detailValue: '~/WorkOn/tracker.db',
-        },
-        {
-          index: '02',
-          title: 'Minimal footprint',
-          description:
-            'Respects your battery and RAM — sits quietly in the system tray throughout your entire workday.',
-          metric: '< 40 MB',
-          metricCaption: 'RAM in background mode',
-        },
-        {
-          index: '03',
-          title: 'Keyboard-first workflow',
-          description:
-            'Start, pause, and switch tasks directly from the system tray without breaking focus.',
-          shortcuts: [
-            { keys: 'Ctrl + Shift + S', label: 'Start / Pause' },
-            { keys: 'Ctrl + Shift + N', label: 'New task' },
+          id: 'tasks',
+          label: 'Kanban, List & Sprints',
+          modulesCount: 'Modules 03 · 04 · 06',
+          title: 'Jira-level task control without enterprise bloat',
+          summary:
+            'Structured issue keys (WRK-12), types (Task / Bug / Feature / Epic), Story Points, subtasks, comments, dependencies, and 1-click timer launch.',
+          blocks: [
+            {
+              name: 'Kanban Board',
+              points: [
+                'Smooth drag-and-drop across customizable columns with custom names, colors, order, WIP limits, and Done state',
+                'Cards surface key, type, priority, tags, subtask progress, due date, fixed price or tracked hours, and instant Play button',
+                '1-click tags from workspace history, blocker flag, epic/sprint binding, and activity log',
+              ],
+            },
+            {
+              name: 'List View & Scrum Sprints',
+              points: [
+                'Dense sortable table with filters by status, type, priority, billing model, sprint, tag, and overdue state',
+                'Bottom Bulk Actions bar to batch-update status, priority, type, sprint, tags, or delete tasks',
+                'Sprint completion wizard moving unfinished items automatically, sprint archive, and Burndown chart',
+              ],
+            },
           ],
         },
         {
-          index: '04',
-          title: 'Honestly free forever',
+          id: 'time',
+          label: 'Timer, Focus & Timeline',
+          modulesCount: 'Modules 01 · 02',
+          title: 'Accurate time logs without surveillance or artificial caps',
+          summary:
+            'Run timers from the app header or task card, pace deep work with Focus Clock, and inspect your day on an hourly grid.',
+          blocks: [
+            {
+              name: 'Time Tracking & Focus Clock',
+              points: [
+                'Built-in Pomodoro, TrackTime, and FlowTime dial — breaks are logged separately and excluded from billable hours',
+                'Smart Idle Detection prompts you on return to keep, subtract, or split away time into a separate entry',
+                'Unlimited manual logging (1h to 120h+ across weeks) with date picker and quick 1h / 4h / 8h / 24h / 40h / 80h presets',
+              ],
+            },
+            {
+              name: 'Timeline 00:00–24:00',
+              points: [
+                'Interactive Day and Week hourly calendar grid with overlapping block layout',
+                'Current-time red indicator line, smooth scrolling, and click-to-create/edit time slots',
+              ],
+            },
+          ],
+        },
+        {
+          id: 'gantt',
+          label: 'Gantt Chart',
+          modulesCount: 'Module 05',
+          title: 'Visual scheduling with real progress and dependencies',
+          summary:
+            'A synchronized task list and calendar scale lets you spot schedule collisions and adjust dates directly.',
+          blocks: [
+            {
+              name: 'Interactive Schedule Scale',
+              points: [
+                'Three zoom levels: Compact, Standard, and Detailed',
+                'Drag task bars across dates or resize left and right edges to adjust duration',
+              ],
+            },
+            {
+              name: 'Progress & SVG Dependencies',
+              points: [
+                'Displays actual completion progress right inside each timeline bar',
+                'Renders clear SVG dependency arrows connecting linked tasks',
+              ],
+            },
+          ],
+        },
+        {
+          id: 'finance',
+          label: 'Finance, Invoices & Excel',
+          modulesCount: 'Modules 08 · 09',
+          title: 'Billing tied directly to tracked work and fixed tasks',
+          summary:
+            'Generate invoices straight from unbilled hours and fixed-price items across 7 currencies with built-in double-billing protection.',
+          blocks: [
+            {
+              name: 'Multi-Currency Billing & Invoices',
+              points: [
+                'Supports RUB (₽), USD ($), EUR (€), KZT (₸), GBP (£), BYN (Br), and USDT (₮) for hourly rates and fixed-price tasks',
+                'Tracks billed vs unbilled hours with invoice lifecycle (Draft → Sent → Paid / Canceled) and legal presets (Sole Prop, LLC, SWIFT/IBAN)',
+                'Dark-mode invoice preview with instant Paper View toggle for crisp white A4/PDF printing',
+              ],
+            },
+            {
+              name: 'Reports & Native Excel (.xlsx)',
+              points: [
+                'Clean work timesheets for Today / 7d / 30d / All Time — breaks and idle intervals excluded automatically',
+                'Real Excel (.xlsx) export with two formatted sheets (Timesheet + Project Summary), single-invoice export, or full ledger export',
+                'CSV export and isolated print/PDF layout',
+              ],
+            },
+          ],
+        },
+        {
+          id: 'crm',
+          label: 'CRM, Workspaces & Wiki',
+          modulesCount: 'Modules 07 · 10',
+          title: 'Clients, deals, and project specs next to your tasks',
+          summary:
+            'Separate Freelance, Day Job, and Personal work into isolated Workspaces while keeping Markdown specs inside each project.',
+          blocks: [
+            {
+              name: 'CRM & Isolated Workspaces',
+              points: [
+                'Client directory and lead pipeline with Telegram contacts, notes, balances, and history',
+                'Link or unlink new and existing projects to clients at any time',
+                'Multiple isolated Workspaces with instant switching from the left sidebar',
+              ],
+            },
+            {
+              name: 'Docs & Project Wiki',
+              points: [
+                'Built-in Markdown editor with GFM tables, checklists, and live preview',
+                'Folder hierarchy organized by project for specs, meeting notes, and references',
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    modularity: {
+      heading: 'Modular down to every single tab',
+      subheading:
+        'Do not need Scrum or CRM? Toggle unused modules off and reorder tabs to match your workflow. Try configuring the bar below:',
+      previewLabel: 'Active tab bar inside WorkOn header',
+      activeCountSuffix: 'of 10 modules enabled',
+      resetBtn: 'Reset defaults',
+      minWarning: 'Keep at least one module enabled',
+      moveUpAria: 'Move earlier',
+      moveDownAria: 'Move later',
+      modules: [
+        { id: 'kanban', name: 'Kanban', desc: 'Columns, WIP limits, cards' },
+        { id: 'list', name: 'List', desc: 'Table, filters, Bulk Actions' },
+        { id: 'timeline', name: 'Timeline', desc: 'Hourly 00:00–24:00 grid' },
+        { id: 'gantt', name: 'Gantt', desc: 'Dates & SVG dependencies' },
+        { id: 'sprints', name: 'Sprints', desc: 'Backlog, Scrum & Burndown' },
+        { id: 'time', name: 'Time', desc: 'Focus Clock & Idle Detection' },
+        { id: 'docs', name: 'Docs', desc: 'Markdown Wiki & GFM tables' },
+        { id: 'reports', name: 'Reports', desc: 'Timesheets, Excel & CSV' },
+        { id: 'finance', name: 'Finance', desc: '7 currencies, A4/PDF invoices' },
+        { id: 'crm', name: 'CRM', desc: 'Clients, deals & balances' },
+      ],
+    },
+    privacy: {
+      heading: 'Privacy, native Tauri speed, and a self-hosted path ahead',
+      subheading:
+        'Built for professionals who expect full ownership of both their tooling and their business records.',
+      cards: [
+        {
+          index: '01',
+          title: '100% local & private',
           description:
-            'No Pro tiers, no project caps, no ads, and no watermarks. Releases are published openly on GitHub, and development is funded solely by voluntary donations.',
-          ctaLabel: 'Support the project',
+            'No mandatory accounts, no cloud lock-in, zero telemetry, and zero hidden screen captures. Every record lives on your machine and can be exported or restored anytime via full JSON backup.',
+          metaLeft: 'Backup format',
+          metaRight: 'Full JSON export / import',
+        },
+        {
+          index: '02',
+          title: 'Native Tauri engine',
+          description:
+            'Small binary footprint, instant launch without Electron overhead, frameless desktop window, 70%–150% interface scaling, and both Obsidian Dark and Light themes.',
+          metric: '70%–150%',
+          metricCaption: 'UI scale range · Tauri',
+        },
+        {
+          index: '03',
+          title: 'Architected for future Self-Hosted teams',
+          description:
+            'Under the hood, WorkOn is already structured to support an upcoming self-hosted server edition for teams and agencies — while the local desktop app stays free forever.',
+          metaLeft: 'Roadmap posture',
+          metaRight: 'Offline-first today · Self-hosted ready',
         },
       ],
     },
     download: {
-      heading: 'Download WorkOn',
-      subheading: 'Choose the build for your operating system. Ready to run in under a minute.',
+      heading: 'Download WorkOn for free',
+      subheading:
+        'Install the local desktop build for your OS. No trials, no project caps, and no paid tiers.',
       recommendedTag: 'Your OS',
       allReleasesLink: 'Browse all releases on GitHub',
       windows: {
         name: 'Windows',
-        meta: 'Windows 10, 11 · 64-bit',
+        meta: 'Windows 10, 11 · 64-bit (Tauri)',
         primaryBtn: 'Installer (.exe)',
         secondaryBtn: 'Portable (.zip)',
       },
@@ -350,39 +667,39 @@ export const TRANSLATIONS = {
     faq: {
       heading: 'FAQ & Installation Notes',
       subheading:
-        'Answers about privacy, backups, and OS security prompts when installing unsigned freeware builds.',
+        'Straight answers on offline usage, backups, currencies, exports, and unsigned installer prompts.',
       items: [
         {
-          q: 'Why does Windows SmartScreen warn when opening the .exe installer?',
-          a: 'WorkOn is a free independent project without a commercial EV code-signing certificate yet (which costs hundreds of dollars annually). Because of this, SmartScreen may show "Windows protected your PC". Click "More info" → "Run anyway" to proceed. All official builds are published directly on GitHub Releases.',
-        },
-        {
-          q: 'How do I open WorkOn on macOS if Gatekeeper blocks it?',
-          a: 'Because builds are not yet notarized with a paid Apple Developer account, macOS may warn about an unidentified developer on first launch. Right-click WorkOn in your Applications folder and select "Open", or approve it under System Settings → Privacy & Security → Open Anyway.',
-        },
-        {
-          q: 'Where is my data stored and how do I back it up?',
-          a: 'Your entire project and session history is stored in a single local SQLite file on your machine. You can copy that file at any time for backups or move it to another computer — no cloud account needed.',
-        },
-        {
           q: 'Does WorkOn require an account or internet connection?',
-          a: 'No. WorkOn works 100% offline right out of the box. There is no mandatory sign-up, no advertising, and no background analytics.',
+          a: 'No. WorkOn is 100% offline-first and works locally right after installation. There is no mandatory sign-up, cloud lock-in, advertising, telemetry, or hidden screenshot tracking.',
+        },
+        {
+          q: 'How do I back up or move my database to another computer?',
+          a: 'WorkOn includes full JSON backup export and import covering all workspaces, projects, tasks, time entries, docs, clients, and invoices. Export one JSON file and import it on your new machine.',
+        },
+        {
+          q: 'Which currencies and export formats are supported?',
+          a: 'Finance supports 7 currencies: RUB (₽), USD ($), EUR (€), KZT (₸), GBP (£), BYN (Br), and USDT (₮), for both hourly rates and fixed-price tasks. Reports and invoices export to native Excel (.xlsx with formatted Timesheet + Project Summary sheets), CSV, and clean white A4/PDF print.',
+        },
+        {
+          q: 'Why do Windows SmartScreen or macOS Gatekeeper warn on first launch?',
+          a: 'WorkOn is a free independent project without a commercial EV code-signing certificate yet. On Windows, click "More info" → "Run anyway". On macOS, right-click WorkOn in Applications → "Open" (or allow it in System Settings → Privacy & Security). All official builds are published on GitHub Releases.',
         },
         {
           q: "What's the catch? Why is it completely free?",
-          a: 'No catch — WorkOn started as a focused personal utility free from subscription fatigue. It is distributed for free and sustained purely by voluntary user donations.',
+          a: 'There is no catch — no paywalls, locked modules, or ads. Development is funded solely through voluntary donations from people who find WorkOn genuinely useful.',
         },
       ],
     },
     donateCta: {
-      heading: 'Does WorkOn save you time every day?',
+      heading: 'Did WorkOn replace your paid tools?',
       description:
-        'There are no investors or paid plans. Voluntary donations fund code-signing certificates, domain costs, and dedicated time for new features.',
+        'There are no investors or subscriptions. Voluntary donations help fund code-signing certificates (.exe / .dmg), domain costs, and dedicated development time.',
       button: 'Support WorkOn',
     },
     changelog: {
       heading: 'Changelog',
-      subheading: 'Chronological record of releases, improvements, and bug fixes in WorkOn.',
+      subheading: 'Chronological record of releases, new modules, and fixes in WorkOn.',
       filters: {
         all: 'All',
         new: 'New',
@@ -397,13 +714,13 @@ export const TRANSLATIONS = {
     donate: {
       heading: 'Support WorkOn Development',
       subheading:
-        'WorkOn stays 100% free for everyone — no paywalls, limits, or ads. Your contribution directly sustains ongoing releases and improvements.',
+        'WorkOn is 100% free — no paid tiers, project limits, or ads. Voluntary donations are the sole way the project is funded.',
       transparencyTitle: 'Where donations go',
       transparencyItems: [
         'Code-signing certificates (.exe / .dmg) to remove Windows SmartScreen and macOS Gatekeeper warnings',
         'Domain registration and release infrastructure upkeep',
-        'Development time for new features, bug fixes, and cross-platform testing on Windows, macOS, and Linux',
-        'Keeping WorkOn permanently free and ad-free for everyone',
+        'Development time for new modules, cross-platform testing, and the upcoming self-hosted server edition',
+        'Keeping the local WorkOn desktop app permanently free and ad-free',
       ],
       cisHeading: 'CIS / Russian Bank Cards & SBP',
       intlHeading: 'International Cards & PayPal',
@@ -412,11 +729,11 @@ export const TRANSLATIONS = {
       copiedBtn: 'Copied',
       copyFailedBtn: 'Failed',
       thankYou:
-        'Thank you to everyone who supports WorkOn — with a donation, a GitHub star, or helpful feedback.',
+        'Thank you to everyone supporting WorkOn — with a donation, a GitHub star, or feedback.',
       starGithub: 'Or simply leave a star on GitHub',
     },
     footer: {
-      copyright: 'WorkOn. Free local desktop time tracker.',
+      copyright: 'WorkOn. Free offline-first desktop suite.',
       changelog: 'Changelog',
       donate: 'Donate',
       github: 'GitHub',

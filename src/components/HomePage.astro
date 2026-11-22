@@ -1,5 +1,5 @@
 ---
-import TimerDemo from './TimerDemo.astro';
+import WorkOnAppDemo from './WorkOnAppDemo.astro';
 import { LATEST_RELEASE, SITE_CONFIG } from '../data/siteConfig';
 import { TRANSLATIONS, getLocalePath, type Lang } from '../i18n/translations';
 
@@ -11,8 +11,6 @@ const { lang } = Astro.props;
 const t = TRANSLATIONS[lang];
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const withBase = (p: string) => `${base}${p}`;
-
-const changelogHref = withBase(getLocalePath(lang, '/changelog'));
 const donateHref = withBase(getLocalePath(lang, '/donate'));
 
 const downloads = LATEST_RELEASE.downloads ?? {
@@ -21,209 +19,335 @@ const downloads = LATEST_RELEASE.downloads ?? {
   macos: SITE_CONFIG.githubReleasesUrl,
   linux: SITE_CONFIG.githubReleasesUrl,
 };
+
+const modularityConfig = {
+  modules: t.modularity.modules,
+  activeCountSuffix: t.modularity.activeCountSuffix,
+  minWarning: t.modularity.minWarning,
+  moveUpAria: t.modularity.moveUpAria,
+  moveDownAria: t.modularity.moveDownAria,
+};
 ---
 
-<!-- Hero Section: Value Proposition + Live Interactive WorkOn Demo -->
-<section class="relative border-b border-line bg-utility-grid">
-  <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
-    <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-10">
-      <!-- Left Column: Copy & Primary Action -->
-      <div class="lg:col-span-6">
-        <div class="flex flex-wrap items-center gap-x-2.5 gap-y-1 font-mono text-xs text-ink-muted">
-          <span class="text-accent tabular-nums">v{LATEST_RELEASE.version}</span>
-          <span aria-hidden="true">·</span>
-          <span>{LATEST_RELEASE.date[lang]}</span>
-          <span aria-hidden="true">·</span>
-          <span>{t.hero.metaFree}</span>
-          <span aria-hidden="true">·</span>
-          <span>{t.hero.metaLocal}</span>
-        </div>
-
-        <h1 class="mt-5 font-display text-[clamp(2.25rem,4.2vw,3.5rem)] font-extrabold tracking-tight text-ink leading-[1.08]">
-          {t.hero.headlineStart}
-          <span class="block mt-1 text-ink-secondary font-bold">
-            {t.hero.headlineAccent}
-          </span>
-        </h1>
-
-        <p class="mt-6 max-w-xl text-base leading-relaxed text-ink-secondary sm:text-lg">
-          {t.hero.subtitle}
-        </p>
-
-        <div class="mt-8 flex flex-wrap items-center gap-3">
-          <a
-            id="hero-download-cta"
-            href="#download"
-            data-label-default={t.hero.primaryCtaDefault}
-            data-label-windows={t.hero.primaryCtaWindows}
-            data-label-macos={t.hero.primaryCtaMac}
-            data-label-linux={t.hero.primaryCtaLinux}
-            class="inline-flex min-h-11 items-center justify-center gap-2 rounded-md bg-accent px-6 py-3 text-sm font-semibold text-accent-ink transition-colors duration-150 hover:bg-accent-hover whitespace-nowrap shrink-0"
-          >
-            <svg
-              class="h-4 w-4 shrink-0"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2.2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              aria-hidden="true"
-            >
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-              <polyline points="7 10 12 15 17 10" />
-              <line x1="12" y1="15" x2="12" y2="3" />
-            </svg>
-            <span id="hero-download-cta-label">{t.hero.primaryCtaDefault}</span>
-          </a>
-
-          <a
-            href={changelogHref}
-            class="inline-flex min-h-11 items-center justify-center rounded-md border border-line bg-surface px-5 py-3 text-sm font-medium text-ink-secondary transition-colors duration-150 hover:border-line-strong hover:bg-surface-elevated hover:text-ink whitespace-nowrap shrink-0"
-          >
-            {t.hero.secondaryCta}
-          </a>
-        </div>
-
-        <p class="mt-5 text-xs text-ink-muted">
-          {t.hero.trustNote}
-        </p>
+<!-- 1. Hero Section + Full-Width Interactive Tauri Desktop Mockup -->
+<section class="border-b border-line bg-obsidian-grid">
+  <div class="mx-auto max-w-6xl px-4 pt-12 pb-16 sm:px-6 sm:pt-16 sm:pb-24 lg:px-8">
+    <div class="mx-auto max-w-4xl text-center">
+      <div class="flex flex-wrap items-center justify-center gap-x-2.5 gap-y-1 font-mono text-xs text-ink-muted">
+        <span class="text-accent-soft tabular-nums">v{LATEST_RELEASE.version}</span>
+        <span aria-hidden="true">·</span>
+        <span>{t.hero.metaTauri}</span>
+        <span aria-hidden="true">·</span>
+        <span>{t.hero.metaOffline}</span>
+        <span aria-hidden="true">·</span>
+        <span>{t.hero.metaFree}</span>
       </div>
 
-      <!-- Right Column: Interactive Desktop Utility Demo -->
-      <div class="lg:col-span-6">
-        <TimerDemo lang={lang} />
+      <h1 class="mt-5 font-display text-[clamp(2rem,4vw,3.35rem)] font-extrabold tracking-tight text-ink-strong leading-[1.1]">
+        {t.hero.headline}
+      </h1>
+
+      <p class="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-ink-secondary sm:text-lg">
+        {t.hero.subtitle}
+      </p>
+
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+        <a
+          id="hero-download-cta"
+          href="#download"
+          data-label-default={t.hero.primaryCtaDefault}
+          data-label-windows={t.hero.primaryCtaWindows}
+          data-label-macos={t.hero.primaryCtaMac}
+          data-label-linux={t.hero.primaryCtaLinux}
+          class="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-accent px-6 py-3 text-sm font-semibold text-accent-ink transition-colors duration-150 hover:bg-accent-hover whitespace-nowrap shrink-0"
+        >
+          <svg
+            class="h-4 w-4 shrink-0"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="7 10 12 15 17 10" />
+            <line x1="12" y1="15" x2="12" y2="3" />
+          </svg>
+          <span id="hero-download-cta-label">{t.hero.primaryCtaDefault}</span>
+        </a>
+
+        <a
+          href="#modules"
+          class="inline-flex min-h-11 items-center justify-center rounded-xl border border-line-strong bg-surface px-5 py-3 text-sm font-medium text-ink transition-colors duration-150 hover:bg-surface-elevated hover:text-ink-strong whitespace-nowrap shrink-0"
+        >
+          {t.hero.secondaryCta}
+        </a>
+      </div>
+
+      <p class="mt-4 text-xs text-ink-muted">
+        {t.hero.trustNote}
+      </p>
+    </div>
+
+    <!-- Full-Width Interactive WorkOn Tauri App Preview -->
+    <div class="mt-12">
+      <WorkOnAppDemo lang={lang} />
+    </div>
+  </div>
+</section>
+
+<!-- 2. Replaces 5+ Paid Cloud Tools -->
+<section id="replaces" class="border-b border-line py-16 sm:py-24">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <div class="max-w-2xl">
+      <h2 class="font-display text-2xl font-bold tracking-tight text-ink-strong sm:text-3xl">
+        {t.replaces.heading}
+      </h2>
+      <p class="mt-3 text-sm leading-relaxed text-ink-secondary sm:text-base">
+        {t.replaces.subheading}
+      </p>
+    </div>
+
+    <div class="mt-10 overflow-hidden rounded-2xl border border-line bg-surface">
+      <div class="hidden md:grid md:grid-cols-12 border-b border-line bg-surface-elevated px-6 py-3.5 text-xs font-medium text-ink-muted">
+        <div class="col-span-3">{t.replaces.colService}</div>
+        <div class="col-span-3">{t.replaces.colInstead}</div>
+        <div class="col-span-6 text-accent-soft">{t.replaces.colWorkon}</div>
+      </div>
+
+      <div class="divide-y divide-line">
+        {t.replaces.rows.map((row) => (
+          <div class="grid grid-cols-1 gap-2 px-5 py-4 md:grid-cols-12 md:items-baseline md:gap-4 md:px-6">
+            <div class="md:col-span-3 font-display text-sm font-semibold text-ink-strong">
+              {row.category}
+            </div>
+            <div class="md:col-span-3 font-mono text-xs text-ink-muted line-through decoration-line-strong">
+              {row.instead}
+            </div>
+            <div class="md:col-span-6 text-sm leading-relaxed text-ink">
+              {row.workon}
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   </div>
 </section>
 
-<!-- Capabilities: Asymmetric Bento Grid -->
-<section class="border-b border-line py-16 sm:py-24">
+<!-- 3. Interactive Showcase of All 10 Modules -->
+<section id="modules" class="border-b border-line py-16 sm:py-24 scroll-mt-16">
   <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
     <div class="max-w-2xl">
-      <h2 class="font-display text-2xl font-bold tracking-tight text-ink sm:text-3xl">
-        {t.features.heading}
+      <h2 class="font-display text-2xl font-bold tracking-tight text-ink-strong sm:text-3xl">
+        {t.showcase.heading}
       </h2>
       <p class="mt-3 text-sm leading-relaxed text-ink-secondary sm:text-base">
-        {t.features.subheading}
+        {t.showcase.subheading}
+      </p>
+    </div>
+
+    <!-- Interactive Scenario Selector Tabs -->
+    <div
+      class="mt-8 flex flex-wrap gap-2"
+      role="tablist"
+      aria-label={t.showcase.heading}
+    >
+      {t.showcase.tabs.map((tab, idx) => (
+        <button
+          type="button"
+          role="tab"
+          data-showcase-tab={tab.id}
+          aria-selected={idx === 0 ? 'true' : 'false'}
+          class={`showcase-tab-btn min-h-10 rounded-xl border px-4 py-2 text-xs sm:text-sm font-medium transition-colors duration-150 whitespace-nowrap shrink-0 cursor-pointer ${
+            idx === 0
+              ? 'border-accent bg-accent/15 text-ink-strong'
+              : 'border-line bg-surface text-ink-secondary hover:border-line-strong hover:text-ink-strong'
+          }`}
+        >
+          {tab.label}
+        </button>
+      ))}
+    </div>
+
+    <!-- Scenario Content Panels -->
+    <div class="mt-6">
+      {t.showcase.tabs.map((tab, idx) => (
+        <div
+          data-showcase-panel={tab.id}
+          class={`${idx === 0 ? '' : 'hidden'} rounded-2xl border border-line bg-surface p-6 sm:p-8`}
+        >
+          <div class="flex flex-wrap items-baseline justify-between gap-3 border-b border-line pb-5">
+            <div class="max-w-3xl">
+              <div class="font-mono text-xs text-accent-soft">{tab.modulesCount}</div>
+              <h3 class="mt-1.5 font-display text-xl font-bold text-ink-strong sm:text-2xl">
+                {tab.title}
+              </h3>
+              <p class="mt-2 text-sm leading-relaxed text-ink-secondary">
+                {tab.summary}
+              </p>
+            </div>
+          </div>
+
+          <div class="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2">
+            {tab.blocks.map((block) => (
+              <div class="rounded-xl border border-line bg-canvas-alt p-5">
+                <h4 class="font-display text-base font-semibold text-ink-strong">
+                  {block.name}
+                </h4>
+                <ul class="mt-3.5 space-y-2.5 text-sm leading-relaxed text-ink-secondary">
+                  {block.points.map((pt) => (
+                    <li class="flex items-start gap-2.5">
+                      <span class="mt-2 h-1.5 w-1.5 rounded-full bg-accent-soft shrink-0" aria-hidden="true"></span>
+                      <span>{pt}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- 4. Interactive Modularity Configurator -->
+<section id="modularity" class="border-b border-line py-16 sm:py-24">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+      <div class="max-w-2xl">
+        <h2 class="font-display text-2xl font-bold tracking-tight text-ink-strong sm:text-3xl">
+          {t.modularity.heading}
+        </h2>
+        <p class="mt-3 text-sm leading-relaxed text-ink-secondary sm:text-base">
+          {t.modularity.subheading}
+        </p>
+      </div>
+      <button
+        type="button"
+        id="modularity-reset-btn"
+        class="inline-flex min-h-9 items-center self-start rounded-lg border border-line-strong bg-surface px-3.5 py-1.5 text-xs font-medium text-ink-secondary transition-colors duration-150 hover:bg-surface-elevated hover:text-ink-strong whitespace-nowrap sm:self-auto cursor-pointer"
+      >
+        {t.modularity.resetBtn}
+      </button>
+    </div>
+
+    <div
+      id="modularity-root"
+      data-config={JSON.stringify(modularityConfig)}
+      class="mt-8 rounded-2xl border border-line bg-surface p-5 sm:p-7"
+    >
+      <!-- Live Preview of Customizable App Tab Bar -->
+      <div class="rounded-xl border border-line bg-canvas p-4">
+        <div class="flex flex-wrap items-center justify-between gap-2 text-xs">
+          <span class="text-ink-muted">{t.modularity.previewLabel}</span>
+          <span id="modularity-count" class="font-mono text-accent-soft tabular-nums">
+            10 {t.modularity.activeCountSuffix}
+          </span>
+        </div>
+        <div
+          id="modularity-preview-bar"
+          class="mt-3 flex flex-wrap items-center gap-1.5 min-h-9"
+        ></div>
+        <div
+          id="modularity-warning"
+          class="hidden mt-2 text-xs text-amber-400"
+        ></div>
+      </div>
+
+      <!-- 10 Module Toggle Cards -->
+      <div
+        id="modularity-grid"
+        class="mt-5 grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:grid-cols-5"
+      ></div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. Privacy, Tauri Architecture & Self-Hosted Roadmap -->
+<section id="privacy" class="border-b border-line py-16 sm:py-24">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <div class="max-w-2xl">
+      <h2 class="font-display text-2xl font-bold tracking-tight text-ink-strong sm:text-3xl">
+        {t.privacy.heading}
+      </h2>
+      <p class="mt-3 text-sm leading-relaxed text-ink-secondary sm:text-base">
+        {t.privacy.subheading}
       </p>
     </div>
 
     <div class="mt-10 grid grid-cols-1 gap-5 md:grid-cols-3">
-      <!-- 01: Wide Local SQLite Card -->
-      <div class="flex flex-col justify-between rounded-xl border border-line bg-surface p-6 sm:p-7 md:col-span-2">
+      <!-- 01: Wide Local & Private -->
+      <div class="flex flex-col justify-between rounded-2xl border border-line bg-surface p-6 sm:p-7 md:col-span-2">
         <div>
           <span class="font-mono text-xs text-ink-muted tabular-nums">
-            {t.features.items[0].index}.
+            {t.privacy.cards[0].index}.
           </span>
-          <h3 class="mt-2 font-display text-lg font-semibold text-ink sm:text-xl">
-            {t.features.items[0].title}
+          <h3 class="mt-2 font-display text-lg font-semibold text-ink-strong sm:text-xl">
+            {t.privacy.cards[0].title}
           </h3>
           <p class="mt-2.5 max-w-xl text-sm leading-relaxed text-ink-secondary">
-            {t.features.items[0].description}
+            {t.privacy.cards[0].description}
           </p>
         </div>
 
         <div class="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-line pt-4 font-mono text-xs">
-          <span class="text-ink-muted">{t.features.items[0].detailLabel}</span>
-          <code class="text-ink">{t.features.items[0].detailValue}</code>
+          <span class="text-ink-muted">{t.privacy.cards[0].metaLeft}</span>
+          <span class="text-ink">{t.privacy.cards[0].metaRight}</span>
         </div>
       </div>
 
-      <!-- 02: Compact Footprint Metric Card -->
-      <div class="flex flex-col justify-between rounded-xl border border-line bg-surface p-6 sm:p-7">
+      <!-- 02: Native Tauri Engine -->
+      <div class="flex flex-col justify-between rounded-2xl border border-line bg-surface p-6 sm:p-7">
         <div>
           <span class="font-mono text-xs text-ink-muted tabular-nums">
-            {t.features.items[1].index}.
+            {t.privacy.cards[1].index}.
           </span>
-          <h3 class="mt-2 font-display text-lg font-semibold text-ink sm:text-xl">
-            {t.features.items[1].title}
+          <h3 class="mt-2 font-display text-lg font-semibold text-ink-strong sm:text-xl">
+            {t.privacy.cards[1].title}
           </h3>
           <p class="mt-2.5 text-sm leading-relaxed text-ink-secondary">
-            {t.features.items[1].description}
+            {t.privacy.cards[1].description}
           </p>
         </div>
 
         <div class="mt-6 border-t border-line pt-4">
-          <div class="font-mono text-3xl font-semibold tracking-tight text-accent tabular-nums">
-            {t.features.items[1].metric}
+          <div class="font-mono text-2xl font-semibold tracking-tight text-accent-soft tabular-nums">
+            {t.privacy.cards[1].metric}
           </div>
           <div class="mt-1 text-xs text-ink-muted">
-            {t.features.items[1].metricCaption}
+            {t.privacy.cards[1].metricCaption}
           </div>
         </div>
       </div>
 
-      <!-- 03: Compact Keyboard Shortcuts Card -->
-      <div class="flex flex-col justify-between rounded-xl border border-line bg-surface p-6 sm:p-7">
-        <div>
-          <span class="font-mono text-xs text-ink-muted tabular-nums">
-            {t.features.items[2].index}.
-          </span>
-          <h3 class="mt-2 font-display text-lg font-semibold text-ink sm:text-xl">
-            {t.features.items[2].title}
+      <!-- 03: Full-Width Self-Hosted Teaser -->
+      <div class="flex flex-col justify-between gap-4 rounded-2xl border border-line bg-surface p-6 sm:p-7 md:col-span-3 md:flex-row md:items-center">
+        <div class="max-w-3xl">
+          <div class="flex items-center gap-3 font-mono text-xs">
+            <span class="text-ink-muted tabular-nums">{t.privacy.cards[2].index}.</span>
+            <span class="text-accent-soft">{t.privacy.cards[2].metaRight}</span>
+          </div>
+          <h3 class="mt-2 font-display text-lg font-semibold text-ink-strong sm:text-xl">
+            {t.privacy.cards[2].title}
           </h3>
-          <p class="mt-2.5 text-sm leading-relaxed text-ink-secondary">
-            {t.features.items[2].description}
+          <p class="mt-2 text-sm leading-relaxed text-ink-secondary">
+            {t.privacy.cards[2].description}
           </p>
-        </div>
-
-        <div class="mt-6 space-y-2.5 border-t border-line pt-4">
-          {t.features.items[2].shortcuts?.map((sc) => (
-            <div class="flex items-center justify-between gap-2 text-xs">
-              <span class="text-ink-muted">{sc.label}</span>
-              <kbd class="rounded border border-line-strong bg-canvas px-2 py-0.5 font-mono text-[11px] text-ink whitespace-nowrap">
-                {sc.keys}
-              </kbd>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <!-- 04: Wide Donation-Funded Free Forever Card -->
-      <div class="flex flex-col justify-between rounded-xl border border-line bg-surface p-6 sm:p-7 md:col-span-2">
-        <div>
-          <span class="font-mono text-xs text-ink-muted tabular-nums">
-            {t.features.items[3].index}.
-          </span>
-          <h3 class="mt-2 font-display text-lg font-semibold text-ink sm:text-xl">
-            {t.features.items[3].title}
-          </h3>
-          <p class="mt-2.5 max-w-xl text-sm leading-relaxed text-ink-secondary">
-            {t.features.items[3].description}
-          </p>
-        </div>
-
-        <div class="mt-6 flex flex-wrap items-center gap-6 border-t border-line pt-4 text-xs">
-          <a
-            href={donateHref}
-            class="inline-flex items-center gap-1.5 font-medium text-accent transition-colors duration-150 hover:text-accent-hover whitespace-nowrap"
-          >
-            <span>{t.features.items[3].ctaLabel}</span>
-            <span aria-hidden="true">→</span>
-          </a>
-          <a
-            href={SITE_CONFIG.githubRepo}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center gap-1.5 font-medium text-ink-secondary transition-colors duration-150 hover:text-ink whitespace-nowrap"
-          >
-            <span>GitHub</span>
-            <span aria-hidden="true">↗</span>
-          </a>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Download Section -->
+<!-- 6. Download Section -->
 <section id="download" class="border-b border-line py-16 sm:py-24 scroll-mt-16">
   <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
     <div class="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
       <div class="max-w-xl">
-        <h2 class="font-display text-2xl font-bold tracking-tight text-ink sm:text-3xl">
+        <h2 class="font-display text-2xl font-bold tracking-tight text-ink-strong sm:text-3xl">
           {t.download.heading}
         </h2>
         <p class="mt-2.5 text-sm leading-relaxed text-ink-secondary sm:text-base">
@@ -240,27 +364,19 @@ const downloads = LATEST_RELEASE.downloads ?? {
       <!-- Windows -->
       <div
         data-os-card="windows"
-        class="flex flex-col justify-between rounded-xl border border-line bg-surface p-6 transition-colors duration-150 hover:border-line-strong"
+        class="flex flex-col justify-between rounded-2xl border border-line bg-surface p-6 transition-colors duration-150 hover:border-line-strong"
       >
         <div>
           <div class="flex items-center justify-between gap-3">
-            <svg
-              class="h-6 w-6 text-ink"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              aria-hidden="true"
-            >
+            <svg class="h-6 w-6 text-ink-strong" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
               <path d="M3 5.5L10.5 4.4V11.5H3V5.5ZM11.5 4.25L21 3V11.5H11.5V4.25ZM3 12.5H10.5V19.6L3 18.5V12.5ZM11.5 12.5H21V21L11.5 19.75V12.5Z" />
             </svg>
-            <span
-              data-os-badge="windows"
-              class="hidden font-mono text-xs font-medium text-accent"
-            >
+            <span data-os-badge="windows" class="hidden font-mono text-xs font-medium text-accent-soft">
               {t.download.recommendedTag}
             </span>
           </div>
 
-          <h3 class="mt-5 font-display text-xl font-bold text-ink">
+          <h3 class="mt-5 font-display text-xl font-bold text-ink-strong">
             {t.download.windows.name}
           </h3>
           <p class="mt-1 text-xs text-ink-muted">
@@ -272,14 +388,14 @@ const downloads = LATEST_RELEASE.downloads ?? {
           <a
             href={downloads.windows}
             data-os-primary="windows"
-            class="flex min-h-10 w-full items-center justify-center rounded-md border border-line-strong bg-surface-elevated px-4 py-2.5 text-sm font-semibold text-ink transition-colors duration-150 hover:bg-surface-hover whitespace-nowrap"
+            class="flex min-h-10 w-full items-center justify-center rounded-xl border border-line-strong bg-surface-elevated px-4 py-2.5 text-sm font-semibold text-ink-strong transition-colors duration-150 hover:bg-surface-hover whitespace-nowrap"
           >
             {t.download.windows.primaryBtn}
           </a>
           {downloads.windowsPortable && (
             <a
               href={downloads.windowsPortable}
-              class="flex min-h-9 w-full items-center justify-center rounded-md px-4 py-2 text-xs font-medium text-ink-secondary transition-colors duration-150 hover:bg-surface-elevated hover:text-ink whitespace-nowrap"
+              class="flex min-h-9 w-full items-center justify-center rounded-xl px-4 py-2 text-xs font-medium text-ink-secondary transition-colors duration-150 hover:bg-surface-elevated hover:text-ink-strong whitespace-nowrap"
             >
               {t.download.windows.secondaryBtn}
             </a>
@@ -290,27 +406,19 @@ const downloads = LATEST_RELEASE.downloads ?? {
       <!-- macOS -->
       <div
         data-os-card="macos"
-        class="flex flex-col justify-between rounded-xl border border-line bg-surface p-6 transition-colors duration-150 hover:border-line-strong"
+        class="flex flex-col justify-between rounded-2xl border border-line bg-surface p-6 transition-colors duration-150 hover:border-line-strong"
       >
         <div>
           <div class="flex items-center justify-between gap-3">
-            <svg
-              class="h-6 w-6 text-ink"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              aria-hidden="true"
-            >
+            <svg class="h-6 w-6 text-ink-strong" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
               <path d="M16.365 1.43c0 1.14-.493 2.27-1.177 3.08-.744.9-1.99 1.57-2.987 1.57-.12 0-.23-.02-.3-.03-.01-.06-.04-.22-.04-.39 0-1.15.572-2.27 1.206-2.98.804-.94 2.142-1.64 3.248-1.68.03.13.05.28.05.43zm4.565 15.71c-.03.07-.463 1.58-1.518 3.12-.945 1.34-1.94 2.71-3.43 2.71-1.517 0-1.9-.88-3.63-.88-1.698 0-2.302.91-3.67.91-1.377 0-2.332-1.26-3.428-2.8-1.287-1.82-2.323-4.63-2.323-7.28 0-4.28 2.797-6.55 5.552-6.55 1.448 0 2.675.95 3.6.95.865 0 2.222-1.01 3.902-1.01.613 0 2.886.06 4.374 2.19-.13.09-2.383 1.37-2.383 4.19 0 3.26 2.854 4.42 2.955 4.45z" />
             </svg>
-            <span
-              data-os-badge="macos"
-              class="hidden font-mono text-xs font-medium text-accent"
-            >
+            <span data-os-badge="macos" class="hidden font-mono text-xs font-medium text-accent-soft">
               {t.download.recommendedTag}
             </span>
           </div>
 
-          <h3 class="mt-5 font-display text-xl font-bold text-ink">
+          <h3 class="mt-5 font-display text-xl font-bold text-ink-strong">
             {t.download.macos.name}
           </h3>
           <p class="mt-1 text-xs text-ink-muted">
@@ -322,7 +430,7 @@ const downloads = LATEST_RELEASE.downloads ?? {
           <a
             href={downloads.macos}
             data-os-primary="macos"
-            class="flex min-h-10 w-full items-center justify-center rounded-md border border-line-strong bg-surface-elevated px-4 py-2.5 text-sm font-semibold text-ink transition-colors duration-150 hover:bg-surface-hover whitespace-nowrap"
+            class="flex min-h-10 w-full items-center justify-center rounded-xl border border-line-strong bg-surface-elevated px-4 py-2.5 text-sm font-semibold text-ink-strong transition-colors duration-150 hover:bg-surface-hover whitespace-nowrap"
           >
             {t.download.macos.primaryBtn}
           </a>
@@ -332,32 +440,20 @@ const downloads = LATEST_RELEASE.downloads ?? {
       <!-- Linux -->
       <div
         data-os-card="linux"
-        class="flex flex-col justify-between rounded-xl border border-line bg-surface p-6 transition-colors duration-150 hover:border-line-strong"
+        class="flex flex-col justify-between rounded-2xl border border-line bg-surface p-6 transition-colors duration-150 hover:border-line-strong"
       >
         <div>
           <div class="flex items-center justify-between gap-3">
-            <svg
-              class="h-6 w-6 text-ink"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.8"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              aria-hidden="true"
-            >
+            <svg class="h-6 w-6 text-ink-strong" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <polyline points="4 17 10 11 4 5" />
               <line x1="12" y1="19" x2="20" y2="19" />
             </svg>
-            <span
-              data-os-badge="linux"
-              class="hidden font-mono text-xs font-medium text-accent"
-            >
+            <span data-os-badge="linux" class="hidden font-mono text-xs font-medium text-accent-soft">
               {t.download.recommendedTag}
             </span>
           </div>
 
-          <h3 class="mt-5 font-display text-xl font-bold text-ink">
+          <h3 class="mt-5 font-display text-xl font-bold text-ink-strong">
             {t.download.linux.name}
           </h3>
           <p class="mt-1 text-xs text-ink-muted">
@@ -369,7 +465,7 @@ const downloads = LATEST_RELEASE.downloads ?? {
           <a
             href={downloads.linux}
             data-os-primary="linux"
-            class="flex min-h-10 w-full items-center justify-center rounded-md border border-line-strong bg-surface-elevated px-4 py-2.5 text-sm font-semibold text-ink transition-colors duration-150 hover:bg-surface-hover whitespace-nowrap"
+            class="flex min-h-10 w-full items-center justify-center rounded-xl border border-line-strong bg-surface-elevated px-4 py-2.5 text-sm font-semibold text-ink-strong transition-colors duration-150 hover:bg-surface-hover whitespace-nowrap"
           >
             {t.download.linux.primaryBtn}
           </a>
@@ -377,12 +473,12 @@ const downloads = LATEST_RELEASE.downloads ?? {
       </div>
     </div>
 
-    <div class="mt-6 flex items-center justify-between text-xs text-ink-muted">
+    <div class="mt-6 text-xs text-ink-muted">
       <a
         href={SITE_CONFIG.githubReleasesUrl}
         target="_blank"
         rel="noopener noreferrer"
-        class="inline-flex items-center gap-1.5 transition-colors duration-150 hover:text-ink"
+        class="inline-flex items-center gap-1.5 transition-colors duration-150 hover:text-ink-strong"
       >
         <span>{t.download.allReleasesLink}</span>
         <span aria-hidden="true">↗</span>
@@ -391,12 +487,12 @@ const downloads = LATEST_RELEASE.downloads ?? {
   </div>
 </section>
 
-<!-- FAQ & Unsigned Build Installation Notes -->
+<!-- 7. FAQ Section -->
 <section id="faq" class="border-b border-line py-16 sm:py-24 scroll-mt-16">
   <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
     <div class="grid grid-cols-1 gap-10 lg:grid-cols-12">
       <div class="lg:col-span-4">
-        <h2 class="font-display text-2xl font-bold tracking-tight text-ink sm:text-3xl">
+        <h2 class="font-display text-2xl font-bold tracking-tight text-ink-strong sm:text-3xl">
           {t.faq.heading}
         </h2>
         <p class="mt-3 text-sm leading-relaxed text-ink-secondary">
@@ -408,7 +504,7 @@ const downloads = LATEST_RELEASE.downloads ?? {
         <div class="divide-y divide-line border-y border-line">
           {t.faq.items.map((item, idx) => (
             <details class="group py-4" open={idx === 0}>
-              <summary class="flex min-h-10 cursor-pointer list-none items-center justify-between gap-4 text-left text-sm font-semibold text-ink transition-colors duration-150 hover:text-accent sm:text-base">
+              <summary class="flex min-h-10 cursor-pointer list-none items-center justify-between gap-4 text-left text-sm font-semibold text-ink-strong transition-colors duration-150 hover:text-accent-soft sm:text-base">
                 <span>{item.q}</span>
                 <svg
                   class="h-4 w-4 shrink-0 text-ink-muted transition-transform duration-150 group-open:rotate-180"
@@ -434,12 +530,12 @@ const downloads = LATEST_RELEASE.downloads ?? {
   </div>
 </section>
 
-<!-- Quiet Donation CTA -->
+<!-- 8. Quiet Donation CTA -->
 <section class="py-16 sm:py-20">
   <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-    <div class="flex flex-col items-start justify-between gap-6 rounded-xl border border-line bg-surface p-7 sm:flex-row sm:items-center sm:p-9">
+    <div class="flex flex-col items-start justify-between gap-6 rounded-2xl border border-line bg-surface p-7 sm:flex-row sm:items-center sm:p-9">
       <div class="max-w-xl">
-        <h2 class="font-display text-xl font-bold tracking-tight text-ink sm:text-2xl">
+        <h2 class="font-display text-xl font-bold tracking-tight text-ink-strong sm:text-2xl">
           {t.donateCta.heading}
         </h2>
         <p class="mt-2 text-sm leading-relaxed text-ink-secondary">
@@ -449,7 +545,7 @@ const downloads = LATEST_RELEASE.downloads ?? {
 
       <a
         href={donateHref}
-        class="inline-flex min-h-11 items-center justify-center gap-2 rounded-md border border-line-strong bg-surface-elevated px-5 py-3 text-sm font-semibold text-ink transition-colors duration-150 hover:border-accent hover:text-accent whitespace-nowrap shrink-0"
+        class="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-line-strong bg-surface-elevated px-5 py-3 text-sm font-semibold text-ink-strong transition-colors duration-150 hover:border-accent hover:text-accent-soft whitespace-nowrap shrink-0"
       >
         <span>{t.donateCta.button}</span>
         <span aria-hidden="true">→</span>
@@ -459,6 +555,7 @@ const downloads = LATEST_RELEASE.downloads ?? {
 </section>
 
 <script>
+  // 1. OS Auto-Detection for Download CTA & Cards
   function detectOS(): 'windows' | 'macos' | 'linux' | null {
     const ua = navigator.userAgent.toLowerCase();
     const platform = (navigator.platform || '').toLowerCase();
@@ -483,24 +580,196 @@ const downloads = LATEST_RELEASE.downloads ?? {
 
     if (card) {
       card.classList.remove('border-line');
-      card.classList.add('border-accent/60');
+      card.classList.add('border-accent');
     }
-    if (badge) {
-      badge.classList.remove('hidden');
-    }
+    if (badge) badge.classList.remove('hidden');
     if (primaryBtn) {
       primaryBtn.classList.remove(
         'border',
         'border-line-strong',
         'bg-surface-elevated',
-        'text-ink',
         'hover:bg-surface-hover'
       );
-      primaryBtn.classList.add(
-        'bg-accent',
-        'text-accent-ink',
-        'hover:bg-accent-hover'
-      );
+      primaryBtn.classList.add('bg-accent', 'text-white', 'hover:bg-accent-hover');
+    }
+  }
+
+  // 2. Interactive 10-Module Showcase Tabs
+  const showcaseBtns = Array.from(
+    document.querySelectorAll<HTMLButtonElement>('.showcase-tab-btn')
+  );
+  const showcasePanels = Array.from(
+    document.querySelectorAll<HTMLElement>('[data-showcase-panel]')
+  );
+
+  showcaseBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const id = btn.getAttribute('data-showcase-tab');
+      showcaseBtns.forEach((item) => {
+        const active = item === btn;
+        item.setAttribute('aria-selected', String(active));
+        item.classList.toggle('border-accent', active);
+        item.classList.toggle('bg-accent/15', active);
+        item.classList.toggle('text-ink-strong', active);
+        item.classList.toggle('border-line', !active);
+        item.classList.toggle('bg-surface', !active);
+        item.classList.toggle('text-ink-secondary', !active);
+      });
+      showcasePanels.forEach((panel) => {
+        panel.classList.toggle('hidden', panel.getAttribute('data-showcase-panel') !== id);
+      });
+    });
+  });
+
+  // 3. Interactive Modularity Configurator (Toggle + Reorder 10 Modules)
+  interface ModItem {
+    id: string;
+    name: string;
+    desc: string;
+    enabled: boolean;
+  }
+
+  const modRoot = document.getElementById('modularity-root');
+  if (modRoot) {
+    const cfgRaw = modRoot.getAttribute('data-config');
+    const cfg = cfgRaw ? JSON.parse(cfgRaw) : null;
+    const previewBar = document.getElementById('modularity-preview-bar');
+    const grid = document.getElementById('modularity-grid');
+    const countEl = document.getElementById('modularity-count');
+    const warnEl = document.getElementById('modularity-warning');
+    const resetBtn = document.getElementById('modularity-reset-btn');
+
+    if (cfg && previewBar && grid && countEl) {
+      let state: ModItem[] = cfg.modules.map((m: { id: string; name: string; desc: string }) => ({
+        ...m,
+        enabled: true,
+      }));
+
+      function renderModularity() {
+        if (!previewBar || !grid || !countEl) return;
+
+        const enabledList = state.filter((m) => m.enabled);
+        countEl.textContent = `${enabledList.length} ${cfg.activeCountSuffix}`;
+
+        previewBar.innerHTML = '';
+        enabledList.forEach((mod, idx) => {
+          const item = document.createElement('span');
+          item.className = `inline-flex items-center rounded-lg px-2.5 py-1 text-xs font-medium whitespace-nowrap ${
+            idx === 0
+              ? 'bg-accent/20 text-accent-soft border border-accent/40'
+              : 'bg-surface-elevated text-ink border border-line'
+          }`;
+          item.textContent = mod.name;
+          previewBar.appendChild(item);
+        });
+
+        grid.innerHTML = '';
+        state.forEach((mod, index) => {
+          const card = document.createElement('div');
+          card.className = `flex flex-col justify-between rounded-xl border p-3 transition-colors duration-150 ${
+            mod.enabled
+              ? 'border-line-strong bg-surface-elevated'
+              : 'border-line bg-canvas opacity-60'
+          }`;
+
+          const top = document.createElement('div');
+          top.className = 'flex items-center justify-between gap-2';
+
+          const title = document.createElement('span');
+          title.className = 'text-xs font-semibold text-ink-strong truncate';
+          title.textContent = mod.name;
+
+          const toggle = document.createElement('button');
+          toggle.type = 'button';
+          toggle.setAttribute('role', 'switch');
+          toggle.setAttribute('aria-checked', String(mod.enabled));
+          toggle.setAttribute('aria-label', mod.name);
+          toggle.className = `relative inline-flex h-5 w-9 shrink-0 items-center rounded-full transition-colors duration-150 cursor-pointer ${
+            mod.enabled ? 'bg-accent' : 'bg-line-strong'
+          }`;
+          toggle.innerHTML = `<span class="inline-block h-3.5 w-3.5 rounded-full bg-white transition-transform duration-150 ${
+            mod.enabled ? 'translate-x-4.5' : 'translate-x-0.5'
+          }"></span>`;
+
+          toggle.addEventListener('click', () => {
+            const activeCount = state.filter((m) => m.enabled).length;
+            if (mod.enabled && activeCount <= 1) {
+              if (warnEl) {
+                warnEl.textContent = cfg.minWarning;
+                warnEl.classList.remove('hidden');
+              }
+              return;
+            }
+            if (warnEl) warnEl.classList.add('hidden');
+            state[index].enabled = !state[index].enabled;
+            renderModularity();
+          });
+
+          top.appendChild(title);
+          top.appendChild(toggle);
+
+          const desc = document.createElement('p');
+          desc.className = 'mt-1.5 text-[11px] leading-snug text-ink-muted';
+          desc.textContent = mod.desc;
+
+          const actions = document.createElement('div');
+          actions.className = 'mt-2.5 flex items-center justify-between border-t border-line pt-2 text-[10px] font-mono text-ink-muted';
+
+          const orderNum = document.createElement('span');
+          orderNum.className = 'tabular-nums';
+          orderNum.textContent = String(index + 1).padStart(2, '0');
+
+          const arrows = document.createElement('div');
+          arrows.className = 'flex items-center gap-1';
+
+          const leftBtn = document.createElement('button');
+          leftBtn.type = 'button';
+          leftBtn.disabled = index === 0;
+          leftBtn.setAttribute('aria-label', cfg.moveUpAria);
+          leftBtn.className =
+            'inline-flex h-6 w-6 items-center justify-center rounded border border-line bg-canvas text-ink-secondary hover:text-ink-strong disabled:opacity-30 cursor-pointer';
+          leftBtn.textContent = '←';
+          leftBtn.addEventListener('click', () => {
+            if (index === 0) return;
+            [state[index - 1], state[index]] = [state[index], state[index - 1]];
+            renderModularity();
+          });
+
+          const rightBtn = document.createElement('button');
+          rightBtn.type = 'button';
+          rightBtn.disabled = index === state.length - 1;
+          rightBtn.setAttribute('aria-label', cfg.moveDownAria);
+          rightBtn.className =
+            'inline-flex h-6 w-6 items-center justify-center rounded border border-line bg-canvas text-ink-secondary hover:text-ink-strong disabled:opacity-30 cursor-pointer';
+          rightBtn.textContent = '→';
+          rightBtn.addEventListener('click', () => {
+            if (index === state.length - 1) return;
+            [state[index + 1], state[index]] = [state[index], state[index + 1]];
+            renderModularity();
+          });
+
+          arrows.appendChild(leftBtn);
+          arrows.appendChild(rightBtn);
+          actions.appendChild(orderNum);
+          actions.appendChild(arrows);
+
+          card.appendChild(top);
+          card.appendChild(desc);
+          card.appendChild(actions);
+          grid.appendChild(card);
+        });
+      }
+
+      resetBtn?.addEventListener('click', () => {
+        if (warnEl) warnEl.classList.add('hidden');
+        state = cfg.modules.map((m: { id: string; name: string; desc: string }) => ({
+          ...m,
+          enabled: true,
+        }));
+        renderModularity();
+      });
+
+      renderModularity();
     }
   }
 </script>

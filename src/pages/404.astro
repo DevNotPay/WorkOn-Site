@@ -9,10 +9,10 @@ const t = TRANSLATIONS.ru.notFound;
 <Layout lang="ru" pageKey="notFound" routePath="/" noindex={true}>
   <section class="py-24 sm:py-32">
     <div class="mx-auto max-w-xl px-4 text-center sm:px-6">
-      <div class="font-mono text-sm font-medium text-accent tabular-nums">
+      <div class="font-mono text-sm font-medium text-accent-soft tabular-nums">
         {t.code}
       </div>
-      <h1 class="mt-3 font-display text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
+      <h1 class="mt-3 font-display text-3xl font-extrabold tracking-tight text-ink-strong sm:text-4xl">
         {t.heading}
       </h1>
       <p class="mt-3 text-sm leading-relaxed text-ink-secondary sm:text-base">
@@ -22,13 +22,13 @@ const t = TRANSLATIONS.ru.notFound;
       <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
         <a
           href={`${base}/`}
-          class="inline-flex min-h-11 items-center justify-center rounded-md bg-accent px-5 py-2.5 text-sm font-semibold text-accent-ink transition-colors duration-150 hover:bg-accent-hover whitespace-nowrap"
+          class="inline-flex min-h-11 items-center justify-center rounded-xl bg-accent px-5 py-2.5 text-sm font-semibold text-accent-ink transition-colors duration-150 hover:bg-accent-hover whitespace-nowrap"
         >
           {t.backHome}
         </a>
         <a
           href={`${base}/en/`}
-          class="inline-flex min-h-11 items-center justify-center rounded-md border border-line bg-surface px-5 py-2.5 text-sm font-medium text-ink-secondary transition-colors duration-150 hover:border-line-strong hover:text-ink whitespace-nowrap"
+          class="inline-flex min-h-11 items-center justify-center rounded-xl border border-line bg-surface px-5 py-2.5 text-sm font-medium text-ink-secondary transition-colors duration-150 hover:border-line-strong hover:text-ink-strong whitespace-nowrap"
         >
           {t.backHomeEn}
         </a>
