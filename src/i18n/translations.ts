@@ -28,7 +28,7 @@ export const TRANSLATIONS = {
     seo: {
       homeTitle: 'WorkOn — Локальная альтернатива Jira, трекер времени, CRM и счета для ПК',
       homeDesc:
-        'Бесплатная offline-first программа на Tauri для Windows, macOS и Linux: Канбан, Гант, Scrum-спринты, учёт времени, Wiki, CRM и мультивалютные счета с экспортом в Excel.',
+        'Бесплатная offline-first программа на Tauri 2.0 (~15 МБ) для Windows, macOS и Linux: Канбан, Фокус-часы, Гант, Scrum-спринты, Wiki, CRM и мультивалютные счета с экспортом в Excel.',
       changelogTitle: 'История версий — WorkOn',
       changelogDesc:
         'Хронология релизов, новых модулей и исправлений в локальной десктопной платформе WorkOn для Windows, macOS и Linux.',
@@ -38,19 +38,24 @@ export const TRANSLATIONS = {
       notFoundTitle: 'Страница не найдена — WorkOn',
     },
     hero: {
-      metaTauri: 'Tauri Desktop',
+      metaTauri: 'Tauri 2.0 (~15 МБ)',
       metaOffline: '100% Offline-First',
       metaFree: 'Бесплатно · Без подписок',
       headline:
         'Альтернатива Jira, трекер времени, CRM и счета — в одной локальной программе для ПК',
       subtitle:
-        '10 настраиваемых модулей в одном быстром окне на Windows, macOS и Linux. Все данные хранятся на вашем диске — без облачных аккаунтов, слежки за экраном, телеметрии и ежемесячных тарифов.',
+        '10 настраиваемых модулей в одном быстром окне на Windows, macOS и Linux. Все данные хранятся локально на вашем диске — без облачных аккаунтов, слежки за экраном, телеметрии и ежемесячных тарифов.',
       primaryCtaDefault: 'Скачать для Windows',
       primaryCtaWindows: 'Скачать для Windows',
       primaryCtaMac: 'Скачать для macOS',
       primaryCtaLinux: 'Скачать для Linux',
       secondaryCta: 'Посмотреть возможности',
-      trustNote: 'Windows 10/11 · macOS 12+ · Linux AppImage · Темы Obsidian Dark и Light · Масштаб 70%–150%',
+      trustNote:
+        'Windows 10/11 · macOS 12+ · Linux AppImage · Темы Obsidian Dark и Light · Масштаб 70%–150%',
+      openFullscreen: 'Открыть в полном размере',
+      closeLightbox: 'Закрыть просмотр',
+      prevScreen: 'Предыдущий экран',
+      nextScreen: 'Следующий экран',
     },
     replaces: {
       heading: 'Заменяет 5+ облачных сервисов одним локальным приложением',
@@ -63,75 +68,83 @@ export const TRANSLATIONS = {
         {
           category: 'Таск-трекер и планирование',
           instead: 'Jira / Linear / Trello',
-          workon: 'Ключи PROJ-1, Канбан с WIP-лимитами, таблица с Bulk Actions, Гант с зависимостями, Scrum-спринты и Burndown',
+          workon:
+            'Ключи WRK-1, Канбан с WIP-лимитами, таблица с Bulk Actions, Гант с SVG-зависимостями, Scrum-спринты и Burndown',
         },
         {
           category: 'Учёт времени и фокус',
           instead: 'Toggl / Clockify',
-          workon: 'Живой таймер, Фокус-часы (Pomodoro / FlowTime), умный Idle Detection, почасовой таймлайн 00:00–24:00',
+          workon:
+            'Живой таймер в шапке, Фокус-часы (Pomodoro / TrackTime / FlowTime), умный Idle Detection, почасовой таймлайн 00:00–24:00',
         },
         {
           category: 'База знаний проектов',
           instead: 'Notion / Confluence',
-          workon: 'Встроенный Markdown-редактор с GFM-таблицами, предпросмотром и иерархией папок по проектам',
+          workon:
+            'Встроенный Markdown-редактор с GFM-таблицами, переключением «Редактор / Просмотр» и иерархией папок по проектам',
         },
         {
           category: 'Клиенты и сделки',
           instead: 'Pipedrive / amoCRM',
-          workon: 'CRM с воронкой лидов, контактами (включая Telegram), балансами и привязкой проектов в изолированных воркспейсах',
+          workon:
+            'CRM с воронкой из 5 этапов, суммой воронки в валютах, Telegram-контактами и привязкой проектов в изолированных воркспейсах',
         },
         {
           category: 'Табели и выставление счетов',
           instead: 'Excel + сервисы инвойсов',
-          workon: 'Мультивалютный биллинг (7 валют), защита от двойного счёта, «Бумажный вид» A4/PDF и настоящий экспорт в Excel (.xlsx)',
+          workon:
+            'Мультивалютный биллинг (7 валют), защита от двойного счёта, «Бумажный вид» A4/PDF и настоящий экспорт в Excel (.xlsx)',
         },
       ],
     },
     showcase: {
-      heading: 'Все 10 модулей — под реальный рабочий процесс',
+      heading: 'Все 10 модулей — на реальных экранах программы',
       subheading:
-        'Переключайте сценарии ниже, чтобы посмотреть, как устроены ключевые разделы программы изнутри.',
+        'Переключайте разделы ниже, чтобы детально изучить возможности и открыть любой скриншот на весь экран.',
+      zoomHint: 'Нажмите на скриншот для просмотра в полном размере',
       tabs: [
         {
           id: 'tasks',
           label: 'Канбан, Список и Спринты',
           modulesCount: 'Модули 03 · 04 · 06',
+          screenshots: ['kanban', 'sprints'] as const,
           title: 'Управление задачами уровня Jira без тяжеловесности',
           summary:
-            'Ключи задач (WRK-12), типы (Задача / Баг / Фича / Эпик), Story Points, подзадачи, комментарии, зависимости и быстрый запуск таймера прямо с карточки.',
+            'Ключи задач (WRK-2, TP-2, FT-3), типы (Задача / Баг / Фича / Эпик), Story Points, подзадачи с прогресс-барами, комментарии, зависимости и запуск таймера прямо с карточки.',
           blocks: [
             {
               name: 'Канбан-доска',
               points: [
-                'Перетаскивание карточек (включая захват за заголовок) и настройка своих колонок, цветов и порядка',
-                'WIP-лимиты на колонки и отметка финального статуса «Готово»',
-                'Теги в 1 клик из истории воркспейса, флаг блокировки, дедлайн, фикс-цена или накопленное время',
+                'Плавное перетаскивание карточек между колонками с настраиваемыми цветами, порядком, WIP-лимитами и финальной колонкой «Готово»',
+                'Фильтрация по ключу, типу, приоритету, тегам и просрочке прямо над доской',
+                'На карточке видны проект, приоритет, прогресс подзадач, потраченное время или фикс-цена (например 20 000 ₽) и кнопка запуска таймера',
               ],
             },
             {
-              name: 'Таблица и массовые действия',
+              name: 'Таблица и Scrum-спринты',
               points: [
-                'Компактная таблица с сортировкой и фильтрами по статусу, типу, приоритету, биллингу, спринту, тегу и просрочке',
-                'Панель Bulk Actions снизу: пакетная смена статуса, приоритета, типа, спринта, тегов или удаление',
-                'Завершение спринта с автопереносом незавершённых задач + архив и Burndown-график',
+                'Компактная таблица задач с сортировкой и нижней панелью Bulk Actions для пакетных правок статуса, приоритета, спринта и тегов',
+                'Интерактивный Burndown-график с переключением осей (Часы / Story Points / Задачи) и вертикальной отметкой «Сегодня»',
+                'Мастер завершения спринта с переносом незавершённых задач в бэклог или следующий спринт + архив',
               ],
             },
           ],
         },
         {
           id: 'time',
-          label: 'Таймер, Фокус и Таймлайн',
+          label: 'Фокус-часы, Таймер и Таймлайн',
           modulesCount: 'Модули 01 · 02',
+          screenshots: ['time'] as const,
           title: 'Точный учёт времени без слежки и искусственных лимитов',
           summary:
-            'Запускайте таймер из шапки или карточки задачи, работайте интервалами в Фокус-часах и проверяйте день на почасовой сетке.',
+            'Живой таймер всегда под рукой в верхней панели («Продолжить: задача»), а в модуле «Учёт времени» доступны Фокус-часы с интерактивным циферблатом и почасовой таймлайн.',
           blocks: [
             {
-              name: 'Учёт времени и Фокус-часы',
+              name: 'Фокус-часы и Idle Detection',
               points: [
-                'Встроенные режимы Pomodoro, TrackTime и FlowTime с визуальным циферблатом — перерывы логируются отдельно и не попадают в оплачиваемые часы',
-                'Умная детекция простоя (Idle Detection): при возвращении к ПК можно оставить время, вычесть или вынести в «Обед / Созвон»',
-                'Ручной ввод без ограничений (хоть 1 ч, хоть 120 ч за несколько недель) с быстрыми пресетами 1ч / 4ч / 8ч / 24ч / 40ч / 80ч',
+                'Режимы TrackTime, FlowTime и Pomodoro: цель задаётся перетягиванием стрелки прямо по циферблату, перерывы логируются отдельно и не попадают в оплачиваемые часы',
+                'Умная детекция простоя (Idle Detection): при возвращении к ПК предлагает оставить время, вычесть или вынести в «Обед / Созвон»',
+                'Ручной ввод времени без лимитов (хоть 1 ч, хоть 120 ч за недели) с пресетами 1ч / 4ч / 8ч / 24ч / 40ч / 80ч',
               ],
             },
             {
@@ -139,7 +152,7 @@ export const TRANSLATIONS = {
               points: [
                 'Интерактивная почасовая сетка в режимах «День» и «Неделя» в духе Google Calendar',
                 'Умная раскладка пересекающихся блоков активности и красная линия текущего времени',
-                'Создание и правка записей одним кликом по нужному временному слоту',
+                'Создание и редактирование записей кликом прямо по временному слоту',
               ],
             },
           ],
@@ -148,22 +161,23 @@ export const TRANSLATIONS = {
           id: 'gantt',
           label: 'Диаграмма Ганта',
           modulesCount: 'Модуль 05',
+          screenshots: ['gantt'] as const,
           title: 'Визуальное планирование сроков и зависимостей',
           summary:
-            'Синхронизированная сетка задач и календарной шкалы позволяет сразу видеть узкие места и двигать сроки мышью.',
+            'Синхронизированная сетка задач и календарной шкалы по дням и месяцам с наглядными связями между задачами и защитой от циклических зависимостей.',
           blocks: [
             {
               name: 'Интерактивная шкала сроков',
               points: [
-                'Три масштаба отображения календаря: «Компактно», «Стандарт» и «Подробно»',
-                'Сдвиг сроков перетаскиванием всей полосы задачи и точная подгонка длительности за левый или правый край',
+                'Три масштаба отображения: «Компактно», «Стандарт» и «Подробно», кнопка мгновенного перехода к сегодняшнему дню',
+                'Тяните полосу за центр для переноса сроков или за левый/правый край для изменения длительности',
               ],
             },
             {
-              name: 'Прогресс и связи',
+              name: 'Прогресс и SVG-связи',
               points: [
-                'Отображение фактического прогресса выполнения прямо внутри полосы задачи',
-                'Наглядные SVG-стрелки зависимостей между связанными задачами проекта',
+                'Цветовая кодировка полос по проектам (Разработка WorkOn, Клиентский портал, FinTrack, АвтоСпец) и прогресс внутри полос',
+                'Чёткие пунктирные SVG-стрелки зависимостей между связанными задачами и красная линия «Сегодня»',
               ],
             },
           ],
@@ -172,24 +186,25 @@ export const TRANSLATIONS = {
           id: 'finance',
           label: 'Финансы, Счета и Excel',
           modulesCount: 'Модули 08 · 09',
-          title: 'Деньги напрямую привязаны к реальным часам и задачам',
+          screenshots: ['finance'] as const,
+          title: 'Деньги напрямую привязаны к реальным часам и фикс-задачам',
           summary:
-            'Выставляйте счета из невыставленных часов и фикс-задач в 7 валютах, не рискуя выставить одну работу дважды.',
+            'На одном экране видны суммы к выставлению, выставленные счета и оплаты клиентов сразу в нескольких валютах — без риска выставить одну работу дважды.',
           blocks: [
             {
               name: 'Мультивалютный биллинг и счета',
               points: [
-                '7 валют: RUB (₽), USD ($), EUR (€), KZT (₸), GBP (£), BYN (Br), USDT (₮) + почасовые ставки и фикс-цена на задачи',
-                'Учёт выставленных и невыставленных часов, статусы счёта (Черновик → Отправлен → Оплачен / Отменён)',
-                'Пресеты реквизитов (ИП, Самозанятый НПД, ООО/Студия, SWIFT/IBAN) и предпросмотр с переключателем «Бумажный вид» в A4/PDF',
+                'Фильтрация и учёт в 7 валютах: RUB (₽), USD ($), EUR (€), KZT (₸), GBP (£), BYN (Br), USDT (₮)',
+                'Индивидуальные часовые ставки по проектам (например 3 000 ₽/ч, 50 $/ч) плюс отдельный блок задач с фиксированной стоимостью и кнопкой «Выставить счёт»',
+                'Пресеты реквизитов (ИП, Самозанятый НПД, ООО, SWIFT/IBAN), статусы счёта и переключатель «Бумажный вид» для чистой печати A4/PDF',
               ],
             },
             {
               name: 'Отчёты и настоящий Excel (.xlsx)',
               points: [
                 'Чистые табели за сегодня / 7 дней / 30 дней / всё время — перерывы и простой исключаются автоматически',
-                'Экспорт в .xlsx с двумя оформленными листами («Табель времени» + «Сводка по проектам»), экспорт отдельного счёта или реестра',
-                'Выгрузка в CSV и изолированный режим печати в PDF без лишних элементов интерфейса',
+                'Экспорт в настоящий Excel (.xlsx) с двумя оформленными листами («Табель времени» + «Сводка по проектам»), экспорт отдельного счёта или реестра',
+                'Выгрузка в CSV и изолированный режим печати в PDF',
               ],
             },
           ],
@@ -198,23 +213,24 @@ export const TRANSLATIONS = {
           id: 'crm',
           label: 'CRM, Воркспейсы и Wiki',
           modulesCount: 'Модули 07 · 10',
-          title: 'Клиенты, сделки и документация проектов рядом с задачами',
+          screenshots: ['crm', 'docs'] as const,
+          title: 'Воронка клиентов, изолированные воркспейсы и база знаний',
           summary:
-            'Разделяйте личные проекты, фриланс и основную работу по изолированным пространствам и держите ТЗ прямо в программе.',
+            'Ведите лидов и постоянных клиентов в удобной воронке с Telegram-контактами и храните ТЗ проектов во встроенном Markdown-редакторе.',
           blocks: [
             {
               name: 'CRM и рабочие пространства',
               points: [
-                'База клиентов и воронка лидов, контакты (включая Telegram), заметки, баланс и история расчётов',
-                'Привязка и отвязка новых и существующих проектов к клиентам в пару кликов',
-                'Несколько изолированных воркспейсов («Фриланс», «Основная работа», «Личное») с мгновенным переключением',
+                'Воронка из 5 этапов («Новый лид» → «Оценка и ТЗ» → «В работе» → «Постоянный клиент» → «Завершен») и режим «Справочник»',
+                'Мультивалютный подсчёт суммы воронки и каждого этапа, кликабельные Telegram-хендлы, телефоны, балансы и привязанные проекты',
+                'Переключение изолированных воркспейсов в левом сайдбаре и кнопки «Экспорт / Импорт» резервной копии всегда под рукой',
               ],
             },
             {
-              name: 'Документы и Вики (Docs)',
+              name: 'База знаний / Документы',
               points: [
-                'Встроенный Markdown-редактор с поддержкой GFM-таблиц, списков и режима предпросмотра',
-                'Иерархия папок по проектам для хранения технических заданий, заметок созвонов и ссылок',
+                'Иерархия папок по проектам (Архитектура и ТЗ, Регламенты, Клиентские требования) и быстрый поиск по документам',
+                'Встроенный Markdown-редактор с GFM-таблицами, чек-листами, панелью форматирования и переключением «Редактор / Просмотр»',
               ],
             },
           ],
@@ -224,54 +240,54 @@ export const TRANSLATIONS = {
     modularity: {
       heading: 'Модульность под ваш рабочий процесс',
       subheading:
-        'Не нужен Scrum или CRM? Выключите лишние модули тумблером и расставьте вкладки в удобном порядке. Попробуйте настроить панель ниже:',
+        'Не нужен Scrum или CRM? Выключите лишние модули тумблером и расставьте иконки в верхней панели в нужном порядке. Попробуйте настроить панель ниже:',
       previewLabel: 'Активная панель вкладок в шапке WorkOn',
       activeCountSuffix: 'из 10 модулей включено',
       resetBtn: 'Сбросить по умолчанию',
       minWarning: 'Оставьте включённым хотя бы один модуль',
-      moveUpAria: 'Переместить выше',
-      moveDownAria: 'Переместить ниже',
+      moveUpAria: 'Переместить левее',
+      moveDownAria: 'Переместить правее',
       modules: [
+        { id: 'time', name: 'Учёт времени', desc: 'Фокус-часы и Idle Detection' },
+        { id: 'timeline', name: 'Таймлайн', desc: 'Почасовая сетка 00:00–24:00' },
         { id: 'kanban', name: 'Канбан', desc: 'Колонки, WIP-лимиты, карточки' },
         { id: 'list', name: 'Список', desc: 'Таблица, фильтры, Bulk Actions' },
-        { id: 'timeline', name: 'Таймлайн', desc: 'Почасовая сетка 00:00–24:00' },
         { id: 'gantt', name: 'Гант', desc: 'Сроки и SVG-зависимости' },
-        { id: 'sprints', name: 'Спринты', desc: 'Бэклог, Scrum и Burndown' },
-        { id: 'time', name: 'Время', desc: 'Фокус-часы и Idle Detection' },
+        { id: 'sprints', name: 'Бэклог', desc: 'Scrum-спринты и Burndown' },
         { id: 'docs', name: 'Документы', desc: 'Markdown Wiki и GFM-таблицы' },
         { id: 'reports', name: 'Отчёты', desc: 'Табели, Excel (.xlsx) и CSV' },
         { id: 'finance', name: 'Финансы', desc: '7 валют, счета A4/PDF' },
-        { id: 'crm', name: 'CRM', desc: 'Клиенты, сделки и балансы' },
+        { id: 'crm', name: 'CRM', desc: 'Воронка, клиенты и балансы' },
       ],
     },
     privacy: {
-      heading: 'Приватность, нативная скорость и задел на будущее',
+      heading: 'Приватность, ядро Tauri 2.0 и задел на Self-Hosted',
       subheading:
-        'WorkOn создаётся для людей, которым нужен полный контроль над инструментами и рабочими данными.',
+        'WorkOn создаётся для специалистов, которым нужен полный контроль над инструментами и рабочими данными.',
       cards: [
         {
           index: '01',
-          title: '100% локально и приватно',
+          title: '100% локально на диске — без облаков и телеметрии',
           description:
-            'Никакой обязательной регистрации, привязки к зарубежным облакам, телеметрии и скрытых скриншотов экрана. Вся база лежит на вашем компьютере и в любой момент выгружается или восстанавливается целиком через JSON-бэкап.',
+            'Никакой обязательной регистрации, привязки к зарубежным облакам и скрытых скриншотов экрана. Данные хранятся локально (IndexedDB через слой StorageRepository), а полная резервная копия Snapshot v2 (JSON) выгружается и импортируется в один клик прямо из левого сайдбара.',
           metaLeft: 'Резервное копирование',
-          metaRight: 'Полный экспорт / импорт JSON',
+          metaRight: 'Snapshot v2 (JSON) · Экспорт / Импорт',
         },
         {
           index: '02',
-          title: 'Нативный движок Tauri',
+          title: 'Легковесное ядро Tauri 2.0',
           description:
-            'Малый вес дистрибутива, мгновенный запуск без тяжёлого Electron, безрамочное окно, масштабирование интерфейса 70%–150% и две полноценные темы: Obsidian Dark и Light.',
-          metric: '70%–150%',
-          metricCaption: 'Масштаб интерфейса · Tauri',
+            'Нативный Rust-мост без тяжёлого Electron: вес дистрибутива около 15 МБ, мгновенный запуск, безрамочное окно, масштаб 70%–150% и темы Obsidian Dark и Light.',
+          metric: '~15 МБ',
+          metricCaption: 'Бинарник Tauri 2.0 · масштаб 70%–150%',
         },
         {
           index: '03',
           title: 'Готовность к Self-Hosted версии для команд',
           description:
-            'Внутренняя архитектура WorkOn уже спроектирована так, чтобы в будущем развернуть собственную self-hosted серверную версию на инфраструктуре компании. Локальная десктопная версия при этом навсегда останется бесплатной.',
+            'Слой хранения StorageRepository и формат снимков Snapshot v2 (JSON) изначально спроектированы под будущую self-hosted серверную редакцию для студий и команд. Локальная десктопная версия при этом навсегда останется бесплатной.',
           metaLeft: 'Статус архитектуры',
-          metaRight: 'Local-first сейчас · Self-hosted в планах',
+          metaRight: 'Local-first сейчас · Self-hosted совместимо',
         },
       ],
     },
@@ -283,7 +299,7 @@ export const TRANSLATIONS = {
       allReleasesLink: 'Все релизы и архивы на GitHub',
       windows: {
         name: 'Windows',
-        meta: 'Windows 10, 11 · 64-bit (Tauri)',
+        meta: 'Windows 10, 11 · 64-bit (Tauri 2.0)',
         primaryBtn: 'Установщик (.exe)',
         secondaryBtn: 'Portable-версия (.zip)',
       },
@@ -301,7 +317,7 @@ export const TRANSLATIONS = {
     faq: {
       heading: 'Частые вопросы и установка',
       subheading:
-        'Коротко и по делу: офлайн-работа, перенос базы, валюты, экспорт и системные предупреждения при установке.',
+        'Коротко и по делу: офлайн-работа, перенос базы Snapshot v2, валюты, экспорт и системные предупреждения при установке.',
       items: [
         {
           q: 'Нужен ли интернет или аккаунт для работы в WorkOn?',
@@ -309,7 +325,7 @@ export const TRANSLATIONS = {
         },
         {
           q: 'Как сделать резервную копию и перенести базу на другой компьютер?',
-          a: 'В настройках WorkOn встроен полный экспорт и импорт резервной копии базы данных в формате JSON — включая воркспейсы, проекты, задачи, записи времени, документы, клиентов и счета. Достаточно сохранить JSON-файл и импортировать его на новом ПК.',
+          a: 'Внизу левой панели всегда доступны кнопки «Экспорт» и «Импорт». Они сохраняют и восстанавливают полный снимок Snapshot v2 (JSON) со всеми воркспейсами, проектами, задачами, записями времени, документами, клиентами и счетами.',
         },
         {
           q: 'Какие валюты и форматы экспорта поддерживаются?',
@@ -321,7 +337,7 @@ export const TRANSLATIONS = {
         },
         {
           q: 'Почему программа полностью бесплатная и на чём она зарабатывает?',
-          a: 'В WorkOn нет платных тарифов, урезанных функций и рекламы. Монетизация строится исключительно на добровольных донатах пользователей, которым программа помогает экономить время и деньги каждый день.',
+          a: 'В WorkOn нет платных тарифов, урезанных модулей и рекламы. Монетизация строится исключительно на добровольных донатах пользователей, которым программа помогает экономить время и деньги каждый день.',
         },
       ],
     },
@@ -395,7 +411,7 @@ export const TRANSLATIONS = {
     seo: {
       homeTitle: 'WorkOn — Local Jira Alternative, Time Tracker, CRM & Invoicing for Desktop',
       homeDesc:
-        'Free offline-first Tauri desktop app for Windows, macOS, and Linux: Kanban, Gantt, Scrum sprints, time tracking, Markdown Wiki, CRM, and multi-currency Excel invoicing.',
+        'Free offline-first Tauri 2.0 (~15 MB) desktop app for Windows, macOS, and Linux: Kanban, Focus Clock, Gantt, Scrum sprints, Markdown Wiki, CRM, and multi-currency Excel invoicing.',
       changelogTitle: 'Changelog — WorkOn',
       changelogDesc:
         'Release history, new modules, and fixes for the offline-first WorkOn desktop suite on Windows, macOS, and Linux.',
@@ -405,19 +421,24 @@ export const TRANSLATIONS = {
       notFoundTitle: 'Page Not Found — WorkOn',
     },
     hero: {
-      metaTauri: 'Tauri Desktop',
+      metaTauri: 'Tauri 2.0 (~15 MB)',
       metaOffline: '100% Offline-First',
       metaFree: 'Free · No Subscriptions',
       headline:
         'Jira-grade tasks, time tracker, CRM, and invoicing — in one local desktop app',
       subtitle:
-        '10 configurable modules inside one fast native window for Windows, macOS, and Linux. Everything stays on your local disk — no cloud accounts, screen surveillance, telemetry, or monthly fees.',
+        '10 configurable modules inside one fast native window for Windows, macOS, and Linux. Everything stays locally on your disk — no cloud accounts, screen surveillance, telemetry, or monthly fees.',
       primaryCtaDefault: 'Download for Windows',
       primaryCtaWindows: 'Download for Windows',
       primaryCtaMac: 'Download for macOS',
       primaryCtaLinux: 'Download for Linux',
       secondaryCta: 'Explore features',
-      trustNote: 'Windows 10/11 · macOS 12+ · Linux AppImage · Obsidian Dark & Light · 70%–150% UI Scale',
+      trustNote:
+        'Windows 10/11 · macOS 12+ · Linux AppImage · Obsidian Dark & Light · 70%–150% UI Scale',
+      openFullscreen: 'View full size',
+      closeLightbox: 'Close preview',
+      prevScreen: 'Previous screen',
+      nextScreen: 'Next screen',
     },
     replaces: {
       heading: 'Replaces 5+ cloud subscriptions with one local binary',
@@ -430,75 +451,83 @@ export const TRANSLATIONS = {
         {
           category: 'Task tracking & planning',
           instead: 'Jira / Linear / Trello',
-          workon: 'PROJ-1 keys, Kanban with WIP limits, table with Bulk Actions, Gantt with SVG dependencies, Scrum sprints & Burndown',
+          workon:
+            'WRK-1 keys, Kanban with WIP limits, table with Bulk Actions, Gantt with SVG dependencies, Scrum sprints & Burndown',
         },
         {
           category: 'Time tracking & focus',
           instead: 'Toggl / Clockify',
-          workon: 'Live timer, Focus Clock (Pomodoro / FlowTime), smart Idle Detection, hourly 00:00–24:00 Day/Week timeline',
+          workon:
+            'Live header timer, Focus Clock (Pomodoro / TrackTime / FlowTime), smart Idle Detection, hourly 00:00–24:00 timeline',
         },
         {
           category: 'Project documentation',
           instead: 'Notion / Confluence',
-          workon: 'Built-in Markdown editor with GFM tables, live preview, and project folder hierarchy',
+          workon:
+            'Built-in Markdown editor with GFM tables, Edit/Preview toggle, and project folder hierarchy',
         },
         {
           category: 'Clients & deals',
           instead: 'Pipedrive / HubSpot',
-          workon: 'CRM pipeline, Telegram & client contacts, balances, project linking across isolated Workspaces',
+          workon:
+            '5-stage CRM pipeline, multi-currency totals, Telegram handles, and project linking across isolated Workspaces',
         },
         {
           category: 'Timesheets & invoicing',
           instead: 'Excel + invoice tools',
-          workon: '7-currency billing, double-billing guard, Paper View A4/PDF print, and native multi-sheet Excel (.xlsx) export',
+          workon:
+            '7-currency billing, double-billing guard, Paper View A4/PDF print, and native multi-sheet Excel (.xlsx) export',
         },
       ],
     },
     showcase: {
-      heading: 'All 10 modules — engineered for real workflows',
+      heading: 'All 10 modules — real screens from the app',
       subheading:
-        'Switch between the core scenarios below to inspect what ships inside WorkOn out of the box.',
+        'Switch workflows below to explore the exact capabilities and inspect any screen at full resolution.',
+      zoomHint: 'Click any screenshot to inspect full resolution',
       tabs: [
         {
           id: 'tasks',
           label: 'Kanban, List & Sprints',
           modulesCount: 'Modules 03 · 04 · 06',
+          screenshots: ['kanban', 'sprints'] as const,
           title: 'Jira-level task control without enterprise bloat',
           summary:
-            'Structured issue keys (WRK-12), types (Task / Bug / Feature / Epic), Story Points, subtasks, comments, dependencies, and 1-click timer launch.',
+            'Structured issue keys (WRK-2, TP-2, FT-3), types (Task / Bug / Feature / Epic), Story Points, subtask progress bars, comments, dependencies, and 1-click timer launch.',
           blocks: [
             {
               name: 'Kanban Board',
               points: [
-                'Smooth drag-and-drop across customizable columns with custom names, colors, order, WIP limits, and Done state',
-                'Cards surface key, type, priority, tags, subtask progress, due date, fixed price or tracked hours, and instant Play button',
-                '1-click tags from workspace history, blocker flag, epic/sprint binding, and activity log',
+                'Smooth pointer drag-and-drop across customizable columns with custom colors, order, WIP limits, and Done column',
+                'Instant filters by key, type, priority, tags, and overdue state right above the board',
+                'Cards surface project, priority, subtask progress, tracked time or fixed price, and instant Play button',
               ],
             },
             {
               name: 'List View & Scrum Sprints',
               points: [
-                'Dense sortable table with filters by status, type, priority, billing model, sprint, tag, and overdue state',
-                'Bottom Bulk Actions bar to batch-update status, priority, type, sprint, tags, or delete tasks',
-                'Sprint completion wizard moving unfinished items automatically, sprint archive, and Burndown chart',
+                'Dense sortable table with bottom Bulk Actions bar to batch-update status, priority, sprint, and tags',
+                'Interactive Burndown chart switching between Hours, Story Points, and Tasks with a Today marker',
+                'Sprint completion wizard moving unfinished items to backlog or next sprint + sprint archive',
               ],
             },
           ],
         },
         {
           id: 'time',
-          label: 'Timer, Focus & Timeline',
+          label: 'Focus Clock, Timer & Timeline',
           modulesCount: 'Modules 01 · 02',
+          screenshots: ['time'] as const,
           title: 'Accurate time logs without surveillance or artificial caps',
           summary:
-            'Run timers from the app header or task card, pace deep work with Focus Clock, and inspect your day on an hourly grid.',
+            'Keep a live timer running from the app header, pace deep work with the interactive Focus Clock dial, and review your day on an hourly grid.',
           blocks: [
             {
-              name: 'Time Tracking & Focus Clock',
+              name: 'Focus Clock & Idle Detection',
               points: [
-                'Built-in Pomodoro, TrackTime, and FlowTime dial — breaks are logged separately and excluded from billable hours',
+                'TrackTime, FlowTime, and Pomodoro dial: drag the hand around the clock to set targets; breaks are logged separately and excluded from billable hours',
                 'Smart Idle Detection prompts you on return to keep, subtract, or split away time into a separate entry',
-                'Unlimited manual logging (1h to 120h+ across weeks) with date picker and quick 1h / 4h / 8h / 24h / 40h / 80h presets',
+                'Unlimited manual logging (1h to 120h+ across weeks) with quick 1h / 4h / 8h / 24h / 40h / 80h presets',
               ],
             },
             {
@@ -514,22 +543,23 @@ export const TRANSLATIONS = {
           id: 'gantt',
           label: 'Gantt Chart',
           modulesCount: 'Module 05',
+          screenshots: ['gantt'] as const,
           title: 'Visual scheduling with real progress and dependencies',
           summary:
-            'A synchronized task list and calendar scale lets you spot schedule collisions and adjust dates directly.',
+            'A synchronized task list and multi-month calendar grid with circular dependency protection lets you spot bottlenecks immediately.',
           blocks: [
             {
               name: 'Interactive Schedule Scale',
               points: [
-                'Three zoom levels: Compact, Standard, and Detailed',
-                'Drag task bars across dates or resize left and right edges to adjust duration',
+                'Three zoom levels: Compact, Standard, and Detailed, plus quick jump to Today',
+                'Drag task bars by center to reschedule or drag left/right edges to adjust duration',
               ],
             },
             {
               name: 'Progress & SVG Dependencies',
               points: [
-                'Displays actual completion progress right inside each timeline bar',
-                'Renders clear SVG dependency arrows connecting linked tasks',
+                'Color-coded project bars with live completion progress right inside each bar',
+                'Crisp dashed SVG dependency arrows linking tasks and a vertical Today marker',
               ],
             },
           ],
@@ -538,23 +568,24 @@ export const TRANSLATIONS = {
           id: 'finance',
           label: 'Finance, Invoices & Excel',
           modulesCount: 'Modules 08 · 09',
-          title: 'Billing tied directly to tracked work and fixed tasks',
+          screenshots: ['finance'] as const,
+          title: 'Billing tied directly to tracked work and fixed-price tasks',
           summary:
-            'Generate invoices straight from unbilled hours and fixed-price items across 7 currencies with built-in double-billing protection.',
+            'See unbilled totals, invoiced amounts, and paid balances across 7 currencies on one dashboard with built-in double-billing protection.',
           blocks: [
             {
               name: 'Multi-Currency Billing & Invoices',
               points: [
-                'Supports RUB (₽), USD ($), EUR (€), KZT (₸), GBP (£), BYN (Br), and USDT (₮) for hourly rates and fixed-price tasks',
-                'Tracks billed vs unbilled hours with invoice lifecycle (Draft → Sent → Paid / Canceled) and legal presets (Sole Prop, LLC, SWIFT/IBAN)',
-                'Dark-mode invoice preview with instant Paper View toggle for crisp white A4/PDF printing',
+                'Supports RUB (₽), USD ($), EUR (€), KZT (₸), GBP (£), BYN (Br), and USDT (₮) across hourly rates and fixed-price tasks',
+                'Per-project hourly rate management plus a dedicated Fixed-Price Tasks list with 1-click "Create Invoice"',
+                'Legal presets (Sole Prop, LLC, SWIFT/IBAN), invoice lifecycle statuses, and Paper View toggle for white A4/PDF printing',
               ],
             },
             {
               name: 'Reports & Native Excel (.xlsx)',
               points: [
                 'Clean work timesheets for Today / 7d / 30d / All Time — breaks and idle intervals excluded automatically',
-                'Real Excel (.xlsx) export with two formatted sheets (Timesheet + Project Summary), single-invoice export, or full ledger export',
+                'Native Excel (.xlsx) export with two formatted sheets (Timesheet + Project Summary), single-invoice export, or full ledger export',
                 'CSV export and isolated print/PDF layout',
               ],
             },
@@ -564,23 +595,24 @@ export const TRANSLATIONS = {
           id: 'crm',
           label: 'CRM, Workspaces & Wiki',
           modulesCount: 'Modules 07 · 10',
-          title: 'Clients, deals, and project specs next to your tasks',
+          screenshots: ['crm', 'docs'] as const,
+          title: 'Client pipeline, isolated workspaces, and project wiki',
           summary:
-            'Separate Freelance, Day Job, and Personal work into isolated Workspaces while keeping Markdown specs inside each project.',
+            'Track leads and retainers in a 5-stage pipeline with Telegram contacts while keeping Markdown specs organized right beside your tasks.',
           blocks: [
             {
               name: 'CRM & Isolated Workspaces',
               points: [
-                'Client directory and lead pipeline with Telegram contacts, notes, balances, and history',
-                'Link or unlink new and existing projects to clients at any time',
-                'Multiple isolated Workspaces with instant switching from the left sidebar',
+                '5-stage deal pipeline (New Lead → Scoping → Active → Loyal Client → Archived) plus Directory table view',
+                'Multi-currency pipeline totals, clickable Telegram handles, phone numbers, client balances, and linked projects',
+                'Instant Workspace switcher plus 1-click Export / Import backup buttons in the left sidebar',
               ],
             },
             {
               name: 'Docs & Project Wiki',
               points: [
-                'Built-in Markdown editor with GFM tables, checklists, and live preview',
-                'Folder hierarchy organized by project for specs, meeting notes, and references',
+                'Folder hierarchy by project with instant document search',
+                'Built-in Markdown editor with GFM tables, checklists, formatting toolbar, and Edit/Preview switcher',
               ],
             },
           ],
@@ -590,7 +622,7 @@ export const TRANSLATIONS = {
     modularity: {
       heading: 'Modular down to every single tab',
       subheading:
-        'Do not need Scrum or CRM? Toggle unused modules off and reorder tabs to match your workflow. Try configuring the bar below:',
+        'Do not need Scrum or CRM? Toggle unused modules off and reorder tabs in the top bar to match your workflow. Try configuring it below:',
       previewLabel: 'Active tab bar inside WorkOn header',
       activeCountSuffix: 'of 10 modules enabled',
       resetBtn: 'Reset defaults',
@@ -598,46 +630,46 @@ export const TRANSLATIONS = {
       moveUpAria: 'Move earlier',
       moveDownAria: 'Move later',
       modules: [
+        { id: 'time', name: 'Time', desc: 'Focus Clock & Idle Detection' },
+        { id: 'timeline', name: 'Timeline', desc: 'Hourly 00:00–24:00 grid' },
         { id: 'kanban', name: 'Kanban', desc: 'Columns, WIP limits, cards' },
         { id: 'list', name: 'List', desc: 'Table, filters, Bulk Actions' },
-        { id: 'timeline', name: 'Timeline', desc: 'Hourly 00:00–24:00 grid' },
         { id: 'gantt', name: 'Gantt', desc: 'Dates & SVG dependencies' },
-        { id: 'sprints', name: 'Sprints', desc: 'Backlog, Scrum & Burndown' },
-        { id: 'time', name: 'Time', desc: 'Focus Clock & Idle Detection' },
+        { id: 'sprints', name: 'Backlog', desc: 'Scrum sprints & Burndown' },
         { id: 'docs', name: 'Docs', desc: 'Markdown Wiki & GFM tables' },
         { id: 'reports', name: 'Reports', desc: 'Timesheets, Excel & CSV' },
         { id: 'finance', name: 'Finance', desc: '7 currencies, A4/PDF invoices' },
-        { id: 'crm', name: 'CRM', desc: 'Clients, deals & balances' },
+        { id: 'crm', name: 'CRM', desc: 'Pipeline, clients & balances' },
       ],
     },
     privacy: {
-      heading: 'Privacy, native Tauri speed, and a self-hosted path ahead',
+      heading: 'Privacy, Tauri 2.0 speed, and a self-hosted path ahead',
       subheading:
         'Built for professionals who expect full ownership of both their tooling and their business records.',
       cards: [
         {
           index: '01',
-          title: '100% local & private',
+          title: '100% local on disk — zero cloud or telemetry',
           description:
-            'No mandatory accounts, no cloud lock-in, zero telemetry, and zero hidden screen captures. Every record lives on your machine and can be exported or restored anytime via full JSON backup.',
+            'No mandatory accounts, no cloud lock-in, and zero hidden screen captures. Data stays locally (IndexedDB via StorageRepository), and full Snapshot v2 (JSON) backups export or restore in one click from the sidebar.',
           metaLeft: 'Backup format',
-          metaRight: 'Full JSON export / import',
+          metaRight: 'Snapshot v2 (JSON) · Export / Import',
         },
         {
           index: '02',
-          title: 'Native Tauri engine',
+          title: 'Lightweight Tauri 2.0 core',
           description:
-            'Small binary footprint, instant launch without Electron overhead, frameless desktop window, 70%–150% interface scaling, and both Obsidian Dark and Light themes.',
-          metric: '70%–150%',
-          metricCaption: 'UI scale range · Tauri',
+            'Native Rust bridge without heavy Electron bloat: ~15 MB desktop binary, instant launch, frameless window, 70%–150% UI scale, and both Obsidian Dark and Light themes.',
+          metric: '~15 MB',
+          metricCaption: 'Tauri 2.0 binary · 70%–150% UI scale',
         },
         {
           index: '03',
           title: 'Architected for future Self-Hosted teams',
           description:
-            'Under the hood, WorkOn is already structured to support an upcoming self-hosted server edition for teams and agencies — while the local desktop app stays free forever.',
+            'The StorageRepository layer and Snapshot v2 (JSON) format are already designed for an upcoming self-hosted team server edition — while the local desktop app stays free forever.',
           metaLeft: 'Roadmap posture',
-          metaRight: 'Offline-first today · Self-hosted ready',
+          metaRight: 'Local-first today · Self-hosted compatible',
         },
       ],
     },
@@ -649,7 +681,7 @@ export const TRANSLATIONS = {
       allReleasesLink: 'Browse all releases on GitHub',
       windows: {
         name: 'Windows',
-        meta: 'Windows 10, 11 · 64-bit (Tauri)',
+        meta: 'Windows 10, 11 · 64-bit (Tauri 2.0)',
         primaryBtn: 'Installer (.exe)',
         secondaryBtn: 'Portable (.zip)',
       },
@@ -667,7 +699,7 @@ export const TRANSLATIONS = {
     faq: {
       heading: 'FAQ & Installation Notes',
       subheading:
-        'Straight answers on offline usage, backups, currencies, exports, and unsigned installer prompts.',
+        'Straight answers on offline usage, Snapshot v2 backups, currencies, exports, and unsigned installer prompts.',
       items: [
         {
           q: 'Does WorkOn require an account or internet connection?',
@@ -675,7 +707,7 @@ export const TRANSLATIONS = {
         },
         {
           q: 'How do I back up or move my database to another computer?',
-          a: 'WorkOn includes full JSON backup export and import covering all workspaces, projects, tasks, time entries, docs, clients, and invoices. Export one JSON file and import it on your new machine.',
+          a: 'Use the Export and Import buttons at the bottom of the left sidebar anytime. WorkOn saves and restores a complete Snapshot v2 (JSON) archive containing all workspaces, projects, tasks, time entries, docs, clients, and invoices.',
         },
         {
           q: 'Which currencies and export formats are supported?',

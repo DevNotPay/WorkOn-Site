@@ -1,0 +1,334 @@
+---
+import { APP_SCREENSHOTS } from '../data/siteConfig';
+import { TRANSLATIONS, type Lang } from '../i18n/translations';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = TRANSLATIONS[lang].hero;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const withBase = (p: string) => `${base}${p}`;
+
+const slides = APP_SCREENSHOTS.map((shot) => ({
+  id: shot.id,
+  src: withBase(shot.src),
+  label: shot.label[lang],
+  caption: shot.caption[lang],
+  alt: shot.alt[lang],
+}));
+---
+
+<div
+  id="workon-gallery-root"
+  data-slides={JSON.stringify(slides)}
+  class="w-full"
+>
+  <!-- Interactive Module Screen Selector -->
+  <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+    <div
+      role="tablist"
+      aria-label="WorkOn real interface screens"
+      class="flex flex-wrap items-center gap-1 rounded-xl border border-line bg-surface p-1"
+    >
+      {slides.map((slide, idx) => (
+        <button
+          type="button"
+          role="tab"
+          data-hero-slide-tab={idx}
+          aria-selected={idx === 0 ? 'true' : 'false'}
+          class={`hero-slide-tab min-h-9 rounded-lg px-3 py-1.5 text-xs font-medium transition-colors duration-150 whitespace-nowrap shrink-0 cursor-pointer ${
+            idx === 0
+              ? 'bg-accent/20 text-accent-soft border border-accent/40'
+              : 'border border-transparent text-ink-secondary hover:bg-surface-elevated hover:text-ink-strong'
+          }`}
+        >
+          {slide.label}
+        </button>
+      ))}
+    </div>
+
+    <div class="flex items-center gap-2 shrink-0">
+      <button
+        type="button"
+        id="hero-slide-prev"
+        aria-label={t.prevScreen}
+        class="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-line bg-surface text-ink-secondary transition-colors duration-150 hover:border-line-strong hover:text-ink-strong cursor-pointer"
+      >
+        ←
+      </button>
+      <span
+        id="hero-slide-counter"
+        class="font-mono text-xs text-ink-muted tabular-nums px-1"
+      >
+        1 / {slides.length}
+      </span>
+      <button
+        type="button"
+        id="hero-slide-next"
+        aria-label={t.nextScreen}
+        class="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-line bg-surface text-ink-secondary transition-colors duration-150 hover:border-line-strong hover:text-ink-strong cursor-pointer"
+      >
+        →
+      </button>
+    </div>
+  </div>
+
+  <!-- Real Desktop Screenshot Frame -->
+  <div class="overflow-hidden rounded-2xl border border-line-strong bg-canvas-alt shadow-[0_32px_90px_-30px_rgba(0,0,0,0.9)]">
+    <button
+      type="button"
+      id="hero-slide-zoom-trigger"
+      aria-label={t.openFullscreen}
+      class="group relative block w-full text-left cursor-zoom-in focus-visible:outline-none"
+    >
+      <div class="relative w-full bg-[#121214]">
+        {slides.map((slide, idx) => (
+          <img
+            src={slide.src}
+            alt={slide.alt}
+            referrerpolicy="no-referrer"
+            loading={idx === 0 ? 'eager' : 'lazy'}
+            decoding="async"
+            data-hero-slide-img={idx}
+            class={`w-full h-auto block transition-opacity duration-200 ${
+              idx === 0 ? 'block' : 'hidden'
+            }`}
+          />
+        ))}
+      </div>
+    </button>
+
+    <!-- Caption & Fullscreen Footer Bar -->
+    <div class="flex flex-col justify-between gap-3 border-t border-line bg-surface px-4 py-3 sm:flex-row sm:items-center sm:px-5">
+      <p id="hero-slide-caption" class="text-xs leading-relaxed text-ink-secondary sm:text-sm">
+        {slides[0].caption}
+      </p>
+
+      <button
+        type="button"
+        id="hero-slide-open-btn"
+        class="inline-flex min-h-9 items-center gap-1.5 self-start rounded-lg border border-line-strong bg-surface-elevated px-3 py-1.5 text-xs font-medium text-ink transition-colors duration-150 hover:border-accent hover:text-accent-soft whitespace-nowrap shrink-0 sm:self-auto cursor-pointer"
+      >
+        <svg
+          class="h-3.5 w-3.5 shrink-0"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <polyline points="15 3 21 3 21 9" />
+          <polyline points="9 21 3 21 3 15" />
+          <line x1="21" y1="3" x2="14" y2="10" />
+          <line x1="3" y1="21" x2="10" y2="14" />
+        </svg>
+        <span>{t.openFullscreen}</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Shared Fullscreen Screenshot Lightbox -->
+<div
+  id="workon-lightbox"
+  role="dialog"
+  aria-modal="true"
+  aria-label={t.openFullscreen}
+  class="hidden fixed inset-0 z-[100] flex flex-col bg-black/92 backdrop-blur-sm p-4 sm:p-6"
+>
+  <div class="mx-auto flex w-full max-w-[1600px] items-center justify-between gap-4 pb-3">
+    <div class="flex items-center gap-3 min-w-0">
+      <span id="lightbox-label" class="font-display text-sm font-semibold text-white whitespace-nowrap"></span>
+      <span id="lightbox-counter" class="font-mono text-xs text-ink-muted tabular-nums whitespace-nowrap"></span>
+    </div>
+
+    <div class="flex items-center gap-2 shrink-0">
+      <button
+        type="button"
+        id="lightbox-prev"
+        aria-label={t.prevScreen}
+        class="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-line-strong bg-surface text-ink hover:text-white cursor-pointer"
+      >
+        ←
+      </button>
+      <button
+        type="button"
+        id="lightbox-next"
+        aria-label={t.nextScreen}
+        class="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-line-strong bg-surface text-ink hover:text-white cursor-pointer"
+      >
+        →
+      </button>
+      <button
+        type="button"
+        id="lightbox-close"
+        aria-label={t.closeLightbox}
+        class="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-line-strong bg-surface text-ink hover:border-accent hover:text-white cursor-pointer"
+      >
+        ×
+      </button>
+    </div>
+  </div>
+
+  <div
+    id="lightbox-backdrop"
+    class="flex flex-1 items-center justify-center overflow-auto"
+  >
+    <img
+      id="lightbox-img"
+      src={slides[0].src}
+      alt={slides[0].alt}
+      referrerpolicy="no-referrer"
+      class="max-h-[80vh] max-w-full rounded-xl border border-line-strong object-contain shadow-2xl"
+    />
+  </div>
+
+  <p
+    id="lightbox-caption"
+    class="mx-auto mt-3 max-w-4xl text-center text-xs leading-relaxed text-ink-secondary sm:text-sm"
+  ></p>
+</div>
+
+<script>
+  interface SlideItem {
+    id: string;
+    src: string;
+    label: string;
+    caption: string;
+    alt: string;
+  }
+
+  const galleryRoot = document.getElementById('workon-gallery-root');
+  const lightbox = document.getElementById('workon-lightbox');
+
+  if (galleryRoot) {
+    const raw = galleryRoot.getAttribute('data-slides');
+    const slides: SlideItem[] = raw ? JSON.parse(raw) : [];
+
+    if (slides.length > 0) {
+      let currentIndex = 0;
+
+      const tabBtns = Array.from(
+        galleryRoot.querySelectorAll<HTMLButtonElement>('[data-hero-slide-tab]')
+      );
+      const slideImgs = Array.from(
+        galleryRoot.querySelectorAll<HTMLImageElement>('[data-hero-slide-img]')
+      );
+      const captionEl = document.getElementById('hero-slide-caption');
+      const counterEl = document.getElementById('hero-slide-counter');
+      const prevBtn = document.getElementById('hero-slide-prev');
+      const nextBtn = document.getElementById('hero-slide-next');
+      const zoomTrigger = document.getElementById('hero-slide-zoom-trigger');
+      const openBtn = document.getElementById('hero-slide-open-btn');
+
+      const lbImg = document.getElementById('lightbox-img') as HTMLImageElement | null;
+      const lbLabel = document.getElementById('lightbox-label');
+      const lbCounter = document.getElementById('lightbox-counter');
+      const lbCaption = document.getElementById('lightbox-caption');
+      const lbPrev = document.getElementById('lightbox-prev');
+      const lbNext = document.getElementById('lightbox-next');
+      const lbClose = document.getElementById('lightbox-close');
+      const lbBackdrop = document.getElementById('lightbox-backdrop');
+
+      function setHeroSlide(index: number) {
+        currentIndex = (index + slides.length) % slides.length;
+        const active = slides[currentIndex];
+
+        tabBtns.forEach((btn, i) => {
+          const isSelected = i === currentIndex;
+          btn.setAttribute('aria-selected', String(isSelected));
+          btn.classList.toggle('bg-accent/20', isSelected);
+          btn.classList.toggle('text-accent-soft', isSelected);
+          btn.classList.toggle('border-accent/40', isSelected);
+          btn.classList.toggle('border-transparent', !isSelected);
+          btn.classList.toggle('text-ink-secondary', !isSelected);
+        });
+
+        slideImgs.forEach((img, i) => {
+          img.classList.toggle('hidden', i !== currentIndex);
+          img.classList.toggle('block', i === currentIndex);
+        });
+
+        if (captionEl) captionEl.textContent = active.caption;
+        if (counterEl) counterEl.textContent = `${currentIndex + 1} / ${slides.length}`;
+      }
+
+      let lightboxIndex = 0;
+
+      function syncLightbox() {
+        const item = slides[lightboxIndex];
+        if (!item) return;
+        if (lbImg) {
+          lbImg.src = item.src;
+          lbImg.alt = item.alt;
+        }
+        if (lbLabel) lbLabel.textContent = item.label;
+        if (lbCounter) lbCounter.textContent = `${lightboxIndex + 1} / ${slides.length}`;
+        if (lbCaption) lbCaption.textContent = item.caption;
+      }
+
+      function openLightbox(index: number) {
+        if (!lightbox) return;
+        lightboxIndex = (index + slides.length) % slides.length;
+        syncLightbox();
+        lightbox.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+        lbClose?.focus();
+      }
+
+      function closeLightbox() {
+        if (!lightbox) return;
+        lightbox.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+
+      tabBtns.forEach((btn, i) => {
+        btn.addEventListener('click', () => setHeroSlide(i));
+      });
+
+      prevBtn?.addEventListener('click', () => setHeroSlide(currentIndex - 1));
+      nextBtn?.addEventListener('click', () => setHeroSlide(currentIndex + 1));
+      zoomTrigger?.addEventListener('click', () => openLightbox(currentIndex));
+      openBtn?.addEventListener('click', () => openLightbox(currentIndex));
+
+      lbPrev?.addEventListener('click', () => {
+        lightboxIndex = (lightboxIndex - 1 + slides.length) % slides.length;
+        syncLightbox();
+      });
+      lbNext?.addEventListener('click', () => {
+        lightboxIndex = (lightboxIndex + 1) % slides.length;
+        syncLightbox();
+      });
+      lbClose?.addEventListener('click', closeLightbox);
+      lbBackdrop?.addEventListener('click', (e) => {
+        if (e.target === lbBackdrop) closeLightbox();
+      });
+
+      // Allow any contextual screenshot button on the page to open the shared lightbox
+      document.querySelectorAll<HTMLElement>('[data-open-lightbox-id]').forEach((el) => {
+        el.addEventListener('click', () => {
+          const targetId = el.getAttribute('data-open-lightbox-id');
+          const foundIdx = slides.findIndex((s) => s.id === targetId);
+          openLightbox(foundIdx >= 0 ? foundIdx : 0);
+        });
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (!lightbox || lightbox.classList.contains('hidden')) return;
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') {
+          lightboxIndex = (lightboxIndex - 1 + slides.length) % slides.length;
+          syncLightbox();
+        }
+        if (e.key === 'ArrowRight') {
+          lightboxIndex = (lightboxIndex + 1) % slides.length;
+          syncLightbox();
+        }
+      });
+    }
+  }
+</script>

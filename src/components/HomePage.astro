@@ -1,6 +1,6 @@
 ---
-import WorkOnAppDemo from './WorkOnAppDemo.astro';
-import { LATEST_RELEASE, SITE_CONFIG } from '../data/siteConfig';
+import AppShowcaseGallery from './AppShowcaseGallery.astro';
+import { APP_SCREENSHOTS, LATEST_RELEASE, SITE_CONFIG } from '../data/siteConfig';
 import { TRANSLATIONS, getLocalePath, type Lang } from '../i18n/translations';
 
 interface Props {
@@ -12,6 +12,10 @@ const t = TRANSLATIONS[lang];
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const withBase = (p: string) => `${base}${p}`;
 const donateHref = withBase(getLocalePath(lang, '/donate'));
+
+const screenshotById = Object.fromEntries(
+  APP_SCREENSHOTS.map((shot) => [shot.id, shot])
+);
 
 const downloads = LATEST_RELEASE.downloads ?? {
   windows: SITE_CONFIG.githubReleasesUrl,
@@ -29,7 +33,7 @@ const modularityConfig = {
 };
 ---
 
-<!-- 1. Hero Section + Full-Width Interactive Tauri Desktop Mockup -->
+<!-- 1. Hero Section + Full-Width Real WorkOn Screenshots Gallery -->
 <section class="border-b border-line bg-obsidian-grid">
   <div class="mx-auto max-w-6xl px-4 pt-12 pb-16 sm:px-6 sm:pt-16 sm:pb-24 lg:px-8">
     <div class="mx-auto max-w-4xl text-center">
@@ -91,9 +95,9 @@ const modularityConfig = {
       </p>
     </div>
 
-    <!-- Full-Width Interactive WorkOn Tauri App Preview -->
+    <!-- Real WorkOn Desktop Screenshots Interactive Gallery -->
     <div class="mt-12">
-      <WorkOnAppDemo lang={lang} />
+      <AppShowcaseGallery lang={lang} />
     </div>
   </div>
 </section>
@@ -136,7 +140,7 @@ const modularityConfig = {
   </div>
 </section>
 
-<!-- 3. Interactive Showcase of All 10 Modules -->
+<!-- 3. Interactive Showcase of All 10 Modules with Real Screenshots -->
 <section id="modules" class="border-b border-line py-16 sm:py-24 scroll-mt-16">
   <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
     <div class="max-w-2xl">
@@ -188,6 +192,40 @@ const modularityConfig = {
                 {tab.summary}
               </p>
             </div>
+          </div>
+
+          <!-- Contextual Real Screenshots for this Workflow -->
+          <div
+            class={`mt-6 grid grid-cols-1 gap-4 ${
+              tab.screenshots.length > 1 ? 'lg:grid-cols-2' : ''
+            }`}
+          >
+            {tab.screenshots.map((shotId) => {
+              const shot = screenshotById[shotId];
+              if (!shot) return null;
+              return (
+                <button
+                  type="button"
+                  data-open-lightbox-id={shot.id}
+                  class="group overflow-hidden rounded-xl border border-line-strong bg-[#121214] text-left transition-colors duration-150 hover:border-accent cursor-zoom-in"
+                >
+                  <img
+                    src={withBase(shot.src)}
+                    alt={shot.alt[lang]}
+                    referrerpolicy="no-referrer"
+                    loading="lazy"
+                    decoding="async"
+                    class="w-full h-auto block"
+                  />
+                  <div class="flex items-center justify-between gap-3 border-t border-line bg-canvas-alt px-3.5 py-2.5 text-xs">
+                    <span class="font-medium text-ink truncate">{shot.label[lang]}</span>
+                    <span class="text-ink-muted transition-colors duration-150 group-hover:text-accent-soft whitespace-nowrap shrink-0">
+                      {t.hero.openFullscreen} ↗
+                    </span>
+                  </div>
+                </button>
+              );
+            })}
           </div>
 
           <div class="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2">
@@ -266,7 +304,7 @@ const modularityConfig = {
   </div>
 </section>
 
-<!-- 5. Privacy, Tauri Architecture & Self-Hosted Roadmap -->
+<!-- 5. Privacy, Tauri 2.0 Architecture & Self-Hosted Roadmap -->
 <section id="privacy" class="border-b border-line py-16 sm:py-24">
   <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
     <div class="max-w-2xl">
@@ -299,7 +337,7 @@ const modularityConfig = {
         </div>
       </div>
 
-      <!-- 02: Native Tauri Engine -->
+      <!-- 02: Lightweight Tauri 2.0 Engine -->
       <div class="flex flex-col justify-between rounded-2xl border border-line bg-surface p-6 sm:p-7">
         <div>
           <span class="font-mono text-xs text-ink-muted tabular-nums">
@@ -713,7 +751,8 @@ const modularityConfig = {
           desc.textContent = mod.desc;
 
           const actions = document.createElement('div');
-          actions.className = 'mt-2.5 flex items-center justify-between border-t border-line pt-2 text-[10px] font-mono text-ink-muted';
+          actions.className =
+            'mt-2.5 flex items-center justify-between border-t border-line pt-2 text-[10px] font-mono text-ink-muted';
 
           const orderNum = document.createElement('span');
           orderNum.className = 'tabular-nums';

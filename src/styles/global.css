@@ -5,25 +5,26 @@
   --font-sans: "DM Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 
-  /* Obsidian Dark exact tokens from WorkOn desktop app */
-  --color-canvas: #181818;
-  --color-canvas-alt: #1e1e1e;
-  --color-surface: #202020;
-  --color-surface-card: #1c1c1e;
-  --color-surface-elevated: #262626;
-  --color-surface-hover: #2d2d30;
+  /* Exact Obsidian Dark tokens sampled from real WorkOn desktop screenshots */
+  --color-canvas: #141416;
+  --color-canvas-alt: #18181b;
+  --color-surface: #1c1c1f;
+  --color-surface-card: #1f1f23;
+  --color-surface-elevated: #25252a;
+  --color-surface-hover: #2c2c32;
 
-  --color-line: #2e2e2e;
-  --color-line-strong: #383838;
+  --color-line: #2a2a30;
+  --color-line-strong: #37373f;
 
   --color-ink-strong: #ffffff;
-  --color-ink: #e5e5e5;
-  --color-ink-secondary: #999999;
-  --color-ink-muted: #737373;
+  --color-ink: #e5e5e7;
+  --color-ink-secondary: #a1a1aa;
+  --color-ink-muted: #71717a;
 
-  --color-accent: #7c3aed;
-  --color-accent-hover: #6d28d9;
-  --color-accent-soft: #a78bfa;
+  /* WorkOn vibrant violet-purple CTA + soft highlight from real app */
+  --color-accent: #8b3dff;
+  --color-accent-hover: #7c2ae8;
+  --color-accent-soft: #b78bfa;
   --color-accent-ink: #ffffff;
 }
 
@@ -62,8 +63,8 @@
 
 .bg-obsidian-grid {
   background-image:
-    linear-gradient(to right, rgba(255, 255, 255, 0.024) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.024) 1px, transparent 1px);
+    linear-gradient(to right, rgba(255, 255, 255, 0.022) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.022) 1px, transparent 1px);
   background-size: 48px 48px;
 }
 

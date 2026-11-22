@@ -47,6 +47,14 @@ export interface CryptoWallet {
   address: string;
 }
 
+export interface AppScreenshot {
+  id: 'kanban' | 'time' | 'gantt' | 'sprints' | 'finance' | 'crm' | 'docs';
+  src: string;
+  label: LocalizedText;
+  caption: LocalizedText;
+  alt: LocalizedText;
+}
+
 export const SITE_CONFIG = {
   name: 'WorkOn',
   siteUrl: 'https://freeworktracker.pages.dev',
@@ -55,6 +63,100 @@ export const SITE_CONFIG = {
   githubIssuesUrl: 'https://github.com/DevNotPay/FreeWorkTracker/issues',
   license: 'Freeware · Offline-First',
 } as const;
+
+export const APP_SCREENSHOTS: AppScreenshot[] = [
+  {
+    id: 'kanban',
+    src: '/assets/aistudio/______________2026-11-22_195545_c7f6572b.png',
+    label: { ru: 'Канбан', en: 'Kanban' },
+    caption: {
+      ru: 'Канбан-доска с колонками, WIP-лимитами, приоритетами, подзадачами, Story Points, фикс-ценами и запуском таймера в 1 клик',
+      en: 'Kanban board with custom columns, WIP limits, priorities, subtask progress, Story Points, fixed prices, and 1-click timer start',
+    },
+    alt: {
+      ru: 'Скриншот Канбан-доски WorkOn с задачами, статусами, подзадачами и трекером времени',
+      en: 'WorkOn Kanban board screenshot showing columns, tasks, subtask progress, and timer controls',
+    },
+  },
+  {
+    id: 'time',
+    src: '/assets/aistudio/______________2026-11-22_195557_2bbd0c6b.png',
+    label: { ru: 'Фокус-часы', en: 'Focus Clock' },
+    caption: {
+      ru: 'Фокус-часы (TrackTime / FlowTime / Pomodoro) с интерактивным циферблатом, отдельным учётом перерывов и выбором задачи',
+      en: 'Focus Clock (TrackTime / FlowTime / Pomodoro) with interactive circular dial, break tracking, and quick task selector',
+    },
+    alt: {
+      ru: 'Скриншот модуля Учёт времени и Фокус-часы (Pomodoro / FlowTime) в WorkOn',
+      en: 'WorkOn Time Tracking and Focus Clock circular Pomodoro dial screenshot',
+    },
+  },
+  {
+    id: 'gantt',
+    src: '/assets/aistudio/______________2026-11-22_195608_3d170659.png',
+    label: { ru: 'Гант', en: 'Gantt' },
+    caption: {
+      ru: 'Диаграмма Ганта и сроки: синхронизированная сетка задач, масштабы Компактно/Стандарт/Подробно, линия «Сегодня» и SVG-связи зависимостей',
+      en: 'Gantt chart & schedule: synchronized task rows, Compact/Standard/Detailed zoom, Today marker, and SVG dependency arrows',
+    },
+    alt: {
+      ru: 'Скриншот Диаграммы Ганта в WorkOn с полосами сроков и пунктирными стрелками зависимостей',
+      en: 'WorkOn Gantt chart screenshot with color-coded task bars and dashed SVG dependency arrows',
+    },
+  },
+  {
+    id: 'sprints',
+    src: '/assets/aistudio/______________2026-11-22_195624_a14ae701.png',
+    label: { ru: 'Спринты', en: 'Sprints' },
+    caption: {
+      ru: 'Бэклог и Scrum-спринты: интерактивный Burndown-график (Часы / Story Points / Задачи), цель спринта и перенос незавершённых задач',
+      en: 'Backlog & Scrum sprints: interactive Burndown chart (Hours / Story Points / Tasks), sprint goal, and unfinished task carryover',
+    },
+    alt: {
+      ru: 'Скриншот Бэклога и Спринтов WorkOn с Burndown-графиком',
+      en: 'WorkOn Backlog and Scrum Sprints view with Burndown chart screenshot',
+    },
+  },
+  {
+    id: 'finance',
+    src: '/assets/aistudio/______________2026-11-22_195657_0b35a7e9.png',
+    label: { ru: 'Финансы', en: 'Finance' },
+    caption: {
+      ru: 'Финансы и Счета: 7 валют (RUB, USD, EUR, KZT, GBP, BYN, USDT), ставки по проектам, учёт невыставленных часов и задачи с фикс-ценой',
+      en: 'Finance & Invoicing: 7 currencies (RUB, USD, EUR, KZT, GBP, BYN, USDT), project hourly rates, unbilled tracking, and fixed-price tasks',
+    },
+    alt: {
+      ru: 'Скриншот раздела Финансы и Счета в WorkOn с мультивалютными ставками и фикс-задачами',
+      en: 'WorkOn Finance and multi-currency invoicing dashboard screenshot',
+    },
+  },
+  {
+    id: 'crm',
+    src: '/assets/aistudio/______________2026-11-22_195646_aa942329.png',
+    label: { ru: 'CRM', en: 'CRM' },
+    caption: {
+      ru: 'CRM и воронка сделок: 5 этапов от лида до постоянного клиента, сумма воронки по валютам, Telegram-контакты и привязанные проекты',
+      en: 'CRM & deal pipeline: 5 stages from new lead to loyal client, multi-currency pipeline total, Telegram handles, and linked projects',
+    },
+    alt: {
+      ru: 'Скриншот CRM и воронки сделок WorkOn с карточками клиентов и контактами Telegram',
+      en: 'WorkOn CRM pipeline screenshot with client cards, deal totals, and Telegram handles',
+    },
+  },
+  {
+    id: 'docs',
+    src: '/assets/aistudio/______________2026-11-22_195635_8eb4767b.png',
+    label: { ru: 'Документы', en: 'Docs' },
+    caption: {
+      ru: 'База знаний и Wiki проектов: иерархия папок, поиск по документам и встроенный Markdown-редактор с режимами «Редактор» и «Просмотр»',
+      en: 'Project Knowledge Base & Wiki: folder hierarchy, instant doc search, and built-in Markdown editor with Edit and Preview modes',
+    },
+    alt: {
+      ru: 'Скриншот встроенной базы знаний и Markdown-редактора WorkOn',
+      en: 'WorkOn Markdown documentation and project wiki screenshot',
+    },
+  },
+];
 
 const LATEST_DOWNLOAD_BASE =
   'https://github.com/DevNotPay/FreeWorkTracker/releases/latest/download';
@@ -73,15 +175,15 @@ export const RELEASES: ReleaseItem[] = [
     },
     isLatest: true,
     description: {
-      ru: 'Первый стабильный публичный релиз локальной платформы WorkOn на движке Tauri со всеми 10 рабочими модулями.',
-      en: 'First stable public release of the offline-first Tauri desktop workspace WorkOn with all 10 configurable modules.',
+      ru: 'Первый стабильный публичный релиз локальной платформы WorkOn на ядре Tauri 2.0 (~15 МБ) со всеми 10 рабочими модулями.',
+      en: 'First stable public release of the offline-first Tauri 2.0 desktop workspace (~15 MB) with all 10 configurable modules.',
     },
     changes: [
       {
         type: 'new',
         text: {
-          ru: '10 модулей в одном окне: Время и Фокус-часы, Таймлайн, Канбан с WIP-лимитами, Таблица задач с Bulk Actions, Гант с SVG-зависимостями, Scrum-спринты с Burndown, Wiki/Docs, Отчёты, Финансы/Счета и CRM',
-          en: '10 modules in one window: Time & Focus Clock, Timeline, Kanban with WIP limits, List View with Bulk Actions, Gantt with SVG dependencies, Scrum Sprints & Burndown, Markdown Docs, Reports, Finance/Invoicing, and CRM',
+          ru: '10 модулей в одном окне: Фокус-часы и учёт времени, Таймлайн, Канбан с WIP-лимитами, Таблица задач с Bulk Actions, Гант с SVG-зависимостями, Scrum-спринты с Burndown, Markdown Wiki, Отчёты, Финансы/Счета и CRM',
+          en: '10 modules in one window: Focus Clock & Time Tracking, Timeline, Kanban with WIP limits, List View with Bulk Actions, Gantt with SVG dependencies, Scrum Sprints & Burndown, Markdown Docs, Reports, Finance/Invoicing, and CRM',
         },
       },
       {
@@ -94,22 +196,22 @@ export const RELEASES: ReleaseItem[] = [
       {
         type: 'new',
         text: {
-          ru: 'Умная детекция простоя (Idle Detection), Фокус-часы (Pomodoro / TrackTime / FlowTime) с отдельным учётом перерывов и ручной ввод времени без лимитов',
-          en: 'Smart Idle Detection, Focus Clock (Pomodoro / TrackTime / FlowTime) separating breaks from billable hours, and unlimited manual time logging',
+          ru: 'Умная детекция простоя (Idle Detection), Фокус-часы (Pomodoro / TrackTime / FlowTime) с интерактивным циферблатом и ручной ввод времени без лимитов',
+          en: 'Smart Idle Detection, Focus Clock (Pomodoro / TrackTime / FlowTime) with interactive circular dial, and unlimited manual time logging',
         },
       },
       {
         type: 'new',
         text: {
-          ru: 'Полностью локальное хранение без аккаунтов и телеметрии, изолированные воркспейсы и полный экспорт/импорт резервной копии базы в JSON',
-          en: '100% local offline-first storage with zero accounts or telemetry, isolated workspaces, and full JSON backup export/import',
+          ru: 'Локальная база IndexedDB через слой StorageRepository (готово к self-hosted серверу) и полные резервные копии Snapshot v2 (JSON) в 1 клик из сайдбара',
+          en: 'Local IndexedDB storage via StorageRepository (ready for future self-hosted server) and 1-click Snapshot v2 (JSON) full backup export/import from sidebar',
         },
       },
       {
         type: 'improve',
         text: {
-          ru: 'Нативное безрамочное окно на Tauri, темы Obsidian Dark и Light, масштабирование интерфейса от 70% до 150%',
-          en: 'Native frameless Tauri desktop shell, Obsidian Dark & Light themes, and interface scaling from 70% to 150%',
+          ru: 'Нативное безрамочное окно Tauri 2.0 (~15 МБ), темы Obsidian Dark и Light, масштабирование интерфейса от 70% до 150%',
+          en: 'Native frameless Tauri 2.0 shell (~15 MB), Obsidian Dark & Light themes, and interface scaling from 70% to 150%',
         },
       },
     ],
@@ -136,8 +238,8 @@ export const RELEASES: ReleaseItem[] = [
       {
         type: 'new',
         text: {
-          ru: 'Модульный сайдбар с отключением ненужных разделов и перестановкой вкладок',
-          en: 'Modular sidebar with toggles to hide unused sections and reorder tabs',
+          ru: 'Модульный интерфейс с отключением ненужных разделов и перестановкой вкладок',
+          en: 'Modular interface with toggles to hide unused sections and reorder tabs',
         },
       },
       {
